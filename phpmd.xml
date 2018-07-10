@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<ruleset name="Lencse code rules"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>
+        Work Calendar HU ruleset
+    </description>
+
+    <rule ref="rulesets/unusedcode.xml" />
+
+    <rule ref="rulesets/codesize.xml">
+        <exclude name="CyclomaticComplexity" />
+        <exclude name="TooManyPublicMethods" />
+    </rule>
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <properties>
+            <property name="reportLevel" value="10" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+        <properties>
+            <property name="maxmethods" value="10" />
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/controversial.xml" />
+    <rule ref="rulesets/design.xml">
+        <exclude name="CouplingBetweenObjects" />
+    </rule>
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <properties>
+            <property name="minimum" value="15" />
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/naming.xml">
+        <exclude name="LongVariable" />
+        <exclude name="ShortVariable"/>
+        <exclude name="BooleanGetMethodName" />
+    </rule>
+    <rule ref="rulesets/naming.xml/LongVariable">
+        <properties>
+            <property name="maximum" value="35" />
+        </properties>
+    </rule>
+</ruleset>

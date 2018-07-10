@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<psalm totallyTyped="true">
+    <projectFiles>
+        <directory name="src" />
+    </projectFiles>
+
+    <issueHandlers>
+        <LessSpecificReturnType errorLevel="info" />
+    </issueHandlers>
+</psalm>
