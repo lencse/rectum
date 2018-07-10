@@ -5,8 +5,8 @@ namespace Test\Unit\Adapter\DependencyInjection\Factory;
 class Factory
 {
 
-    public function __invoke(): MadeByFactory
+    public function __invoke(): Creatable
     {
-        return new MadeByFactory(1);
+        return new Creatable(1);
     }
 }

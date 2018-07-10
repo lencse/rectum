@@ -6,7 +6,7 @@ use Lencse\Rectum\Adapter\DependencyInjection\AurynContainer;
 use PHPUnit\Framework\TestCase;
 use Test\Unit\Adapter\DependencyInjection\Factory\Factory;
 use Test\Unit\Adapter\DependencyInjection\Factory\FactoryWithParam;
-use Test\Unit\Adapter\DependencyInjection\Factory\MadeByFactory;
+use Test\Unit\Adapter\DependencyInjection\Factory\Creatable;
 use Test\Unit\Adapter\DependencyInjection\Factory\Newable;
 
 class AurynContainerTest extends TestCase
@@ -41,9 +41,9 @@ class AurynContainerTest extends TestCase
     public function testFactory(): void
     {
         $dic = new AurynContainer();
-        $dic->factory(MadeByFactory::class, Factory::class);
-        /** @var MadeByFactory $result */
-        $result = $dic->make(MadeByFactory::class);
+        $dic->factory(Creatable::class, Factory::class);
+        /** @var Creatable $result */
+        $result = $dic->make(Creatable::class);
         $this->assertEquals(1, $result->value);
     }
 
@@ -51,13 +51,13 @@ class AurynContainerTest extends TestCase
     {
         $dic = new AurynContainer();
         $result = $dic->call(Factory::class);
-        $this->assertTrue($result instanceof MadeByFactory);
+        $this->assertTrue($result instanceof Creatable);
     }
 
     public function testCallWithParameters()
     {
         $dic = new AurynContainer();
-        /** @var MadeByFactory $result */
+        /** @var Creatable $result */
         $result = $dic->call(FactoryWithParam::class, ['value' => 2]);
         $this->assertEquals(2, $result->value);
     }

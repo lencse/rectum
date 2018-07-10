@@ -5,8 +5,8 @@ namespace Test\Unit\Adapter\DependencyInjection\Factory;
 class FactoryWithParam
 {
 
-    public function __invoke(int $value): MadeByFactory
+    public function __invoke(int $value): Creatable
     {
-        return new MadeByFactory($value);
+        return new Creatable($value);
     }
 }

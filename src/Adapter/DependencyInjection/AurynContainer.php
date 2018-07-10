@@ -47,6 +47,18 @@ class AurynContainer implements Container, Caller
         $this->auryn->delegate($class, $factoryClass);
     }
 
+    /**
+     * @param string $callableClass
+     * @param mixed[] $params
+     * @return mixed
+     *
+     * @psalm-suppress MixedReturnStatement
+     */
+    public function call(string $callableClass, array $params = [])
+    {
+        return $this->auryn->execute($callableClass, $this->transformParameters($params));
+    }
+
     private function makeInstance(string $class): object
     {
         /** @var object $result */
@@ -56,21 +68,18 @@ class AurynContainer implements Container, Caller
     }
 
     /**
-     * @param string $callableClass
-     * @param mixed[] $params
-     * @return object|array
+     * @param array $params
+     * @return array
      *
      * @psalm-suppress MixedAssignment
-     * @psalm-suppress MixedInferredReturnType
-     * @psalm-suppress MixedReturnStatement
      */
-    public function call(string $callableClass, array $params = [])
+    private function transformParameters(array $params): array
     {
-        $execParams = [];
+        $result = [];
         foreach ($params as $key => $value) {
-            $execParams[":$key"] = $value;
+            $result[":$key"] = $value;
         }
 
-        return $this->auryn->execute($callableClass, $execParams);
+        return $result;
     }
 }
