@@ -7,14 +7,10 @@ use PHPUnit\Framework\TestCase;
 use Test\Unit\Adapter\DependencyInjection\Factory\Factory;
 use Test\Unit\Adapter\DependencyInjection\Factory\FactoryWithParam;
 use Test\Unit\Adapter\DependencyInjection\Factory\MadeByFactory;
+use Test\Unit\Adapter\DependencyInjection\Factory\Newable;
 
 class AurynContainerTest extends TestCase
 {
-
-    /**
-     * @var int
-     */
-    public $value = 0;
 
     public function testMake(): void
     {
@@ -34,10 +30,10 @@ class AurynContainerTest extends TestCase
     public function testMakeAndShare(): void
     {
         $dic = new AurynContainer();
-        /** @var self $obj1 */
-        $obj1 = $dic->make(self::class);
-        /** @var self $obj2 */
-        $obj2 = $dic->make(self::class);
+        /** @var Newable $obj1 */
+        $obj1 = $dic->make(Newable::class);
+        /** @var Newable $obj2 */
+        $obj2 = $dic->make(Newable::class);
         $obj1->value = 1;
         $this->assertEquals(1, $obj2->value);
     }
