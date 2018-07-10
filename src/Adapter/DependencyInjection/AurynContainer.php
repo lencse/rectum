@@ -3,9 +3,10 @@
 namespace Lencse\Rectum\Adapter\DependencyInjection;
 
 use Auryn\Injector;
+use Lencse\Rectum\DependencyInjection\Caller;
 use Lencse\Rectum\DependencyInjection\Container;
 
-class AurynContainer implements Container
+class AurynContainer implements Container, Caller
 {
 
     /**
@@ -52,5 +53,24 @@ class AurynContainer implements Container
         $result = $this->auryn->make($class);
 
         return $result;
+    }
+
+    /**
+     * @param string $callableClass
+     * @param mixed[] $params
+     * @return object|array
+     *
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedInferredReturnType
+     * @psalm-suppress MixedReturnStatement
+     */
+    public function call(string $callableClass, array $params = [])
+    {
+        $execParams = [];
+        foreach ($params as $key => $value) {
+            $execParams[":$key"] = $value;
+        }
+
+        return $this->auryn->execute($callableClass, $execParams);
     }
 }

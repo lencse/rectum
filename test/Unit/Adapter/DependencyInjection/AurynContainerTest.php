@@ -5,6 +5,7 @@ namespace Test\Unit\Adapter\DependencyInjection;
 use Lencse\Rectum\Adapter\DependencyInjection\AurynContainer;
 use PHPUnit\Framework\TestCase;
 use Test\Unit\Adapter\DependencyInjection\Factory\Factory;
+use Test\Unit\Adapter\DependencyInjection\Factory\FactoryWithParam;
 use Test\Unit\Adapter\DependencyInjection\Factory\MadeByFactory;
 
 class AurynContainerTest extends TestCase
@@ -48,5 +49,20 @@ class AurynContainerTest extends TestCase
         /** @var MadeByFactory $result */
         $result = $dic->make(MadeByFactory::class);
         $this->assertEquals(1, $result->value);
+    }
+
+    public function testCall()
+    {
+        $dic = new AurynContainer();
+        $result = $dic->call(Factory::class);
+        $this->assertTrue($result instanceof MadeByFactory);
+    }
+
+    public function testCallWithParameters()
+    {
+        $dic = new AurynContainer();
+        /** @var MadeByFactory $result */
+        $result = $dic->call(FactoryWithParam::class, ['value' => 2]);
+        $this->assertEquals(2, $result->value);
     }
 }
