@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Adapter\DependencyInjection\Factory;
 
-class Creatable
+class ConstructorParameter
 {
 
     /**

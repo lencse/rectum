@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Adapter\DependencyInjection\Factory;
 
-class Newable
+class NoConstructorParameter implements DummyInterface
 {
 
     /**

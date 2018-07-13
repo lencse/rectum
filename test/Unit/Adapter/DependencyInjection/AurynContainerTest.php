@@ -4,10 +4,12 @@ namespace Test\Unit\Adapter\DependencyInjection;
 
 use Lencse\Rectum\Adapter\DependencyInjection\AurynContainer;
 use PHPUnit\Framework\TestCase;
-use Test\Unit\Adapter\DependencyInjection\Factory\Factory;
-use Test\Unit\Adapter\DependencyInjection\Factory\FactoryWithParam;
-use Test\Unit\Adapter\DependencyInjection\Factory\Creatable;
-use Test\Unit\Adapter\DependencyInjection\Factory\Newable;
+use Test\Unit\Adapter\DependencyInjection\Factory\ConstructorParameterWithDependency;
+use Test\Unit\Adapter\DependencyInjection\Factory\DummyInterface;
+use Test\Unit\Adapter\DependencyInjection\Factory\FactoryWithoutParameter;
+use Test\Unit\Adapter\DependencyInjection\Factory\FactoryWithParameter;
+use Test\Unit\Adapter\DependencyInjection\Factory\ConstructorParameter;
+use Test\Unit\Adapter\DependencyInjection\Factory\NoConstructorParameter;
 
 class AurynContainerTest extends TestCase
 {
@@ -30,10 +32,10 @@ class AurynContainerTest extends TestCase
     public function testMakeAndShare(): void
     {
         $dic = new AurynContainer();
-        /** @var Newable $obj1 */
-        $obj1 = $dic->make(Newable::class);
-        /** @var Newable $obj2 */
-        $obj2 = $dic->make(Newable::class);
+        /** @var NoConstructorParameter $obj1 */
+        $obj1 = $dic->make(NoConstructorParameter::class);
+        /** @var NoConstructorParameter $obj2 */
+        $obj2 = $dic->make(NoConstructorParameter::class);
         $obj1->value = 1;
         $this->assertEquals(1, $obj2->value);
     }
@@ -41,24 +43,43 @@ class AurynContainerTest extends TestCase
     public function testFactory(): void
     {
         $dic = new AurynContainer();
-        $dic->factory(Creatable::class, Factory::class);
-        /** @var Creatable $result */
-        $result = $dic->make(Creatable::class);
+        $dic->factory(ConstructorParameter::class, FactoryWithoutParameter::class);
+        /** @var ConstructorParameter $result */
+        $result = $dic->make(ConstructorParameter::class);
         $this->assertEquals(1, $result->value);
     }
 
     public function testCall()
     {
         $dic = new AurynContainer();
-        $result = $dic->call(Factory::class);
-        $this->assertTrue($result instanceof Creatable);
+        $result = $dic->call(FactoryWithoutParameter::class);
+        $this->assertTrue($result instanceof ConstructorParameter);
     }
 
     public function testCallWithParameters()
     {
         $dic = new AurynContainer();
-        /** @var Creatable $result */
-        $result = $dic->call(FactoryWithParam::class, ['value' => 2]);
+        /** @var ConstructorParameter $result */
+        $result = $dic->call(FactoryWithParameter::class, ['value' => 2]);
+        $this->assertEquals(2, $result->value);
+    }
+
+    public function testSetup()
+    {
+        $dic = new AurynContainer();
+        $dic->setup(ConstructorParameter::class, ['value' => 2]);
+        /** @var ConstructorParameter $result */
+        $result = $dic->make(ConstructorParameter::class);
+        $this->assertEquals(2, $result->value);
+    }
+
+    public function testSetupWithDependency()
+    {
+        $dic = new AurynContainer();
+        $dic->bind(DummyInterface::class, NoConstructorParameter::class);
+        $dic->setup(ConstructorParameterWithDependency::class, ['value' => 2]);
+        /** @var ConstructorParameterWithDependency $result */
+        $result = $dic->make(ConstructorParameterWithDependency::class);
         $this->assertEquals(2, $result->value);
     }
 }

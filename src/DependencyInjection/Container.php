@@ -10,4 +10,6 @@ interface Container
     public function bind(string $abstract, string $concrete): void;
 
     public function factory(string $class, string $factoryClass): void;
+
+    public function setup(string $class, array $params = []): void;
 }

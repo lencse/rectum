@@ -82,4 +82,9 @@ class AurynContainer implements Container, Caller
 
         return $result;
     }
+
+    public function setup(string $class, array $params = []): void
+    {
+        $this->auryn->define($class, $this->transformParameters($params));
+    }
 }
