@@ -82,4 +82,15 @@ class AurynContainerTest extends TestCase
         $result = $dic->make(ConstructorParameterWithDependency::class);
         $this->assertEquals(2, $result->value);
     }
+
+    public function testBindInstance()
+    {
+        $dic = new AurynContainer();
+        $instance = new NoConstructorParameter();
+        $instance->value = 2;
+        $dic->bindInstance(DummyInterface::class, $instance);
+        /** @var NoConstructorParameter $result */
+        $result = $dic->make(DummyInterface::class);
+        $this->assertEquals(2, $result->value);
+    }
 }

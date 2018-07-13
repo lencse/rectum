@@ -12,4 +12,6 @@ interface Container
     public function factory(string $class, string $factoryClass): void;
 
     public function setup(string $class, array $params = []): void;
+
+    public function bindInstance(string $class, object $instance): void;
 }

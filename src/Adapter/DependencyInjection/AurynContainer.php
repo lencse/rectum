@@ -87,4 +87,10 @@ class AurynContainer implements Container, Caller
     {
         $this->auryn->define($class, $this->transformParameters($params));
     }
+
+    public function bindInstance(string $class, object $instance): void
+    {
+        $this->auryn->share($instance);
+        $this->bind($class, get_class($instance));
+    }
 }
