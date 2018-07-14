@@ -6,7 +6,7 @@ use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectio
 
 return new class implements DependencyInjectionConfig
 {
-    
+
     public function bind(): array
     {
         // TODO: Implement bind() method.
@@ -21,4 +21,4 @@ return new class implements DependencyInjectionConfig
     {
         // TODO: Implement setup() method.
     }
-}
+};

@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\Framework\DependencyInjection\Factory;
+namespace Test\Objects;
 
 class FactoryWithoutParameter
 {
