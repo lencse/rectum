@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\Adapter\DependencyInjection\Factory;
+namespace Test\Objects;
 
 class FactoryWithParameter
 {

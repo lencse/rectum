@@ -1,10 +1,10 @@
 <?php
 
-namespace Lencse\Rectum\Adapter\DependencyInjection;
+namespace Lencse\Rectum\Framework\DependencyInjection;
 
 use Auryn\Injector;
-use Lencse\Rectum\DependencyInjection\Caller;
-use Lencse\Rectum\DependencyInjection\Container;
+use Lencse\Rectum\Component\DependencyInjection\Caller;
+use Lencse\Rectum\Component\DependencyInjection\Container;
 
 class AurynContainer implements Container, Caller
 {

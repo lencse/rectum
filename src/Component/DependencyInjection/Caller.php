@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\DependencyInjection;
+namespace Lencse\Rectum\Component\DependencyInjection;
 
 interface Caller
 {

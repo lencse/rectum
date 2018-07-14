@@ -1,15 +1,15 @@
 <?php
 
-namespace Test\Unit\Adapter\DependencyInjection;
+namespace Test\Unit\Framework\DependencyInjection;
 
-use Lencse\Rectum\Adapter\DependencyInjection\AurynContainer;
+use Lencse\Rectum\Framework\DependencyInjection\AurynContainer;
 use PHPUnit\Framework\TestCase;
-use Test\Unit\Adapter\DependencyInjection\Factory\ConstructorParameterWithDependency;
-use Test\Unit\Adapter\DependencyInjection\Factory\DummyInterface;
-use Test\Unit\Adapter\DependencyInjection\Factory\FactoryWithoutParameter;
-use Test\Unit\Adapter\DependencyInjection\Factory\FactoryWithParameter;
-use Test\Unit\Adapter\DependencyInjection\Factory\ConstructorParameter;
-use Test\Unit\Adapter\DependencyInjection\Factory\NoConstructorParameter;
+use Test\Objects\ConstructorParameterWithDependency;
+use Test\Objects\DummyInterface;
+use Test\Objects\FactoryWithoutParameter;
+use Test\Objects\FactoryWithParameter;
+use Test\Objects\ConstructorParameter;
+use Test\Objects\NoConstructorParameter;
 
 class AurynContainerTest extends TestCase
 {

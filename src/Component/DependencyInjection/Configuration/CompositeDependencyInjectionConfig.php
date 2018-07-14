@@ -1,9 +1,8 @@
 <?php
 
-namespace Lencse\Rectum\DependencyInjection\Configuration;
+namespace Lencse\Rectum\Component\DependencyInjection\Configuration;
 
 use Closure;
-use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 
 class CompositeDependencyInjectionConfig implements DependencyInjectionConfig
 {

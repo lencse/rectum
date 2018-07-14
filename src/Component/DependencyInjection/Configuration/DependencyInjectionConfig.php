@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\DependencyInjection\Configuration;
+namespace Lencse\Rectum\Component\DependencyInjection\Configuration;
 
 interface DependencyInjectionConfig
 {

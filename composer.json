@@ -39,7 +39,7 @@
         "min-coverage": "ci-test-coverage --min-coverage 99 --clover-file logs/clover.xml",
         "md": "phpmd src/ text phpmd.xml && phpmd test/ text phpmd.xml",
         "cs": "phpcs --standard=PSR2 src test",
-        "loc": "phploc --count-tests -vvv src test",
+        "loc": "phploc -vvv src",
         "psalm": "psalm",
         "phpstan": "phpstan analyse --level 7 src test",
         "test-all": "composer test-coverage && composer min-coverage && composer md && composer cs && composer psalm && composer phpstan && composer loc",

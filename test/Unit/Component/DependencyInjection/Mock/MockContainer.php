@@ -1,9 +1,9 @@
 <?php
 
-namespace Test\Unit\Adapter\DependencyInjection\Mock;
+namespace Test\Unit\Component\DependencyInjection\Mock;
 
-use Lencse\Rectum\DependencyInjection\Caller;
-use Lencse\Rectum\DependencyInjection\Container;
+use Lencse\Rectum\Component\DependencyInjection\Caller;
+use Lencse\Rectum\Component\DependencyInjection\Container;
 
 /**
  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
