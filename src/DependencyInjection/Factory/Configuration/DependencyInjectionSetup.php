@@ -8,4 +8,9 @@ interface DependencyInjectionSetup
 {
 
     public function createContainer(): Container;
+
+    /**
+     * @return string[]
+     */
+    public function injectSelf(): array;
 }
