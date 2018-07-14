@@ -4,8 +4,8 @@ namespace Test\Unit\Adapter\DependencyInjection;
 
 use Lencse\Rectum\DependencyInjection\Caller;
 use Lencse\Rectum\DependencyInjection\Container;
-use Lencse\Rectum\DependencyInjection\Factory\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\DependencyInjection\Factory\Configuration\DependencyInjectionSetup;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionSetup;
 use Lencse\Rectum\DependencyInjection\Factory\ContainerFactory;
 use PHPUnit\Framework\TestCase;
 use Test\Unit\Adapter\DependencyInjection\Factory\ConstructorParameter;

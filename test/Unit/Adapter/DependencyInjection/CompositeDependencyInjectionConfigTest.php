@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Adapter\DependencyInjection;
 
-use Lencse\Rectum\DependencyInjection\Factory\Configuration\CompositeDependencyInjectionConfig;
-use Lencse\Rectum\DependencyInjection\Factory\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\CompositeDependencyInjectionConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 use PHPUnit\Framework\TestCase;
 
 class CompositeDependencyInjectionConfigTest extends TestCase

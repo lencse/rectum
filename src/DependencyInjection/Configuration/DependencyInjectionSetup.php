@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\DependencyInjection\Factory\Configuration;
+namespace Lencse\Rectum\DependencyInjection\Configuration;
 
 use Lencse\Rectum\DependencyInjection\Container;
 

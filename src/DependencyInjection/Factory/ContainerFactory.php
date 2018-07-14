@@ -3,8 +3,8 @@
 namespace Lencse\Rectum\DependencyInjection\Factory;
 
 use Lencse\Rectum\DependencyInjection\Container;
-use Lencse\Rectum\DependencyInjection\Factory\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\DependencyInjection\Factory\Configuration\DependencyInjectionSetup;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionSetup;
 
 class ContainerFactory
 {
