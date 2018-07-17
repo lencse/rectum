@@ -3,6 +3,7 @@
 namespace Lencse\Rectum\Framework\DependencyInjection;
 
 use Auryn\Injector;
+use function get_class;
 use Lencse\Rectum\Component\DependencyInjection\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Component\DependencyInjection\Container;
@@ -27,7 +28,7 @@ class AurynContainerFactory implements ContainerFactory
     public function createContainer(DependencyInjectionConfig $config): Container
     {
         $auryn = new Injector();
-        $dic = $this->create($auryn);
+        $dic = $this->createAurynContainer($auryn);
         $this->setup($auryn, $config);
         $this->bindInvoker($auryn, $dic);
 
@@ -64,7 +65,7 @@ class AurynContainerFactory implements ContainerFactory
         $auryn->alias(Invoker::class, get_class($dic));
     }
 
-    private function create(Injector $auryn): Container
+    private function createAurynContainer(Injector $auryn): Container
     {
         return new class ($auryn, $this->parameterTransformer) implements Container, Invoker
         {
