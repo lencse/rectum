@@ -5,7 +5,7 @@ namespace Test\Unit\Framework\DependencyInjection;
 use Lencse\Rectum\Component\DependencyInjection\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Component\DependencyInjection\Container;
-use Lencse\Rectum\Framework\DependencyInjection\AurynrContainerFactory;
+use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use PHPUnit\Framework\TestCase;
 use Test\Unit\Framework\DependencyInjection\Objects\ConstructorParameterWithDependency;
@@ -18,9 +18,12 @@ use Test\Unit\Framework\DependencyInjection\Objects\Service1;
 use Test\Unit\Framework\DependencyInjection\Objects\WithDependency1;
 use Test\Unit\Framework\DependencyInjection\Objects\Service2;
 use Test\Unit\Framework\DependencyInjection\Objects\WithDependency2;
+use Test\Unit\Framework\DependencyInjection\Objects\WithDependencyAndParam1;
+use Test\Unit\Framework\DependencyInjection\Objects\WithDependencyAndParam2;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class AurynContainerFactoryTest extends TestCase
 {
@@ -120,9 +123,47 @@ class AurynContainerFactoryTest extends TestCase
         $this->assertTrue($obj2->dependency instanceof Service2);
     }
 
+    public function testWireAndSetup()
+    {
+        $dic = $this->getContainer(new TestConfig([
+            'setup' => [
+                WithDependencyAndParam1::class => ['value' => 1],
+                WithDependencyAndParam2::class => ['value' => 2],
+            ],
+            'wire' => [
+                WithDependencyAndParam1::class => ['dependency' => Service1::class],
+                WithDependencyAndParam2::class => ['dependency' => Service2::class],
+            ]
+        ]));
+        /** @var WithDependencyAndParam1 $obj1 */
+        $obj1 = $dic->make(WithDependencyAndParam1::class);
+        /** @var WithDependencyAndParam2 $obj2 */
+        $obj2 = $dic->make(WithDependencyAndParam2::class);
+        $this->assertTrue($obj1->dependency instanceof Service1);
+        $this->assertTrue($obj2->dependency instanceof Service2);
+    }
+
+    public function testWireOverridesDefaultBinding()
+    {
+        $dic = $this->getContainer(new TestConfig([
+            'bind' => [
+                DummyInterface::class => Service2::class
+            ],
+            'wire' => [
+                WithDependency1::class => ['dependency' => Service1::class],
+            ]
+        ]));
+        /** @var WithDependency1 $obj1 */
+        $obj1 = $dic->make(WithDependency1::class);
+        /** @var WithDependency2 $obj2 */
+        $obj2 = $dic->make(WithDependency2::class);
+        $this->assertTrue($obj1->dependency instanceof Service1);
+        $this->assertTrue($obj2->dependency instanceof Service2);
+    }
+
     private function getContainer(DependencyInjectionConfig $config): Container
     {
-        $factory = new AurynrContainerFactory(new AurynParameterTransformer());
+        $factory = new AurynContainerFactory(new AurynParameterTransformer());
         return  $factory->createContainer($config);
     }
 }

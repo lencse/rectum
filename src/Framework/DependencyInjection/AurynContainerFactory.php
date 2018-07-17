@@ -11,7 +11,7 @@ use Lencse\Rectum\Component\DependencyInjection\Factory\ContainerFactory;
 /**
  * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
-class AurynrContainerFactory implements ContainerFactory
+class AurynContainerFactory implements ContainerFactory
 {
 
     /**
@@ -45,11 +45,16 @@ class AurynrContainerFactory implements ContainerFactory
         foreach ($config->factory() as $class => $factoryClass) {
             $auryn->delegate($class, $factoryClass);
         }
-        foreach ($config->setup() as $class => $params) {
-            $auryn->define($class, $this->parameterTransformer->transformParameters($params));
-        }
-        foreach ($config->wire() as $class => $params) {
-            $auryn->define($class, $params);
+
+        $wireConfig = $config->wire();
+        $setupConfig = $config->setup();
+        /** @var string[] $defineClasses */
+        $defineClasses = array_merge(array_keys($wireConfig), array_keys($setupConfig));
+
+        foreach ($defineClasses as $class) {
+            $wire = $wireConfig[$class] ?? [];
+            $setup = $this->parameterTransformer->transformParameters($setupConfig[$class] ?? []);
+            $auryn->define($class, array_merge($wire, $setup));
         }
     }
 
