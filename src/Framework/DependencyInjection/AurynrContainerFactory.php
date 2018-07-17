@@ -11,7 +11,7 @@ use Lencse\Rectum\Component\DependencyInjection\Factory\ContainerFactory;
 /**
  * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
-class AurynContainerContainerFactory implements ContainerFactory
+class AurynrContainerFactory implements ContainerFactory
 {
 
     /**
