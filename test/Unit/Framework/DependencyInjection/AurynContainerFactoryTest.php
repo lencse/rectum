@@ -8,12 +8,12 @@ use Lencse\Rectum\Component\DependencyInjection\Container;
 use Lencse\Rectum\Framework\DependencyInjection\AurynContainerContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use PHPUnit\Framework\TestCase;
-use Test\Objects\ConstructorParameterWithDependency;
-use Test\Objects\DummyInterface;
-use Test\Objects\FactoryWithoutParameter;
-use Test\Objects\FactoryWithParameter;
-use Test\Objects\ConstructorParameter;
-use Test\Objects\NoConstructorParameter;
+use Test\Unit\Framework\DependencyInjection\Objects\ConstructorParameterWithDependency;
+use Test\Unit\Framework\DependencyInjection\Objects\DummyInterface;
+use Test\Unit\Framework\DependencyInjection\Objects\FactoryWithoutParameter;
+use Test\Unit\Framework\DependencyInjection\Objects\FactoryWithParameter;
+use Test\Unit\Framework\DependencyInjection\Objects\ConstructorParameter;
+use Test\Unit\Framework\DependencyInjection\Objects\NoConstructorParameter;
 
 class AurynContainerFactoryTest extends TestCase
 {

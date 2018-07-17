@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Objects;
+namespace Test\Unit\Framework\DependencyInjection\Objects;
 
 class NoConstructorParameter implements DummyInterface
 {
