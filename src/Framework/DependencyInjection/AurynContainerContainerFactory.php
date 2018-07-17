@@ -3,25 +3,33 @@
 namespace Lencse\Rectum\Framework\DependencyInjection;
 
 use Auryn\Injector;
-use Lencse\Rectum\Component\DependencyInjection\Caller;
+use Lencse\Rectum\Component\DependencyInjection\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Component\DependencyInjection\Container;
-use Lencse\Rectum\Component\DependencyInjection\Factory\Factory;
+use Lencse\Rectum\Component\DependencyInjection\Factory\ContainerFactory;
 
 /**
  * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
-class AurynContainerFactory implements Factory
+class AurynContainerContainerFactory implements ContainerFactory
 {
+
+    /**
+     * @var AurynParameterTransformer
+     */
+    private $parameterTransformer;
+
+    public function __construct(AurynParameterTransformer $parameterTransformer)
+    {
+        $this->parameterTransformer = $parameterTransformer;
+    }
 
     public function createContainer(DependencyInjectionConfig $config): Container
     {
         $auryn = new Injector();
         $dic = $this->create($auryn);
         $this->setup($auryn, $config);
-
-        $auryn->share($dic);
-        $auryn->alias(Caller::class, get_class($dic));
+        $this->bindInvoker($auryn, $dic);
 
         return $dic;
     }
@@ -38,13 +46,19 @@ class AurynContainerFactory implements Factory
             $auryn->delegate($class, $factoryClass);
         }
         foreach ($config->setup() as $class => $params) {
-            $auryn->define($class, $this->transformParameters($params));
+            $auryn->define($class, $this->parameterTransformer->transformParameters($params));
         }
+    }
+
+    private function bindInvoker(Injector $auryn, Container $dic): void
+    {
+        $auryn->share($dic);
+        $auryn->alias(Invoker::class, get_class($dic));
     }
 
     private function create(Injector $auryn): Container
     {
-        return new class ($auryn) implements Container, Caller
+        return new class ($auryn, $this->parameterTransformer) implements Container, Invoker
         {
 
             /**
@@ -53,18 +67,20 @@ class AurynContainerFactory implements Factory
             private $auryn;
 
             /**
+             * @var AurynParameterTransformer
+             */
+            private $parameterTransformer;
+
+            /**
              * @var bool[]
              */
             private $instances = [];
 
-            /**
-             * @param Injector $auryn
-             */
-            public function __construct(Injector $auryn)
+            public function __construct(Injector $auryn, AurynParameterTransformer $parameterTransformer)
             {
                 $this->auryn = $auryn;
+                $this->parameterTransformer = $parameterTransformer;
             }
-
 
             public function make(string $class): object
             {
@@ -88,48 +104,19 @@ class AurynContainerFactory implements Factory
             }
 
             /**
-             * @param string $callableClass
+             * @param string $invokableClass
              * @param mixed[] $params
              * @return mixed
              *
              * @psalm-suppress MixedReturnStatement
              */
-            public function call(string $callableClass, array $params = [])
+            public function call(string $invokableClass, array $params = [])
             {
-                return $this->auryn->execute($callableClass, $this->transformParameters($params));
-            }
-
-            /**
-             * @param array $params
-             * @return array
-             *
-             * @psalm-suppress MixedAssignment
-             */
-            private function transformParameters(array $params): array
-            {
-                $result = [];
-                foreach ($params as $key => $value) {
-                    $result[":$key"] = $value;
-                }
-
-                return $result;
+                return $this->auryn->execute(
+                    $invokableClass,
+                    $this->parameterTransformer->transformParameters($params)
+                );
             }
         };
-    }
-
-    /**
-     * @param array $params
-     * @return array
-     *
-     * @psalm-suppress MixedAssignment
-     */
-    private function transformParameters(array $params): array
-    {
-        $result = [];
-        foreach ($params as $key => $value) {
-            $result[":$key"] = $value;
-        }
-
-        return $result;
     }
 }

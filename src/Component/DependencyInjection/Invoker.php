@@ -2,13 +2,13 @@
 
 namespace Lencse\Rectum\Component\DependencyInjection;
 
-interface Caller
+interface Invoker
 {
 
     /**
-     * @param string $callableClass
+     * @param string $invokableClass
      * @param mixed[] $params
      * @return mixed
      */
-    public function call(string $callableClass, array $params = []);
+    public function call(string $invokableClass, array $params = []);
 }

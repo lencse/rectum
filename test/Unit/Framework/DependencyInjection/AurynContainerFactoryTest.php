@@ -2,10 +2,11 @@
 
 namespace Test\Unit\Framework\DependencyInjection;
 
-use Lencse\Rectum\Component\DependencyInjection\Caller;
+use Lencse\Rectum\Component\DependencyInjection\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Component\DependencyInjection\Container;
-use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
+use Lencse\Rectum\Framework\DependencyInjection\AurynContainerContainerFactory;
+use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use PHPUnit\Framework\TestCase;
 use Test\Objects\ConstructorParameterWithDependency;
 use Test\Objects\DummyInterface;
@@ -134,8 +135,8 @@ class AurynContainerFactoryTest extends TestCase
                 return [];
             }
         });
-        /** @var Caller $invoker */
-        $invoker = $dic->make(Caller::class);
+        /** @var Invoker $invoker */
+        $invoker = $dic->make(Invoker::class);
         $result = $invoker->call(FactoryWithoutParameter::class);
         $this->assertTrue($result instanceof ConstructorParameter);
     }
@@ -159,8 +160,8 @@ class AurynContainerFactoryTest extends TestCase
                 return [];
             }
         });
-        /** @var Caller $invoker */
-        $invoker = $dic->make(Caller::class);
+        /** @var Invoker $invoker */
+        $invoker = $dic->make(Invoker::class);
         /** @var ConstructorParameter $result */
         $result = $invoker->call(FactoryWithParameter::class, ['value' => 2]);
         $this->assertEquals(2, $result->value);
@@ -216,7 +217,7 @@ class AurynContainerFactoryTest extends TestCase
 
     private function getContainer(DependencyInjectionConfig $config): Container
     {
-        $factory = new AurynContainerFactory();
+        $factory = new AurynContainerContainerFactory(new AurynParameterTransformer());
         return  $factory->createContainer($config);
     }
 }
