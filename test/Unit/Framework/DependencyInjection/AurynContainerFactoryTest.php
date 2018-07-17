@@ -14,7 +14,14 @@ use Test\Unit\Framework\DependencyInjection\Objects\FactoryWithoutParameter;
 use Test\Unit\Framework\DependencyInjection\Objects\FactoryWithParameter;
 use Test\Unit\Framework\DependencyInjection\Objects\ConstructorParameter;
 use Test\Unit\Framework\DependencyInjection\Objects\NoConstructorParameter;
+use Test\Unit\Framework\DependencyInjection\Objects\Service1;
+use Test\Unit\Framework\DependencyInjection\Objects\WithDependency1;
+use Test\Unit\Framework\DependencyInjection\Objects\Service2;
+use Test\Unit\Framework\DependencyInjection\Objects\WithDependency2;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class AurynContainerFactoryTest extends TestCase
 {
 
@@ -95,6 +102,22 @@ class AurynContainerFactoryTest extends TestCase
         /** @var ConstructorParameterWithDependency $result */
         $result = $dic->make(ConstructorParameterWithDependency::class);
         $this->assertEquals(2, $result->value);
+    }
+
+    public function testWire()
+    {
+        $dic = $this->getContainer(new TestConfig([
+            'wire' => [
+                WithDependency1::class => ['dependency' => Service1::class],
+                WithDependency2::class => ['dependency' => Service2::class],
+            ]
+        ]));
+        /** @var WithDependency1 $obj1 */
+        $obj1 = $dic->make(WithDependency1::class);
+        /** @var WithDependency2 $obj2 */
+        $obj2 = $dic->make(WithDependency2::class);
+        $this->assertTrue($obj1->dependency instanceof Service1);
+        $this->assertTrue($obj2->dependency instanceof Service2);
     }
 
     private function getContainer(DependencyInjectionConfig $config): Container

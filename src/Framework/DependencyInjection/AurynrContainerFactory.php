@@ -48,6 +48,9 @@ class AurynrContainerFactory implements ContainerFactory
         foreach ($config->setup() as $class => $params) {
             $auryn->define($class, $this->parameterTransformer->transformParameters($params));
         }
+        foreach ($config->wire() as $class => $params) {
+            $auryn->define($class, $params);
+        }
     }
 
     private function bindInvoker(Injector $auryn, Container $dic): void

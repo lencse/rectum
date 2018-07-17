@@ -21,4 +21,9 @@ return new class implements DependencyInjectionConfig
     {
         // TODO: Implement setup() method.
     }
+
+    public function wire(): array
+    {
+        // TODO: Implement wire() method.
+    }
 };

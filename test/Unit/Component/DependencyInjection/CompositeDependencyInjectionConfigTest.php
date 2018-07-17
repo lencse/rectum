@@ -29,6 +29,11 @@ class CompositeDependencyInjectionConfigTest extends TestCase
                 {
                     return ['A' => ['a' => 1]];
                 }
+
+                public function wire(): array
+                {
+                    return ['A' => ['B' => 'b']];
+                }
             },
             new class implements DependencyInjectionConfig
             {
@@ -47,11 +52,17 @@ class CompositeDependencyInjectionConfigTest extends TestCase
                 {
                     return ['B' => ['b' => 2]];
                 }
-            },
+
+                public function wire(): array
+                {
+                    return ['C' => ['D' => 'd']];
+                }
+            }
         ]);
 
         $this->assertEquals(['A' => 'a', 'B' => 'b', 'C' => 'c'], $config->bind());
         $this->assertEquals(['A' => 'af', 'B' => 'bf', 'C' => 'cf'], $config->factory());
         $this->assertEquals(['A' => ['a' => 1], 'B' => ['b' => 2]], $config->setup());
+        $this->assertEquals(['A' => ['B' => 'b'], 'C' => ['D' => 'd']], $config->wire());
     }
 }

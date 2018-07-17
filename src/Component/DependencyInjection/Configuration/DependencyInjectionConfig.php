@@ -19,4 +19,9 @@ interface DependencyInjectionConfig
      * @return mixed[][]
      */
     public function setup(): array;
+
+    /**
+     * @return mixed[][]
+     */
+    public function wire(): array;
 }

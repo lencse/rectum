@@ -31,4 +31,9 @@ class TestConfig implements DependencyInjectionConfig
     {
         return $this->config['setup'] ?? [];
     }
+
+    public function wire(): array
+    {
+        return $this->config['wire'] ?? [];
+    }
 }
