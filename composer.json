@@ -22,7 +22,9 @@
     },
     "require": {
         "php": ">=7.2.0",
-        "rdlowrey/auryn": "^1.4"
+        "rdlowrey/auryn": "^1.4",
+        "guzzlehttp/psr7": "^1.4",
+        "nikic/fast-route": "^1.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.2",
@@ -36,7 +38,7 @@
     "scripts": {
         "test": "phpunit",
         "test-coverage": "phpunit --coverage-html logs/coverage-report --coverage-clover logs/clover.xml",
-        "min-coverage": "ci-test-coverage --min-coverage 99 --clover-file logs/clover.xml",
+        "min-coverage": "ci-test-coverage --min-coverage 98 --clover-file logs/clover.xml",
         "md": "phpmd src/ text phpmd.xml && phpmd test/ text phpmd.xml",
         "cs": "phpcs --standard=PSR2 src test",
         "loc": "phploc -vvv src",
