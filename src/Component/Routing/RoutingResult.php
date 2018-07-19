@@ -2,6 +2,10 @@
 
 namespace Lencse\Rectum\Component\Routing;
 
+use Psr\Http\Message\ServerRequestInterface;
+use ReflectionClass;
+use ReflectionParameter;
+
 class RoutingResult
 {
 
@@ -29,5 +33,10 @@ class RoutingResult
     public function getParams(): array
     {
         return $this->params;
+    }
+
+    public function withParams(array $params): self
+    {
+        return new self($this->handlerClass, $params);
     }
 }

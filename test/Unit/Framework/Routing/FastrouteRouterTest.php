@@ -37,17 +37,6 @@ class FastrouteRouterTest extends TestCase
         $this->assertEquals(['id' => 1], $response->getParams());
     }
 
-    public function testRequestParams(): void
-    {
-        $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test', TestHandler::class)]));
-        $request = new ServerRequest(
-            HttpMethod::get(),
-            '/test'
-        );
-        $response = $router->route($request);
-        $this->assertEquals(['request' => $request], $response->getParams());
-    }
-
     public function testNotFound(): void
     {
         $router = new FastrouteRouter(new RouteCollection([]));
