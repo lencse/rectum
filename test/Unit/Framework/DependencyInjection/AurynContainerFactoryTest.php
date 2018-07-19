@@ -72,7 +72,7 @@ class AurynContainerFactoryTest extends TestCase
         $dic = $this->getContainer(new TestConfig([]));
         /** @var Invoker $invoker */
         $invoker = $dic->make(Invoker::class);
-        $result = $invoker->call(FactoryWithoutParameter::class);
+        $result = $invoker->invoke(FactoryWithoutParameter::class);
         $this->assertTrue($result instanceof ConstructorParameter);
     }
 
@@ -82,7 +82,7 @@ class AurynContainerFactoryTest extends TestCase
         /** @var Invoker $invoker */
         $invoker = $dic->make(Invoker::class);
         /** @var ConstructorParameter $result */
-        $result = $invoker->call(FactoryWithParameter::class, ['value' => 2]);
+        $result = $invoker->invoke(FactoryWithParameter::class, ['value' => 2]);
         $this->assertEquals(2, $result->value);
     }
 

@@ -53,7 +53,7 @@ class RequestProcessorTest extends TestCase
             ),
             new class implements Invoker
             {
-                public function call(string $invokableClass, array $params = [])
+                public function invoke(string $invokableClass, array $params = [])
                 {
                     if ('Handler' === $invokableClass) {
                         /** @var ServerRequestInterface $request */

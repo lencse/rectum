@@ -30,7 +30,7 @@ class RequestProcessor
     {
         $routingResult = $this->router->route($request);
         /** @var ResponseInterface $response */
-        $response = $this->invoker->call($routingResult->getHandlerClass(), $routingResult->getParams());
+        $response = $this->invoker->invoke($routingResult->getHandlerClass(), $routingResult->getParams());
 
         return $response;
     }

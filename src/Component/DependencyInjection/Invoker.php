@@ -10,5 +10,5 @@ interface Invoker
      * @param mixed[] $params
      * @return mixed
      */
-    public function call(string $invokableClass, array $params = []);
+    public function invoke(string $invokableClass, array $params = []);
 }

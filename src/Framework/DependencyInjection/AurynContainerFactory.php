@@ -119,7 +119,7 @@ class AurynContainerFactory implements ContainerFactory
              *
              * @psalm-suppress MixedReturnStatement
              */
-            public function call(string $invokableClass, array $params = [])
+            public function invoke(string $invokableClass, array $params = [])
             {
                 return $this->auryn->execute(
                     $invokableClass,
