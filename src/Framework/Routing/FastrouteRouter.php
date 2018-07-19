@@ -27,7 +27,7 @@ class FastrouteRouter implements Router
         /** @var Dispatcher dispatcher */
         $this->dispatcher = simpleDispatcher(function (RouteCollector $collector) use ($routes): void {
             foreach ($routes as $route) {
-                $collector->addRoute('GET', $route->getPath(), $route->getHandlerClass());
+                $collector->addRoute((string) $route->getMethod(), $route->getPath(), $route->getHandlerClass());
             }
         });
     }

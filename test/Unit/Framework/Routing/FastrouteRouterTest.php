@@ -69,17 +69,21 @@ class FastrouteRouterTest extends TestCase
 
     public function testBadMethod(): void
     {
-        $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test/{id}', 'TestHandler')]));
+        $router = new FastrouteRouter(new RouteCollection([
+            new Route(HttpMethod::post(), '/test/{id}', 'TestHandler')
+        ]));
         $request = new ServerRequest(
-            HttpMethod::post(),
+            HttpMethod::get(),
             '/test/1'
         );
         try {
             $router->route($request);
         } catch (BadMethodException $e) {
             $this->assertEquals($request, $e->getRequest());
-            $this->assertEquals('Method not allowed: POST on "/test/1"', $e->getMessage());
+            $this->assertEquals('Method not allowed: GET on "/test/1"', $e->getMessage());
             return;
         }
+
+        $this->fail('Exception not thrown');
     }
 }
