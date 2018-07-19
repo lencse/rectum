@@ -2,7 +2,9 @@
 
 namespace Lencse\Rectum\Component\Web;
 
-class WebApplication
+use Lencse\Rectum\Component\Application\Application;
+
+class WebApplication implements Application
 {
 
     /**
