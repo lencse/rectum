@@ -10,12 +10,11 @@ use Lencse\Rectum\Component\Routing\Route;
 use Lencse\Rectum\Component\Routing\RouteCollection;
 use Lencse\Rectum\Framework\Routing\FastrouteRouter;
 use PHPUnit\Framework\TestCase;
-use Test\Unit\Framework\Routing\Handler\TestHandler;
 
 class FastrouteRouterTest extends TestCase
 {
 
-    public function testRoute(): void
+    public function testRoute()
     {
         $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test', 'TestHandler')]));
         $request = new ServerRequest(
@@ -26,7 +25,7 @@ class FastrouteRouterTest extends TestCase
         $this->assertEquals('TestHandler', $response->getHandlerClass());
     }
 
-    public function testParams(): void
+    public function testParams()
     {
         $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test/{id}', 'TestHandler')]));
         $request = new ServerRequest(
@@ -37,7 +36,7 @@ class FastrouteRouterTest extends TestCase
         $this->assertEquals(['id' => 1], $response->getParams());
     }
 
-    public function testNotFound(): void
+    public function testNotFound()
     {
         $router = new FastrouteRouter(new RouteCollection([]));
         $request = new ServerRequest(
@@ -56,7 +55,7 @@ class FastrouteRouterTest extends TestCase
         $this->fail('Exception not thrown');
     }
 
-    public function testBadMethod(): void
+    public function testBadMethod()
     {
         $router = new FastrouteRouter(new RouteCollection([
             new Route(HttpMethod::post(), '/test/{id}', 'TestHandler')

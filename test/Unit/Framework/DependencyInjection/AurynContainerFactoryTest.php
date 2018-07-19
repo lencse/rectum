@@ -28,14 +28,14 @@ use Test\Unit\Framework\DependencyInjection\Objects\WithDependencyAndParam2;
 class AurynContainerFactoryTest extends TestCase
 {
 
-    public function testMake(): void
+    public function testMake()
     {
         $dic = $this->getContainer(new TestConfig([]));
         $obj = $dic->make(self::class);
         $this->assertTrue($obj instanceof self);
     }
 
-    public function testMakeAbstract(): void
+    public function testMakeAbstract()
     {
         $dic = $this->getContainer(new TestConfig([
             'bind' => [TestCase::class => AurynContainerFactoryTest::class]
@@ -44,7 +44,7 @@ class AurynContainerFactoryTest extends TestCase
         $this->assertTrue($obj instanceof self);
     }
 
-    public function testMakeAndShare(): void
+    public function testMakeAndShare()
     {
         $dic = $this->getContainer(new TestConfig([
             'bind' => [TestCase::class => AurynContainerFactoryTest::class]
@@ -57,7 +57,7 @@ class AurynContainerFactoryTest extends TestCase
         $this->assertEquals(1, $obj2->value);
     }
 
-    public function testFactory(): void
+    public function testFactory()
     {
         $dic = $this->getContainer(new TestConfig([
             'factory' => [ConstructorParameter::class => FactoryWithoutParameter::class]
