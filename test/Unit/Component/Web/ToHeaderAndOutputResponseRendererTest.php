@@ -8,7 +8,7 @@ use Lencse\Rectum\Component\Web\Output;
 use Lencse\Rectum\Component\Web\ToHeaderAndOutputResponseRenderer;
 use PHPUnit\Framework\TestCase;
 
-class ResponseRendererTest extends TestCase implements HttpHeader, Output
+class ToHeaderAndOutputResponseRendererTest extends TestCase implements HttpHeader, Output
 {
 
     /**
