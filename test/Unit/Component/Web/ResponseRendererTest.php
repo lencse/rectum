@@ -1,11 +1,11 @@
 <?php
 
-namespace Test\Unit\Web;
+namespace Test\Unit\Component\Web;
 
 use GuzzleHttp\Psr7\Response;
 use Lencse\Rectum\Component\Web\HttpHeader;
 use Lencse\Rectum\Component\Web\Output;
-use Lencse\Rectum\Component\Web\ResponseRenderer;
+use Lencse\Rectum\Component\Web\ToHeaderAndOutputResponseRenderer;
 use PHPUnit\Framework\TestCase;
 
 class ResponseRendererTest extends TestCase implements HttpHeader, Output
@@ -33,7 +33,7 @@ class ResponseRendererTest extends TestCase implements HttpHeader, Output
 
     public function testRender()
     {
-        $renderer = new ResponseRenderer($this, $this);
+        $renderer = new ToHeaderAndOutputResponseRenderer($this, $this);
         $response = new Response(200, ['Content-Type' => 'text/plain'], 'Body');
         $renderer->render($response);
         $this->assertEquals(['Content-Type: text/plain'], $this->headers);

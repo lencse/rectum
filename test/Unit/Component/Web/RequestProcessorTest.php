@@ -13,7 +13,7 @@ use Lencse\Rectum\Component\Routing\Router;
 use Lencse\Rectum\Component\Routing\RoutingResult;
 use Lencse\Rectum\Component\Routing\RoutingResultParameterAppender;
 use Lencse\Rectum\Component\Routing\WebRouter;
-use Lencse\Rectum\Component\Web\RequestProcessor;
+use Lencse\Rectum\Component\Web\RequestProcessorByRouter;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,7 +22,7 @@ class RequestProcessorTest extends TestCase
 
     public function testProcess()
     {
-        $processor = new RequestProcessor(
+        $processor = new RequestProcessorByRouter(
             new WebRouter(
                 new class implements Router
                 {
