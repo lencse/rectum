@@ -5,6 +5,7 @@ namespace Lencse\Rectum\Framework\Routing;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use function FastRoute\simpleDispatcher;
+use Lencse\Rectum\Component\Routing\Exception\BadMethodException;
 use Lencse\Rectum\Component\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Component\Routing\RouteCollection;
 use Lencse\Rectum\Component\Routing\Router;
@@ -35,6 +36,9 @@ class FastrouteRouter implements Router
     {
         $routeInfo = $this->dispatcher->dispatch($request->getMethod(), $request->getUri()->getPath());
 
+        if (Dispatcher::METHOD_NOT_ALLOWED === $routeInfo[0]) {
+            throw BadMethodException::create($request);
+        }
 
         if (Dispatcher::FOUND !== $routeInfo[0]) {
             throw NotFoundException::create($request);

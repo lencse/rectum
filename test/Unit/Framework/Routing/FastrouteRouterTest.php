@@ -3,6 +3,8 @@
 namespace Test\Unit\Framework\Routing;
 
 use GuzzleHttp\Psr7\ServerRequest;
+use Lencse\Rectum\Component\Http\HttpMethod;
+use Lencse\Rectum\Component\Routing\Exception\BadMethodException;
 use Lencse\Rectum\Component\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Component\Routing\Route;
 use Lencse\Rectum\Component\Routing\RouteCollection;
@@ -15,9 +17,9 @@ class FastrouteRouterTest extends TestCase
 
     public function testRoute(): void
     {
-        $router = new FastrouteRouter(new RouteCollection([new Route('/test', 'TestHandler')]));
+        $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test', 'TestHandler')]));
         $request = new ServerRequest(
-            'GET',
+            HttpMethod::get(),
             '/test'
         );
         $response = $router->route($request);
@@ -26,9 +28,9 @@ class FastrouteRouterTest extends TestCase
 
     public function testParams(): void
     {
-        $router = new FastrouteRouter(new RouteCollection([new Route('/test/{id}', 'TestHandler')]));
+        $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test/{id}', 'TestHandler')]));
         $request = new ServerRequest(
-            'GET',
+            HttpMethod::get(),
             '/test/1'
         );
         $response = $router->route($request);
@@ -37,9 +39,9 @@ class FastrouteRouterTest extends TestCase
 
     public function testRequestParams(): void
     {
-        $router = new FastrouteRouter(new RouteCollection([new Route('/test', TestHandler::class)]));
+        $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test', TestHandler::class)]));
         $request = new ServerRequest(
-            'GET',
+            HttpMethod::get(),
             '/test'
         );
         $response = $router->route($request);
@@ -50,9 +52,10 @@ class FastrouteRouterTest extends TestCase
     {
         $router = new FastrouteRouter(new RouteCollection([]));
         $request = new ServerRequest(
-            'GET',
+            HttpMethod::get(),
             '/test/1'
         );
+
         try {
             $router->route($request);
         } catch (NotFoundException $e) {
@@ -62,5 +65,21 @@ class FastrouteRouterTest extends TestCase
         }
 
         $this->fail('Exception not thrown');
+    }
+
+    public function testBadMethod(): void
+    {
+        $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test/{id}', 'TestHandler')]));
+        $request = new ServerRequest(
+            HttpMethod::post(),
+            '/test/1'
+        );
+        try {
+            $router->route($request);
+        } catch (BadMethodException $e) {
+            $this->assertEquals($request, $e->getRequest());
+            $this->assertEquals('Method not allowed: POST on "/test/1"', $e->getMessage());
+            return;
+        }
     }
 }
