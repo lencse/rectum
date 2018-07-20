@@ -4,7 +4,7 @@ namespace Lencse\Rectum\Component\Web;
 
 use Psr\Http\Message\ResponseInterface;
 
-class ToHeaderAndOutputResponseRenderer
+class ToHeaderAndOutputResponseRenderer implements ResponseRenderer
 {
 
     /**

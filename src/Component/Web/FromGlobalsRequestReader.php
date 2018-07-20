@@ -5,7 +5,7 @@ namespace Lencse\Rectum\Component\Web;
 use GuzzleHttp\Psr7\ServerRequest;
 use Psr\Http\Message\ServerRequestInterface;
 
-class FromGlobalsRequestReader
+class FromGlobalsRequestReader implements RequestReader
 {
 
     /**
