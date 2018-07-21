@@ -2,10 +2,10 @@
 
 namespace Lencse\Rectum\Framework\Classes;
 
-use Lencse\Rectum\Component\Classes\GivenParameterType;
-use Lencse\Rectum\Component\Classes\MethodParameter;
-use Lencse\Rectum\Component\Classes\MethodParameterAnalyzer;
-use Lencse\Rectum\Component\Classes\NonGivenParameterType;
+use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
+use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
+use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
+use Lencse\Rectum\Component\Classes\Method\Parameter\NonGivenParameterType;
 use ReflectionClass;
 use ReflectionParameter;
 

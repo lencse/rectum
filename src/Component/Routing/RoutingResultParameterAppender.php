@@ -2,8 +2,8 @@
 
 namespace Lencse\Rectum\Component\Routing;
 
-use Lencse\Rectum\Component\Classes\MethodParameter;
-use Lencse\Rectum\Component\Classes\MethodParameterAnalyzer;
+use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
+use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
 use Psr\Http\Message\ServerRequestInterface;
 
 class RoutingResultParameterAppender

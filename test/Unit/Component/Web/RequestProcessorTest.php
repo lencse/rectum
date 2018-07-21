@@ -4,9 +4,9 @@ namespace Test\Unit\Component\Web;
 
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Classes\GivenParameterType;
-use Lencse\Rectum\Component\Classes\MethodParameter;
-use Lencse\Rectum\Component\Classes\MethodParameterAnalyzer;
+use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
+use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
+use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Http\HttpMethod;
 use Lencse\Rectum\Component\Routing\Router;

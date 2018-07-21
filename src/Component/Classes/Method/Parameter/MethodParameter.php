@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Component\Classes;
+namespace Lencse\Rectum\Component\Classes\Method\Parameter;
 
 class MethodParameter
 {

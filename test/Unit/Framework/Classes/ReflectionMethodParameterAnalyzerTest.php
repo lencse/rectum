@@ -2,9 +2,9 @@
 
 namespace Test\Unit\Framework\Classes;
 
-use Lencse\Rectum\Component\Classes\GivenParameterType;
-use Lencse\Rectum\Component\Classes\MethodParameter;
-use Lencse\Rectum\Component\Classes\NonGivenParameterType;
+use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
+use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
+use Lencse\Rectum\Component\Classes\Method\Parameter\NonGivenParameterType;
 use Lencse\Rectum\Framework\Classes\ReflectionMethodParameterAnalyzer;
 use PHPUnit\Framework\TestCase;
 
