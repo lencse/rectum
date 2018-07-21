@@ -3,6 +3,7 @@
 namespace Lencse\Rectum\Component\Web;
 
 use Lencse\Rectum\Component\Application\Application;
+use Psr\Http\Server\RequestHandlerInterface;
 
 class WebApplication implements Application
 {
@@ -13,9 +14,9 @@ class WebApplication implements Application
     private $requestReader;
 
     /**
-     * @var RequestProcessor
+     * @var RequestHandlerInterface
      */
-    private $requestProcessor;
+    private $requestHandler;
 
     /**
      * @var ResponseRenderer
@@ -24,11 +25,11 @@ class WebApplication implements Application
 
     public function __construct(
         RequestReader $requestReader,
-        RequestProcessor $requestProcessor,
+        RequestHandlerInterface $requestHandler,
         ResponseRenderer $responseRenderer
     ) {
         $this->requestReader = $requestReader;
-        $this->requestProcessor = $requestProcessor;
+        $this->requestHandler = $requestHandler;
         $this->responseRenderer = $responseRenderer;
     }
 
@@ -36,7 +37,7 @@ class WebApplication implements Application
     public function run(): void
     {
         $request = $this->requestReader->create();
-        $response = $this->requestProcessor->process($request);
+        $response = $this->requestHandler->handle($request);
         $this->responseRenderer->render($response);
     }
 }

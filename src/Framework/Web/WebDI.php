@@ -6,11 +6,11 @@ use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectio
 use Lencse\Rectum\Component\Web\FromGlobalsRequestReader;
 use Lencse\Rectum\Component\Web\HttpHeader;
 use Lencse\Rectum\Component\Web\Output;
-use Lencse\Rectum\Component\Web\RequestProcessor;
 use Lencse\Rectum\Component\Web\RequestProcessorByRouter;
 use Lencse\Rectum\Component\Web\RequestReader;
 use Lencse\Rectum\Component\Web\ResponseRenderer;
 use Lencse\Rectum\Component\Web\ToHeaderAndOutputResponseRenderer;
+use Psr\Http\Server\RequestHandlerInterface;
 
 class WebDI implements DependencyInjectionConfig
 {
@@ -20,7 +20,7 @@ class WebDI implements DependencyInjectionConfig
         return [
             HttpHeader::class => RealHttpHeader::class,
             Output::class => RealOutput::class,
-            RequestProcessor::class => RequestProcessorByRouter::class,
+            RequestHandlerInterface::class => RequestProcessorByRouter::class,
             RequestReader::class => FromGlobalsRequestReader::class,
             ResponseRenderer::class => ToHeaderAndOutputResponseRenderer::class
         ];

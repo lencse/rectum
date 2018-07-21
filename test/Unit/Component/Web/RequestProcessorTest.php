@@ -68,7 +68,7 @@ class RequestProcessorTest extends TestCase
             }
         );
 
-        $response = $processor->process(new ServerRequest(HttpMethod::get(), '/1'));
+        $response = $processor->handle(new ServerRequest(HttpMethod::get(), '/1'));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('/1-1', (string) $response->getBody());
     }

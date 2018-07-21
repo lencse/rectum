@@ -2,16 +2,15 @@
 
 namespace Test\Unit\Component\Web;
 
-use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Web\RequestProcessor;
 use Lencse\Rectum\Component\Web\RequestReader;
 use Lencse\Rectum\Component\Web\ResponseRenderer;
 use Lencse\Rectum\Component\Web\WebApplication;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 class WebApplicationTest extends TestCase implements ResponseRenderer
 {
@@ -36,9 +35,9 @@ class WebApplicationTest extends TestCase implements ResponseRenderer
                     return new ServerRequest('GET', '/');
                 }
             },
-            new class implements RequestProcessor
+            new class implements RequestHandlerInterface
             {
-                public function process(ServerRequestInterface $request): ResponseInterface
+                public function handle(ServerRequestInterface $request): ResponseInterface
                 {
                     if ('/' === $request->getUri()->getPath()) {
                         return new Response(200, [], 'Test');
