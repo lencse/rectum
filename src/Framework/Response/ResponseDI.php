@@ -3,16 +3,10 @@
 namespace Lencse\Rectum\Framework\Response;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Request\FromGlobalsRequestReader;
 use Lencse\Rectum\Component\Response\HttpHeader;
 use Lencse\Rectum\Component\Response\Output;
-use Lencse\Rectum\Component\RequestHandler\RequestHandler;
-use Lencse\Rectum\Component\Request\RequestReader;
 use Lencse\Rectum\Component\Response\ResponseRenderer;
 use Lencse\Rectum\Component\Response\ToHeaderAndOutputResponseRenderer;
-use Lencse\Rectum\Framework\Response\RealHttpHeader;
-use Lencse\Rectum\Framework\Response\RealOutput;
-use Psr\Http\Server\RequestHandlerInterface;
 
 class ResponseDI implements DependencyInjectionConfig
 {
@@ -22,8 +16,6 @@ class ResponseDI implements DependencyInjectionConfig
         return [
             HttpHeader::class => RealHttpHeader::class,
             Output::class => RealOutput::class,
-            RequestHandlerInterface::class => RequestHandler::class,
-            RequestReader::class => FromGlobalsRequestReader::class,
             ResponseRenderer::class => ToHeaderAndOutputResponseRenderer::class
         ];
     }
@@ -38,12 +30,7 @@ class ResponseDI implements DependencyInjectionConfig
      */
     public function setup(): array
     {
-        return [
-            FromGlobalsRequestReader::class => [
-                'serverArr' => $_SERVER,
-                'getArr' => $_GET,
-            ]
-        ];
+        return [];
     }
 
     public function wire(): array
