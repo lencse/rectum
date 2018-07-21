@@ -39,7 +39,7 @@ class RequestHandler implements RequestHandlerInterface
 
         foreach ($routingResult->getHandlerPipeline() as $handler) {
             $result = $this->invoker->invoke($handler, $params);
-            $params = ['data' => $result];
+            $params = [$result];
         }
 
         /** @var ResponseInterface $response */

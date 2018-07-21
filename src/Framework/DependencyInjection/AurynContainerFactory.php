@@ -6,6 +6,7 @@ use Auryn\InjectionException;
 use Auryn\Injector;
 use function get_class;
 use Lencse\Rectum\Component\Classes\Invoking\Invoker;
+use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Component\DependencyInjection\Factory\ContainerFactory;
 use Psr\Container\ContainerInterface;
@@ -21,9 +22,17 @@ class AurynContainerFactory implements ContainerFactory
      */
     private $parameterTransformer;
 
-    public function __construct(AurynParameterTransformer $parameterTransformer)
-    {
+    /**
+     * @var MethodParameterAnalyzer
+     */
+    private $methodParameterAnalyzer;
+
+    public function __construct(
+        AurynParameterTransformer $parameterTransformer,
+        MethodParameterAnalyzer $methodParameterAnalyzer
+    ) {
         $this->parameterTransformer = $parameterTransformer;
+        $this->methodParameterAnalyzer = $methodParameterAnalyzer;
     }
 
     public function createContainer(DependencyInjectionConfig $config): ContainerInterface
@@ -66,9 +75,16 @@ class AurynContainerFactory implements ContainerFactory
         $auryn->alias(Invoker::class, get_class($dic));
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     private function createAurynContainer(Injector $auryn): ContainerInterface
     {
-        return new class ($auryn, $this->parameterTransformer) implements ContainerInterface, Invoker
+        return new class (
+            $auryn,
+            $this->parameterTransformer,
+            $this->methodParameterAnalyzer
+        ) implements ContainerInterface, Invoker
         {
 
             /**
@@ -82,14 +98,23 @@ class AurynContainerFactory implements ContainerFactory
             private $parameterTransformer;
 
             /**
+             * @var MethodParameterAnalyzer
+             */
+            private $methodParameterAnalyzer;
+
+            /**
              * @var bool[]
              */
             private $instances = [];
 
-            public function __construct(Injector $auryn, AurynParameterTransformer $parameterTransformer)
-            {
+            public function __construct(
+                Injector $auryn,
+                AurynParameterTransformer $parameterTransformer,
+                MethodParameterAnalyzer $methodParameterAnalyzer
+            ) {
                 $this->auryn = $auryn;
                 $this->parameterTransformer = $parameterTransformer;
+                $this->methodParameterAnalyzer = $methodParameterAnalyzer;
             }
 
             public function get($id): object
@@ -128,8 +153,30 @@ class AurynContainerFactory implements ContainerFactory
             {
                 return $this->auryn->execute(
                     $invokableClass,
-                    $this->parameterTransformer->transformParameters($params)
+                    $this->parameterTransformer->transformParameters(
+                        $this->getExtendedParameters(
+                            $invokableClass,
+                            $params
+                        )
+                    )
                 );
+            }
+
+            /**
+             * @psalm-suppress MixedArrayOffset
+             * @psalm-suppress MixedAssignment
+             */
+            private function getExtendedParameters(string $invokableClass, array $params): array
+            {
+                $result = $params;
+                $methodParameters = $this->methodParameterAnalyzer->getParameters($invokableClass, '__invoke');
+                foreach ($methodParameters as $i => $methodParam) {
+                    if (isset($params[$i]) && !isset($params[$methodParam->getName()])) {
+                        $result[$methodParam->getName()] = $params[$i];
+                    }
+                }
+
+                return $result;
             }
 
             private function makeInstance(string $class): object

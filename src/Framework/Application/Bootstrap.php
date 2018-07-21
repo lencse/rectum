@@ -5,6 +5,7 @@ namespace Lencse\Rectum\Framework\Application;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\CompositeDependencyInjectionConfig;
 use Lencse\Rectum\Component\Web\WebApplication;
 use Lencse\Rectum\Framework\Classes\ClassesDI;
+use Lencse\Rectum\Framework\Classes\Method\Parameter\ReflectionMethodParameterAnalyzer;
 use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use Lencse\Rectum\Framework\Web\Request\RequestDI;
@@ -23,7 +24,7 @@ class Bootstrap
 
     public function __construct()
     {
-        $factory = new AurynContainerFactory(new AurynParameterTransformer());
+        $factory = new AurynContainerFactory(new AurynParameterTransformer(), new ReflectionMethodParameterAnalyzer());
         $this->dic = $factory->createContainer(new CompositeDependencyInjectionConfig([
             new ClassesDI(),
             new RequestDI(),

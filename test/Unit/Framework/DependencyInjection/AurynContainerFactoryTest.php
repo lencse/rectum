@@ -4,6 +4,7 @@ namespace Test\Unit\Framework\DependencyInjection;
 
 use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\Framework\Classes\Method\Parameter\ReflectionMethodParameterAnalyzer;
 use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use PHPUnit\Framework\TestCase;
@@ -83,6 +84,16 @@ class AurynContainerFactoryTest extends TestCase
         $invoker = $dic->get(Invoker::class);
         /** @var ConstructorParameter $result */
         $result = $invoker->invoke(FactoryWithParameter::class, ['value' => 2]);
+        $this->assertEquals(2, $result->value);
+    }
+
+    public function testInvokeWithUnnamedParameters()
+    {
+        $dic = $this->getContainer(new TestConfig([]));
+        /** @var Invoker $invoker */
+        $invoker = $dic->get(Invoker::class);
+        /** @var ConstructorParameter $result */
+        $result = $invoker->invoke(FactoryWithParameter::class, [2]);
         $this->assertEquals(2, $result->value);
     }
 
@@ -176,7 +187,10 @@ class AurynContainerFactoryTest extends TestCase
 
     private function getContainer(DependencyInjectionConfig $config): ContainerInterface
     {
-        $factory = new AurynContainerFactory(new AurynParameterTransformer());
+        $factory = new AurynContainerFactory(
+            new AurynParameterTransformer(),
+            new ReflectionMethodParameterAnalyzer()
+        );
         return $factory->createContainer($config);
     }
 }

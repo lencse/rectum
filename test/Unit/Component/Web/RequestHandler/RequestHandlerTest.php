@@ -120,7 +120,7 @@ class RequestHandlerTest extends TestCase
                         return new Response(
                             200,
                             [],
-                            (string) $params['data']
+                            (string) $params[0]
                         );
                     }
                 }
