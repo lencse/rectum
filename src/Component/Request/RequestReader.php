@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Component\Web;
+namespace Lencse\Rectum\Component\Request;
 
 use Psr\Http\Message\ServerRequestInterface;
 

@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Component\Web;
 
-use Lencse\Rectum\Component\Web\FromGlobalsRequestReader;
+use Lencse\Rectum\Component\Request\FromGlobalsRequestReader;
 use PHPUnit\Framework\TestCase;
 
 class FromGlobalsRequestReaderTest extends TestCase

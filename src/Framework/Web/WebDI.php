@@ -3,13 +3,13 @@
 namespace Lencse\Rectum\Framework\Web;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Web\FromGlobalsRequestReader;
-use Lencse\Rectum\Component\Web\HttpHeader;
-use Lencse\Rectum\Component\Web\Output;
+use Lencse\Rectum\Component\Request\FromGlobalsRequestReader;
+use Lencse\Rectum\Component\Response\HttpHeader;
+use Lencse\Rectum\Component\Response\Output;
 use Lencse\Rectum\Component\RequestHandler\RequestHandler;
-use Lencse\Rectum\Component\Web\RequestReader;
-use Lencse\Rectum\Component\Web\ResponseRenderer;
-use Lencse\Rectum\Component\Web\ToHeaderAndOutputResponseRenderer;
+use Lencse\Rectum\Component\Request\RequestReader;
+use Lencse\Rectum\Component\Response\ResponseRenderer;
+use Lencse\Rectum\Component\Response\ToHeaderAndOutputResponseRenderer;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class WebDI implements DependencyInjectionConfig

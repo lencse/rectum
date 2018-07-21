@@ -3,6 +3,8 @@
 namespace Lencse\Rectum\Component\Web;
 
 use Lencse\Rectum\Component\Application\Application;
+use Lencse\Rectum\Component\Request\RequestReader;
+use Lencse\Rectum\Component\Response\ResponseRenderer;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class WebApplication implements Application

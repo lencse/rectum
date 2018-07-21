@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Component\Web;
+namespace Lencse\Rectum\Component\Response;
 
 interface Output
 {

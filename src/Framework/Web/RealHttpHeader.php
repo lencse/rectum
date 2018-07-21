@@ -2,7 +2,7 @@
 
 namespace Lencse\Rectum\Framework\Web;
 
-use Lencse\Rectum\Component\Web\HttpHeader;
+use Lencse\Rectum\Component\Response\HttpHeader;
 
 /**
  * @codeCoverageIgnore

@@ -2,7 +2,7 @@
 
 namespace Lencse\Rectum\Framework\Web;
 
-use Lencse\Rectum\Component\Web\Output;
+use Lencse\Rectum\Component\Response\Output;
 
 class RealOutput implements Output
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Component\Web;
+namespace Lencse\Rectum\Component\Request;
 
 use GuzzleHttp\Psr7\ServerRequest;
 use Psr\Http\Message\ServerRequestInterface;
