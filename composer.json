@@ -46,7 +46,7 @@
         "cs": "phpcs --standard=PSR2 src test",
         "loc": "phploc -vvv src",
         "psalm": "psalm",
-        "phpstan": "phpstan analyse --level 7 src test",
+        "phpstan": "phpstan analyse -c phpstan.neon --level 7 src test",
         "test-all": "composer test-coverage && composer min-coverage && composer md && composer cs && composer psalm && composer phpstan && composer loc",
         "benchmark": "phpbench run  --revs=100 --iterations=5 --report=default",
         "benchmark-trace": "phpbench xdebug:trace --extension=\"PhpBench\\Extensions\\XDebug\\XDebugExtension\""

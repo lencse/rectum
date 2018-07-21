@@ -2,7 +2,6 @@
 
 namespace Lencse\Rectum\Component\Web\RequestHandler;
 
-use GuzzleHttp\Psr7\Response;
 use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Psr\Http\Message\ResponseInterface;
@@ -44,7 +43,7 @@ class RequestHandler implements RequestHandlerInterface
         }
 
         /** @var ResponseInterface $response */
-        $response = $result ?? new Response();
+        $response = $result;
 
         return $response;
     }
