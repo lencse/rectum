@@ -8,6 +8,7 @@ use Lencse\Rectum\Component\Web\Routing\Exception\BadMethodException;
 use Lencse\Rectum\Component\Web\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Component\Web\Routing\Route;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
+use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use Lencse\Rectum\Framework\Web\Routing\FastrouteRouter;
 use PHPUnit\Framework\TestCase;
 
@@ -16,18 +17,22 @@ class FastrouteRouterTest extends TestCase
 
     public function testRoute()
     {
-        $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test', 'TestHandler')]));
+        $router = new FastrouteRouter(new RouteCollection([
+            new Route(HttpMethod::get(), '/test', new SimpleRouteHandlingConfig('TestHandler'))
+        ]));
         $request = new ServerRequest(
             HttpMethod::get(),
             '/test'
         );
         $response = $router->route($request);
-        $this->assertEquals('TestHandler', $response->getHandlerClass());
+        $this->assertEquals('TestHandler', $response->getHandlingConfig()->getRequestProcessorClass());
     }
 
     public function testParams()
     {
-        $router = new FastrouteRouter(new RouteCollection([new Route(HttpMethod::get(), '/test/{id}', 'TestHandler')]));
+        $router = new FastrouteRouter(new RouteCollection([
+            new Route(HttpMethod::get(), '/test/{id}', new SimpleRouteHandlingConfig('TestHandler'))
+        ]));
         $request = new ServerRequest(
             HttpMethod::get(),
             '/test/1'
@@ -58,7 +63,7 @@ class FastrouteRouterTest extends TestCase
     public function testBadMethod()
     {
         $router = new FastrouteRouter(new RouteCollection([
-            new Route(HttpMethod::post(), '/test/{id}', 'TestHandler')
+            new Route(HttpMethod::post(), '/test/{id}', new SimpleRouteHandlingConfig('TestHandler'))
         ]));
         $request = new ServerRequest(
             HttpMethod::get(),

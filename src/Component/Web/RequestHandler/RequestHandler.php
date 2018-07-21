@@ -31,7 +31,10 @@ class RequestHandler implements RequestHandlerInterface
     {
         $routingResult = $this->router->route($request);
         /** @var ResponseInterface $response */
-        $response = $this->invoker->invoke($routingResult->getHandlerClass(), $routingResult->getParams());
+        $response = $this->invoker->invoke(
+            $routingResult->getHandlingConfig()->getRequestProcessorClass(),
+            $routingResult->getParams()
+        );
 
         return $response;
     }

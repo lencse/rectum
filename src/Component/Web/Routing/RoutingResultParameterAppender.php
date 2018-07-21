@@ -23,7 +23,10 @@ class RoutingResultParameterAppender
     {
         $append = array_reduce(
             array_filter(
-                $this->methodParameterAnalyzer->getParameters($result->getHandlerClass(), '__invoke'),
+                $this->methodParameterAnalyzer->getParameters(
+                    $result->getHandlingConfig()->getRequestProcessorClass(),
+                    '__invoke'
+                ),
                 function (MethodParameter $parameter): bool {
                     return $parameter->getType()->match(ServerRequestInterface::class);
                 }

@@ -2,32 +2,28 @@
 
 namespace Lencse\Rectum\Component\Web\Routing;
 
-use Psr\Http\Message\ServerRequestInterface;
-use ReflectionClass;
-use ReflectionParameter;
-
 class RoutingResult
 {
 
     /**
-     * @var string
+     * @var RouteHandlingConfig
      */
-    private $handlerClass;
+    private $handlingConfig;
 
     /**
      * @var array
      */
     private $params;
 
-    public function __construct(string $handlerClass, array $params)
+    public function __construct(RouteHandlingConfig $handlingConfig, array $params)
     {
-        $this->handlerClass = $handlerClass;
+        $this->handlingConfig = $handlingConfig;
         $this->params = $params;
     }
 
-    public function getHandlerClass(): string
+    public function getHandlingConfig(): RouteHandlingConfig
     {
-        return $this->handlerClass;
+        return $this->handlingConfig;
     }
 
     public function getParams(): array
@@ -37,6 +33,6 @@ class RoutingResult
 
     public function withParams(array $params): self
     {
-        return new self($this->handlerClass, $params);
+        return new self($this->handlingConfig, $params);
     }
 }

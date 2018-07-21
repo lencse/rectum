@@ -8,6 +8,7 @@ use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
 use Lencse\Rectum\Component\Web\Routing\RoutingResultParameterAppender;
+use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -31,7 +32,10 @@ class RoutingResultParameterAppenderTest extends TestCase
             }
         );
         $request = new ServerRequest('GET', '/');
-        $result = $appender->appendRequestToParameters(new RoutingResult('Handler', ['value' => 1]), $request);
+        $result = $appender->appendRequestToParameters(
+            new RoutingResult(new SimpleRouteHandlingConfig('Handler'), ['value' => 1]),
+            $request
+        );
         $this->assertEquals(['request' => $request, 'value' => 1], $result->getParams());
     }
 }

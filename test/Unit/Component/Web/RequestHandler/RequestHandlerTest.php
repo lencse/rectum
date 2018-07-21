@@ -12,6 +12,7 @@ use Lencse\Rectum\Component\Web\Http\HttpMethod;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
 use Lencse\Rectum\Component\Web\Routing\RoutingResultParameterAppender;
+use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use Lencse\Rectum\Component\Web\Routing\WebRouter;
 use Lencse\Rectum\Component\Web\RequestHandler\RequestHandler;
 use PHPUnit\Framework\TestCase;
@@ -29,7 +30,7 @@ class RequestHandlerTest extends TestCase
                     public function route(ServerRequestInterface $request): RoutingResult
                     {
                         if ('/1' === $request->getUri()->getPath()) {
-                            return new RoutingResult('Handler', ['value' => 1]);
+                            return new RoutingResult(new SimpleRouteHandlingConfig('Handler'), ['value' => 1]);
                         }
                     }
                 },
