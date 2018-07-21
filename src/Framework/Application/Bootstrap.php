@@ -3,19 +3,19 @@
 namespace Lencse\Rectum\Framework\Application;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\CompositeDependencyInjectionConfig;
-use Lencse\Rectum\Component\DependencyInjection\Container;
 use Lencse\Rectum\Component\Web\WebApplication;
 use Lencse\Rectum\Framework\Classes\ClassesDI;
 use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use Lencse\Rectum\Framework\Routing\RoutingDI;
 use Lencse\Rectum\Framework\Web\WebDI;
+use Psr\Container\ContainerInterface;
 
 class Bootstrap
 {
 
     /**
-     * @var Container
+     * @var ContainerInterface
      */
     private $dic;
 
@@ -32,7 +32,8 @@ class Bootstrap
     public function createWebApplication(): WebApplication
     {
         /** @var WebApplication $app */
-        $app = $this->dic->make(WebApplication::class);
+        $app = $this->dic->get(WebApplication::class);
+
         return $app;
     }
 }

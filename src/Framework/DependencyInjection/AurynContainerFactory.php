@@ -2,12 +2,13 @@
 
 namespace Lencse\Rectum\Framework\DependencyInjection;
 
+use Auryn\InjectionException;
 use Auryn\Injector;
 use function get_class;
 use Lencse\Rectum\Component\DependencyInjection\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\DependencyInjection\Container;
 use Lencse\Rectum\Component\DependencyInjection\Factory\ContainerFactory;
+use Psr\Container\ContainerInterface;
 
 /**
  * @SuppressWarnings(PHPMD.UnusedLocalVariable)
@@ -25,7 +26,7 @@ class AurynContainerFactory implements ContainerFactory
         $this->parameterTransformer = $parameterTransformer;
     }
 
-    public function createContainer(DependencyInjectionConfig $config): Container
+    public function createContainer(DependencyInjectionConfig $config): ContainerInterface
     {
         $auryn = new Injector();
         $dic = $this->createAurynContainer($auryn);
@@ -59,15 +60,15 @@ class AurynContainerFactory implements ContainerFactory
         }
     }
 
-    private function bindInvoker(Injector $auryn, Container $dic): void
+    private function bindInvoker(Injector $auryn, ContainerInterface $dic): void
     {
         $auryn->share($dic);
         $auryn->alias(Invoker::class, get_class($dic));
     }
 
-    private function createAurynContainer(Injector $auryn): Container
+    private function createAurynContainer(Injector $auryn): ContainerInterface
     {
-        return new class ($auryn, $this->parameterTransformer) implements Container, Invoker
+        return new class ($auryn, $this->parameterTransformer) implements ContainerInterface, Invoker
         {
 
             /**
@@ -91,8 +92,9 @@ class AurynContainerFactory implements ContainerFactory
                 $this->parameterTransformer = $parameterTransformer;
             }
 
-            public function make(string $class): object
+            public function get($id): object
             {
+                $class = (string) $id;
                 if (isset($this->instances[$class])) {
                     return $this->makeInstance($class);
                 }
@@ -104,12 +106,15 @@ class AurynContainerFactory implements ContainerFactory
                 return $this->makeInstance($class);
             }
 
-            private function makeInstance(string $class): object
+            public function has($id): bool
             {
-                /** @var object $result */
-                $result = $this->auryn->make($class);
+                try {
+                    $this->auryn->make((string) $id);
+                } catch (InjectionException $e) {
+                    return false;
+                }
 
-                return $result;
+                return true;
             }
 
             /**
@@ -125,6 +130,14 @@ class AurynContainerFactory implements ContainerFactory
                     $invokableClass,
                     $this->parameterTransformer->transformParameters($params)
                 );
+            }
+
+            private function makeInstance(string $class): object
+            {
+                /** @var object $result */
+                $result = $this->auryn->make($class);
+
+                return $result;
             }
         };
     }

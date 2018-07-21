@@ -4,10 +4,10 @@ namespace Test\Unit\Framework\DependencyInjection;
 
 use Lencse\Rectum\Component\DependencyInjection\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\DependencyInjection\Container;
 use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Test\Unit\Framework\DependencyInjection\Objects\ConstructorParameterWithDependency;
 use Test\Unit\Framework\DependencyInjection\Objects\DummyInterface;
 use Test\Unit\Framework\DependencyInjection\Objects\FactoryWithoutParameter;
@@ -31,7 +31,7 @@ class AurynContainerFactoryTest extends TestCase
     public function testMake()
     {
         $dic = $this->getContainer(new TestConfig([]));
-        $obj = $dic->make(self::class);
+        $obj = $dic->get(self::class);
         $this->assertTrue($obj instanceof self);
     }
 
@@ -40,7 +40,7 @@ class AurynContainerFactoryTest extends TestCase
         $dic = $this->getContainer(new TestConfig([
             'bind' => [TestCase::class => AurynContainerFactoryTest::class]
         ]));
-        $obj = $dic->make(parent::class);
+        $obj = $dic->get(parent::class);
         $this->assertTrue($obj instanceof self);
     }
 
@@ -50,9 +50,9 @@ class AurynContainerFactoryTest extends TestCase
             'bind' => [TestCase::class => AurynContainerFactoryTest::class]
         ]));
         /** @var NoConstructorParameter $obj1 */
-        $obj1 = $dic->make(NoConstructorParameter::class);
+        $obj1 = $dic->get(NoConstructorParameter::class);
         /** @var NoConstructorParameter $obj2 */
-        $obj2 = $dic->make(NoConstructorParameter::class);
+        $obj2 = $dic->get(NoConstructorParameter::class);
         $obj1->value = 1;
         $this->assertEquals(1, $obj2->value);
     }
@@ -63,7 +63,7 @@ class AurynContainerFactoryTest extends TestCase
             'factory' => [ConstructorParameter::class => FactoryWithoutParameter::class]
         ]));
         /** @var ConstructorParameter $result */
-        $result = $dic->make(ConstructorParameter::class);
+        $result = $dic->get(ConstructorParameter::class);
         $this->assertEquals(1, $result->value);
     }
 
@@ -71,7 +71,7 @@ class AurynContainerFactoryTest extends TestCase
     {
         $dic = $this->getContainer(new TestConfig([]));
         /** @var Invoker $invoker */
-        $invoker = $dic->make(Invoker::class);
+        $invoker = $dic->get(Invoker::class);
         $result = $invoker->invoke(FactoryWithoutParameter::class);
         $this->assertTrue($result instanceof ConstructorParameter);
     }
@@ -80,7 +80,7 @@ class AurynContainerFactoryTest extends TestCase
     {
         $dic = $this->getContainer(new TestConfig([]));
         /** @var Invoker $invoker */
-        $invoker = $dic->make(Invoker::class);
+        $invoker = $dic->get(Invoker::class);
         /** @var ConstructorParameter $result */
         $result = $invoker->invoke(FactoryWithParameter::class, ['value' => 2]);
         $this->assertEquals(2, $result->value);
@@ -92,7 +92,7 @@ class AurynContainerFactoryTest extends TestCase
             'setup' => [ConstructorParameter::class => ['value' => 2]]
         ]));
         /** @var ConstructorParameter $result */
-        $result = $dic->make(ConstructorParameter::class);
+        $result = $dic->get(ConstructorParameter::class);
         $this->assertEquals(2, $result->value);
     }
 
@@ -103,7 +103,7 @@ class AurynContainerFactoryTest extends TestCase
             'setup' => [ConstructorParameterWithDependency::class => ['value' => 2]]
         ]));
         /** @var ConstructorParameterWithDependency $result */
-        $result = $dic->make(ConstructorParameterWithDependency::class);
+        $result = $dic->get(ConstructorParameterWithDependency::class);
         $this->assertEquals(2, $result->value);
     }
 
@@ -116,9 +116,9 @@ class AurynContainerFactoryTest extends TestCase
             ]
         ]));
         /** @var WithDependency1 $obj1 */
-        $obj1 = $dic->make(WithDependency1::class);
+        $obj1 = $dic->get(WithDependency1::class);
         /** @var WithDependency2 $obj2 */
-        $obj2 = $dic->make(WithDependency2::class);
+        $obj2 = $dic->get(WithDependency2::class);
         $this->assertTrue($obj1->dependency instanceof Service1);
         $this->assertTrue($obj2->dependency instanceof Service2);
     }
@@ -136,9 +136,9 @@ class AurynContainerFactoryTest extends TestCase
             ]
         ]));
         /** @var WithDependencyAndParam1 $obj1 */
-        $obj1 = $dic->make(WithDependencyAndParam1::class);
+        $obj1 = $dic->get(WithDependencyAndParam1::class);
         /** @var WithDependencyAndParam2 $obj2 */
-        $obj2 = $dic->make(WithDependencyAndParam2::class);
+        $obj2 = $dic->get(WithDependencyAndParam2::class);
         $this->assertTrue($obj1->dependency instanceof Service1);
         $this->assertTrue($obj2->dependency instanceof Service2);
     }
@@ -154,16 +154,29 @@ class AurynContainerFactoryTest extends TestCase
             ]
         ]));
         /** @var WithDependency1 $obj1 */
-        $obj1 = $dic->make(WithDependency1::class);
+        $obj1 = $dic->get(WithDependency1::class);
         /** @var WithDependency2 $obj2 */
-        $obj2 = $dic->make(WithDependency2::class);
+        $obj2 = $dic->get(WithDependency2::class);
         $this->assertTrue($obj1->dependency instanceof Service1);
         $this->assertTrue($obj2->dependency instanceof Service2);
     }
 
-    private function getContainer(DependencyInjectionConfig $config): Container
+    public function testHas()
+    {
+        $dic = $this->getContainer(new TestConfig([
+            'bind' => [
+                DummyInterface::class => NoConstructorParameter::class
+            ]
+        ]));
+
+        $this->assertTrue($dic->has(DummyInterface::class));
+        $this->assertTrue($dic->has(Service1::class));
+        $this->assertFalse($dic->has('InvalidClass'));
+    }
+
+    private function getContainer(DependencyInjectionConfig $config): ContainerInterface
     {
         $factory = new AurynContainerFactory(new AurynParameterTransformer());
-        return  $factory->createContainer($config);
+        return $factory->createContainer($config);
     }
 }

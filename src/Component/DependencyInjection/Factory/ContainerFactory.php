@@ -3,10 +3,10 @@
 namespace Lencse\Rectum\Component\DependencyInjection\Factory;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\DependencyInjection\Container;
+use Psr\Container\ContainerInterface;
 
 interface ContainerFactory
 {
 
-    public function createContainer(DependencyInjectionConfig $config): Container;
+    public function createContainer(DependencyInjectionConfig $config): ContainerInterface;
 }
