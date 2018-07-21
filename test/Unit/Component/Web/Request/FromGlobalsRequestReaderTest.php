@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Unit\Component\Request;
+namespace Test\Unit\Component\Web\Request;
 
-use Lencse\Rectum\Component\Request\FromGlobalsRequestReader;
+use Lencse\Rectum\Component\Web\Request\FromGlobalsRequestReader;
 use PHPUnit\Framework\TestCase;
 
 class FromGlobalsRequestReaderTest extends TestCase

@@ -1,10 +1,10 @@
 <?php
 
-namespace Lencse\Rectum\Framework\Request;
+namespace Lencse\Rectum\Framework\Web\Request;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Request\FromGlobalsRequestReader;
-use Lencse\Rectum\Component\Request\RequestReader;
+use Lencse\Rectum\Component\Web\Request\FromGlobalsRequestReader;
+use Lencse\Rectum\Component\Web\Request\RequestReader;
 
 class RequestDI implements DependencyInjectionConfig
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lencse\Rectum\Framework\RequestHandler;
+namespace Lencse\Rectum\Framework\Web\RequestHandler;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\RequestHandler\RequestHandler;
+use Lencse\Rectum\Component\Web\RequestHandler\RequestHandler;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class RequestHandlerDI implements DependencyInjectionConfig

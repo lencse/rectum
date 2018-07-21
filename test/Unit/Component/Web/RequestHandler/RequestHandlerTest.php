@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\Component\RequestHandler;
+namespace Test\Unit\Component\Web\RequestHandler;
 
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
@@ -13,7 +13,7 @@ use Lencse\Rectum\Component\Routing\Router;
 use Lencse\Rectum\Component\Routing\RoutingResult;
 use Lencse\Rectum\Component\Routing\RoutingResultParameterAppender;
 use Lencse\Rectum\Component\Routing\WebRouter;
-use Lencse\Rectum\Component\RequestHandler\RequestHandler;
+use Lencse\Rectum\Component\Web\RequestHandler\RequestHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 

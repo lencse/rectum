@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Component\RequestHandler;
+namespace Lencse\Rectum\Component\Web\RequestHandler;
 
 use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Routing\Router;
