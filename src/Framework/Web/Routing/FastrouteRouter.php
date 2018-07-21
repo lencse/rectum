@@ -8,9 +8,11 @@ use function FastRoute\simpleDispatcher;
 use Lencse\Rectum\Component\Web\Routing\Exception\BadMethodException;
 use Lencse\Rectum\Component\Web\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
+use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlingConfig;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
+use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use Psr\Http\Message\ServerRequestInterface;
 
 class FastrouteRouter implements Router
@@ -29,7 +31,7 @@ class FastrouteRouter implements Router
                 $collector->addRoute(
                     (string) $route->getMethod(),
                     $route->getPath(),
-                    $route->getHandlingConfig()
+                    $route->getHandlerPipeline()
                 );
             }
         });
@@ -39,11 +41,11 @@ class FastrouteRouter implements Router
     {
         $routeInfo = $this->dispatcher->dispatch($request->getMethod(), $request->getUri()->getPath());
         $this->validate($request, (int) $routeInfo[0]);
-        /** @var RouteHandlingConfig $handler */
-        $handler = $routeInfo[1];
+        /** @var RouteHandlerPipeline $handlerPipeline */
+        $handlerPipeline = $routeInfo[1];
         $routeParams = (array) $routeInfo[2];
 
-        return new RoutingResult($handler, $routeParams);
+        return new RoutingResult($handlerPipeline, $routeParams);
     }
 
     protected function validate(ServerRequestInterface $request, int $dispatchResult): void

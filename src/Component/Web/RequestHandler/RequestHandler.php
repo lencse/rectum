@@ -2,6 +2,7 @@
 
 namespace Lencse\Rectum\Component\Web\RequestHandler;
 
+use GuzzleHttp\Psr7\Response;
 use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Psr\Http\Message\ResponseInterface;
@@ -28,27 +29,22 @@ class RequestHandler implements RequestHandlerInterface
     }
 
     /**
-     * @psalm-suppress MixedInferredReturnType
      * @psalm-suppress MixedAssignment
-     * @psalm-suppress MixedReturnStatement
+     * @psalm-suppress PossiblyUndefinedVariable
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $routingResult = $this->router->route($request);
 
-        $data = $this->invoker->invoke(
-            $routingResult->getHandlingConfig()->getRequestProcessorClass(),
-            $routingResult->getParams()
-        );
+        $params = $routingResult->getParams();
 
-        if ('' === $routingResult->getHandlingConfig()->getDataTransformerClass()) {
-            return $data;
+        foreach ($routingResult->getHandlerPipeline() as $handler) {
+            $result = $this->invoker->invoke($handler, $params);
+            $params = ['data' => $result];
         }
 
-        $response = $this->invoker->invoke(
-            $routingResult->getHandlingConfig()->getDataTransformerClass(),
-            ['data' => $data]
-        );
+        /** @var ResponseInterface $response */
+        $response = $result ?? new Response();
 
         return $response;
     }

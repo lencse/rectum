@@ -18,15 +18,15 @@ class Route
     private $path;
 
     /**
-     * @var RouteHandlingConfig
+     * @var RouteHandlerPipeline
      */
-    private $handlingConfig;
+    private $handlerPipeline;
 
-    public function __construct(HttpMethod $method, string $path, RouteHandlingConfig $handlingConfig)
+    public function __construct(HttpMethod $method, string $path, RouteHandlerPipeline $handlerPipeline)
     {
         $this->method = $method;
         $this->path = $path;
-        $this->handlingConfig = $handlingConfig;
+        $this->handlerPipeline = $handlerPipeline;
     }
 
     public function getMethod(): HttpMethod
@@ -39,11 +39,8 @@ class Route
         return $this->path;
     }
 
-    /**
-     * @return RouteHandlingConfig
-     */
-    public function getHandlingConfig(): RouteHandlingConfig
+    public function getHandlerPipeline(): RouteHandlerPipeline
     {
-        return $this->handlingConfig;
+        return $this->handlerPipeline;
     }
 }

@@ -9,6 +9,7 @@ use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Web\Http\HttpMethod;
+use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
 use Lencse\Rectum\Component\Web\Routing\RoutingResultParameterAppender;
@@ -51,13 +52,13 @@ class RequestHandlerTest extends TestCase
                     {
                         if ('/1' === $request->getUri()->getPath()) {
                             return new RoutingResult(
-                                new SimpleRouteHandlingConfig('Handler'),
+                                new RouteHandlerPipeline(['Handler']),
                                 ['value' => 1]
                             );
                         }
                         if ('/2' === $request->getUri()->getPath()) {
                             return new RoutingResult(
-                                new WithTransformerRouteHandlingConfig('DataHandler', 'Transformer'),
+                                new RouteHandlerPipeline(['DataHandler', 'Transformer']),
                                 ['value' => 1]
                             );
                         }

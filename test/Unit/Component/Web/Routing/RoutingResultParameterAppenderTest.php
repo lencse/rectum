@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\ServerRequest;
 use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
+use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
 use Lencse\Rectum\Component\Web\Routing\RoutingResultParameterAppender;
 use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
@@ -33,7 +34,10 @@ class RoutingResultParameterAppenderTest extends TestCase
         );
         $request = new ServerRequest('GET', '/');
         $result = $appender->appendRequestToParameters(
-            new RoutingResult(new SimpleRouteHandlingConfig('Handler'), ['value' => 1]),
+            new RoutingResult(
+                new RouteHandlerPipeline(['Handler']),
+                ['value' => 1]
+            ),
             $request
         );
         $this->assertEquals(['request' => $request, 'value' => 1], $result->getParams());

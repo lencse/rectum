@@ -24,7 +24,7 @@ class RoutingResultParameterAppender
         $append = array_reduce(
             array_filter(
                 $this->methodParameterAnalyzer->getParameters(
-                    $result->getHandlingConfig()->getRequestProcessorClass(),
+                    $result->getHandlerPipeline()->first(),
                     '__invoke'
                 ),
                 function (MethodParameter $parameter): bool {

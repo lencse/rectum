@@ -6,24 +6,24 @@ class RoutingResult
 {
 
     /**
-     * @var RouteHandlingConfig
+     * @var RouteHandlerPipeline
      */
-    private $handlingConfig;
+    private $handlerPipeline;
 
     /**
      * @var array
      */
     private $params;
 
-    public function __construct(RouteHandlingConfig $handlingConfig, array $params)
+    public function __construct(RouteHandlerPipeline $handlerPipeline, array $params)
     {
-        $this->handlingConfig = $handlingConfig;
+        $this->handlerPipeline = $handlerPipeline;
         $this->params = $params;
     }
 
-    public function getHandlingConfig(): RouteHandlingConfig
+    public function getHandlerPipeline(): RouteHandlerPipeline
     {
-        return $this->handlingConfig;
+        return $this->handlerPipeline;
     }
 
     public function getParams(): array
@@ -33,6 +33,6 @@ class RoutingResult
 
     public function withParams(array $params): self
     {
-        return new self($this->handlingConfig, $params);
+        return new self($this->handlerPipeline, $params);
     }
 }
