@@ -27,13 +27,27 @@ class RequestHandler implements RequestHandlerInterface
         $this->invoker = $invoker;
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedReturnStatement
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $routingResult = $this->router->route($request);
-        /** @var ResponseInterface $response */
-        $response = $this->invoker->invoke(
+
+        $data = $this->invoker->invoke(
             $routingResult->getHandlingConfig()->getRequestProcessorClass(),
             $routingResult->getParams()
+        );
+
+        if ('' === $routingResult->getHandlingConfig()->getDataTransformerClass()) {
+            return $data;
+        }
+
+        $response = $this->invoker->invoke(
+            $routingResult->getHandlingConfig()->getDataTransformerClass(),
+            ['data' => $data]
         );
 
         return $response;

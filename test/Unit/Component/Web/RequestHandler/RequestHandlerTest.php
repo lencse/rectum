@@ -15,22 +15,51 @@ use Lencse\Rectum\Component\Web\Routing\RoutingResultParameterAppender;
 use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use Lencse\Rectum\Component\Web\Routing\WebRouter;
 use Lencse\Rectum\Component\Web\RequestHandler\RequestHandler;
+use Lencse\Rectum\Component\Web\Routing\WithTransformerRouteHandlingConfig;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class RequestHandlerTest extends TestCase
 {
 
-    public function testProcess()
+    public function testSimpleRouteHandling()
     {
-        $processor = new RequestHandler(
+        $handler = $this->getHandler();
+        $response = $handler->handle(new ServerRequest(HttpMethod::get(), '/1'));
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('/1-1', (string) $response->getBody());
+    }
+
+    public function testTransformedRouteHandling()
+    {
+        $handler = $this->getHandler();
+        $response = $handler->handle(new ServerRequest(HttpMethod::get(), '/2'));
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('1', (string) $response->getBody());
+    }
+
+    private function getHandler(): RequestHandler
+    {
+        return new RequestHandler(
             new WebRouter(
                 new class implements Router
                 {
                     public function route(ServerRequestInterface $request): RoutingResult
                     {
                         if ('/1' === $request->getUri()->getPath()) {
-                            return new RoutingResult(new SimpleRouteHandlingConfig('Handler'), ['value' => 1]);
+                            return new RoutingResult(
+                                new SimpleRouteHandlingConfig('Handler'),
+                                ['value' => 1]
+                            );
+                        }
+                        if ('/2' === $request->getUri()->getPath()) {
+                            return new RoutingResult(
+                                new WithTransformerRouteHandlingConfig('DataHandler', 'Transformer'),
+                                ['value' => 1]
+                            );
                         }
                     }
                 },
@@ -40,6 +69,24 @@ class RequestHandlerTest extends TestCase
                         public function getParameters(string $class, string $method): array
                         {
                             if ('Handler' === $class && '__invoke' === $method) {
+                                return [
+                                    new MethodParameter('value', new GivenParameterType('int')),
+                                    new MethodParameter(
+                                        'request',
+                                        new GivenParameterType(ServerRequestInterface::class)
+                                    ),
+                                ];
+                            }
+                            if ('DataHandler' === $class && '__invoke' === $method) {
+                                return [
+                                    new MethodParameter('value', new GivenParameterType('int')),
+                                    new MethodParameter(
+                                        'request',
+                                        new GivenParameterType(ServerRequestInterface::class)
+                                    ),
+                                ];
+                            }
+                            if ('Transformer' === $class && '__invoke' === $method) {
                                 return [
                                     new MethodParameter('value', new GivenParameterType('int')),
                                     new MethodParameter(
@@ -65,12 +112,18 @@ class RequestHandlerTest extends TestCase
                             sprintf('%s-%s', $request->getUri()->getPath(), (string) $params['value'])
                         );
                     }
+                    if ('DataHandler' === $invokableClass) {
+                        return (int) $params['value'];
+                    }
+                    if ('Transformer' === $invokableClass) {
+                        return new Response(
+                            200,
+                            [],
+                            (string) $params['data']
+                        );
+                    }
                 }
             }
         );
-
-        $response = $processor->handle(new ServerRequest(HttpMethod::get(), '/1'));
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('/1-1', (string) $response->getBody());
     }
 }
