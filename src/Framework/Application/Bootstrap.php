@@ -9,8 +9,8 @@ use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use Lencse\Rectum\Framework\Web\Request\RequestDI;
 use Lencse\Rectum\Framework\Web\RequestHandler\RequestHandlerDI;
-use Lencse\Rectum\Framework\Routing\RoutingDI;
-use Lencse\Rectum\Framework\Response\ResponseDI;
+use Lencse\Rectum\Framework\Web\Routing\RoutingDI;
+use Lencse\Rectum\Framework\Web\Response\ResponseDI;
 use Psr\Container\ContainerInterface;
 
 class Bootstrap
