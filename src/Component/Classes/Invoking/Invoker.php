@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Component\DependencyInjection;
+namespace Lencse\Rectum\Component\Classes\Invoking;
 
 interface Invoker
 {

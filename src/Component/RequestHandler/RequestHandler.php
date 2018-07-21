@@ -1,14 +1,14 @@
 <?php
 
-namespace Lencse\Rectum\Component\Web;
+namespace Lencse\Rectum\Component\RequestHandler;
 
-use Lencse\Rectum\Component\DependencyInjection\Invoker;
+use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Routing\Router;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class RequestProcessorByRouter implements RequestHandlerInterface
+class RequestHandler implements RequestHandlerInterface
 {
 
     /**

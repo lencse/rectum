@@ -7,13 +7,13 @@ use GuzzleHttp\Psr7\ServerRequest;
 use Lencse\Rectum\Component\Classes\GivenParameterType;
 use Lencse\Rectum\Component\Classes\MethodParameter;
 use Lencse\Rectum\Component\Classes\MethodParameterAnalyzer;
-use Lencse\Rectum\Component\DependencyInjection\Invoker;
+use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Http\HttpMethod;
 use Lencse\Rectum\Component\Routing\Router;
 use Lencse\Rectum\Component\Routing\RoutingResult;
 use Lencse\Rectum\Component\Routing\RoutingResultParameterAppender;
 use Lencse\Rectum\Component\Routing\WebRouter;
-use Lencse\Rectum\Component\Web\RequestProcessorByRouter;
+use Lencse\Rectum\Component\RequestHandler\RequestHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,7 +22,7 @@ class RequestProcessorTest extends TestCase
 
     public function testProcess()
     {
-        $processor = new RequestProcessorByRouter(
+        $processor = new RequestHandler(
             new WebRouter(
                 new class implements Router
                 {

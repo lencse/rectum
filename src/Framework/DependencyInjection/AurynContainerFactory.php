@@ -5,7 +5,7 @@ namespace Lencse\Rectum\Framework\DependencyInjection;
 use Auryn\InjectionException;
 use Auryn\Injector;
 use function get_class;
-use Lencse\Rectum\Component\DependencyInjection\Invoker;
+use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Component\DependencyInjection\Factory\ContainerFactory;
 use Psr\Container\ContainerInterface;

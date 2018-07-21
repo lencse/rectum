@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Framework\DependencyInjection;
 
-use Lencse\Rectum\Component\DependencyInjection\Invoker;
+use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
