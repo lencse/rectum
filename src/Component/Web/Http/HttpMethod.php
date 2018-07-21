@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Component\Http;
+namespace Lencse\Rectum\Component\Web\Http;
 
 class HttpMethod
 {

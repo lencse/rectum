@@ -3,7 +3,7 @@
 namespace Test\Unit\Framework\Routing;
 
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Http\HttpMethod;
+use Lencse\Rectum\Component\Web\Http\HttpMethod;
 use Lencse\Rectum\Component\Routing\Exception\BadMethodException;
 use Lencse\Rectum\Component\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Component\Routing\Route;

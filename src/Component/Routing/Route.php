@@ -2,7 +2,7 @@
 
 namespace Lencse\Rectum\Component\Routing;
 
-use Lencse\Rectum\Component\Http\HttpMethod;
+use Lencse\Rectum\Component\Web\Http\HttpMethod;
 
 class Route
 {

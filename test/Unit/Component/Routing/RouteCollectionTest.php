@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Component\Routing;
 
-use Lencse\Rectum\Component\Http\HttpMethod;
+use Lencse\Rectum\Component\Web\Http\HttpMethod;
 use Lencse\Rectum\Component\Routing\Route;
 use Lencse\Rectum\Component\Routing\RouteCollection;
 use PHPUnit\Framework\TestCase;

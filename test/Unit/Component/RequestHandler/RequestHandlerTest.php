@@ -8,7 +8,7 @@ use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Component\Classes\Invoking\Invoker;
-use Lencse\Rectum\Component\Http\HttpMethod;
+use Lencse\Rectum\Component\Web\Http\HttpMethod;
 use Lencse\Rectum\Component\Routing\Router;
 use Lencse\Rectum\Component\Routing\RoutingResult;
 use Lencse\Rectum\Component\Routing\RoutingResultParameterAppender;
