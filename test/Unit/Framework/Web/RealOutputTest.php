@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Framework\Web;
 
-use Lencse\Rectum\Framework\Web\RealOutput;
+use Lencse\Rectum\Framework\Response\RealOutput;
 use PHPUnit\Framework\TestCase;
 
 class RealOutputTest extends TestCase

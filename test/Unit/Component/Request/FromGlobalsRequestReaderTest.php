@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\Component\Web;
+namespace Test\Unit\Component\Request;
 
 use Lencse\Rectum\Component\Request\FromGlobalsRequestReader;
 use PHPUnit\Framework\TestCase;

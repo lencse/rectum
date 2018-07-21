@@ -5,7 +5,7 @@ namespace Test\Unit\Framework\Classes;
 use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
 use Lencse\Rectum\Component\Classes\Method\Parameter\NonGivenParameterType;
-use Lencse\Rectum\Framework\Classes\ReflectionMethodParameterAnalyzer;
+use Lencse\Rectum\Framework\Classes\Method\Parameter\ReflectionMethodParameterAnalyzer;
 use PHPUnit\Framework\TestCase;
 
 class ReflectionMethodParameterAnalyzerTest extends TestCase

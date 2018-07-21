@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Framework\Web;
+namespace Lencse\Rectum\Framework\Response;
 
 use Lencse\Rectum\Component\Response\HttpHeader;
 

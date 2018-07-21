@@ -8,7 +8,7 @@ use Lencse\Rectum\Framework\Classes\ClassesDI;
 use Lencse\Rectum\Framework\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use Lencse\Rectum\Framework\Routing\RoutingDI;
-use Lencse\Rectum\Framework\Web\WebDI;
+use Lencse\Rectum\Framework\Response\ResponseDI;
 use Psr\Container\ContainerInterface;
 
 class Bootstrap
@@ -25,7 +25,7 @@ class Bootstrap
         $this->dic = $factory->createContainer(new CompositeDependencyInjectionConfig([
             new ClassesDI(),
             new RoutingDI(),
-            new WebDI()
+            new ResponseDI()
         ]));
     }
 

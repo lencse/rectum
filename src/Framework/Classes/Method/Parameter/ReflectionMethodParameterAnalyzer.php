@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Framework\Classes;
+namespace Lencse\Rectum\Framework\Classes\Method\Parameter;
 
 use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;

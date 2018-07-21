@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\Component\Web;
+namespace Test\Unit\Component\Response;
 
 use GuzzleHttp\Psr7\Response;
 use Lencse\Rectum\Component\Response\HttpHeader;

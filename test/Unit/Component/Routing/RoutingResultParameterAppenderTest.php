@@ -8,7 +8,7 @@ use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Component\Routing\RoutingResult;
 use Lencse\Rectum\Component\Routing\RoutingResultParameterAppender;
-use Lencse\Rectum\Framework\Classes\ReflectionMethodParameterAnalyzer;
+use Lencse\Rectum\Framework\Classes\Method\Parameter\ReflectionMethodParameterAnalyzer;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Test\Unit\Component\Routing\Handler\TestHandler;

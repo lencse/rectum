@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Framework\Web;
+namespace Lencse\Rectum\Framework\Response;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Component\Request\FromGlobalsRequestReader;
@@ -10,9 +10,11 @@ use Lencse\Rectum\Component\RequestHandler\RequestHandler;
 use Lencse\Rectum\Component\Request\RequestReader;
 use Lencse\Rectum\Component\Response\ResponseRenderer;
 use Lencse\Rectum\Component\Response\ToHeaderAndOutputResponseRenderer;
+use Lencse\Rectum\Framework\Response\RealHttpHeader;
+use Lencse\Rectum\Framework\Response\RealOutput;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class WebDI implements DependencyInjectionConfig
+class ResponseDI implements DependencyInjectionConfig
 {
 
     public function bind(): array

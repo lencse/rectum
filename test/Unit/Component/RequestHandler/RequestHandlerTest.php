@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\Component\Web;
+namespace Test\Unit\Component\RequestHandler;
 
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
@@ -17,7 +17,7 @@ use Lencse\Rectum\Component\RequestHandler\RequestHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
-class RequestProcessorTest extends TestCase
+class RequestHandlerTest extends TestCase
 {
 
     public function testProcess()
