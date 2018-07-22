@@ -30,7 +30,7 @@ class FastrouteRouter implements Router
             foreach ($routes as $route) {
                 $collector->addRoute(
                     (string) $route->getMethod(),
-                    $route->getPath(),
+                    (string) new FastRoutePath($route),
                     $route->getHandlerPipeline()
                 );
             }

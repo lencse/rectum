@@ -22,11 +22,27 @@ class Route
      */
     private $handlerPipeline;
 
-    public function __construct(HttpMethod $method, string $path, RouteHandlerPipeline $handlerPipeline)
-    {
+    /**
+     * @var string[]
+     */
+    private $parameterFormats;
+
+    /**
+     * @param HttpMethod $method
+     * @param string $path
+     * @param RouteHandlerPipeline $handlerPipeline
+     * @param string[] $parameterFormats
+     */
+    public function __construct(
+        HttpMethod $method,
+        string $path,
+        RouteHandlerPipeline $handlerPipeline,
+        array $parameterFormats = []
+    ) {
         $this->method = $method;
         $this->path = $path;
         $this->handlerPipeline = $handlerPipeline;
+        $this->parameterFormats = $parameterFormats;
     }
 
     public function getMethod(): HttpMethod
@@ -42,5 +58,13 @@ class Route
     public function getHandlerPipeline(): RouteHandlerPipeline
     {
         return $this->handlerPipeline;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getParameterFormats(): array
+    {
+        return $this->parameterFormats;
     }
 }

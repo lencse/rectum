@@ -10,6 +10,7 @@ use Lencse\Rectum\Component\Web\Routing\Route;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
 use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
+use Lencse\Rectum\Framework\Web\Routing\FastRoutePath;
 use Lencse\Rectum\Framework\Web\Routing\FastrouteRouter;
 use PHPUnit\Framework\TestCase;
 
@@ -79,5 +80,41 @@ class FastrouteRouterTest extends TestCase
         }
 
         $this->fail('Exception not thrown');
+    }
+
+    public function testBadParameterFormat()
+    {
+        $router = new FastrouteRouter(new RouteCollection([
+            new Route(
+                HttpMethod::get(),
+                '/test/{id}',
+                new RouteHandlerPipeline(['Handler']),
+                ['id' => '\d{3}']
+            )
+        ]));
+        $request = new ServerRequest(
+            'GET',
+            '/test/1'
+        );
+        $this->expectException(NotFoundException::class);
+        $router->route($request);
+    }
+
+    public function testGoodParameterFormat()
+    {
+        $router = new FastrouteRouter(new RouteCollection([
+            new Route(
+                HttpMethod::get(),
+                '/test/{id}',
+                new RouteHandlerPipeline(['Handler']),
+                ['id' => '\d{3}']
+            )
+        ]));
+        $request = new ServerRequest(
+            'GET',
+            '/test/123'
+        );
+        $result = $router->route($request);
+        $this->assertEquals('123', $result->getParams()['id']);
     }
 }
