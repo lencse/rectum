@@ -9,6 +9,7 @@ use Lencse\Rectum\Component\Web\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Component\Web\Routing\Route;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
+use Lencse\Rectum\Component\Web\Routing\Router;
 use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use Lencse\Rectum\Framework\Web\Routing\FastRoutePath;
 use Lencse\Rectum\Framework\Web\Routing\FastrouteRouter;
@@ -19,9 +20,9 @@ class FastrouteRouterTest extends TestCase
 
     public function testRoute()
     {
-        $router = new FastrouteRouter(new RouteCollection([
+        $router = $this->createRouter([
             new Route(HttpMethod::get(), '/test', new RouteHandlerPipeline(['TestHandler']))
-        ]));
+        ]);
         $request = new ServerRequest(
             HttpMethod::get(),
             '/test'
@@ -32,9 +33,9 @@ class FastrouteRouterTest extends TestCase
 
     public function testParams()
     {
-        $router = new FastrouteRouter(new RouteCollection([
+        $router = $this->createRouter([
             new Route(HttpMethod::get(), '/test/{id}', new RouteHandlerPipeline(['TestHandler']))
-        ]));
+        ]);
         $request = new ServerRequest(
             HttpMethod::get(),
             '/test/1'
@@ -45,7 +46,7 @@ class FastrouteRouterTest extends TestCase
 
     public function testNotFound()
     {
-        $router = new FastrouteRouter(new RouteCollection([]));
+        $router = $this->createRouter([]);
         $request = new ServerRequest(
             HttpMethod::get(),
             '/test/1'
@@ -64,9 +65,9 @@ class FastrouteRouterTest extends TestCase
 
     public function testBadMethod()
     {
-        $router = new FastrouteRouter(new RouteCollection([
+        $router = $this->createRouter([
             new Route(HttpMethod::post(), '/test/{id}', new RouteHandlerPipeline(['TestHandler']))
-        ]));
+        ]);
         $request = new ServerRequest(
             HttpMethod::get(),
             '/test/1'
@@ -84,14 +85,14 @@ class FastrouteRouterTest extends TestCase
 
     public function testBadParameterFormat()
     {
-        $router = new FastrouteRouter(new RouteCollection([
+        $router = $this->createRouter([
             new Route(
                 HttpMethod::get(),
                 '/test/{id}',
                 new RouteHandlerPipeline(['Handler']),
                 ['id' => '\d{3}']
             )
-        ]));
+        ]);
         $request = new ServerRequest(
             'GET',
             '/test/1'
@@ -102,19 +103,28 @@ class FastrouteRouterTest extends TestCase
 
     public function testGoodParameterFormat()
     {
-        $router = new FastrouteRouter(new RouteCollection([
+        $router = $this->createRouter([
             new Route(
                 HttpMethod::get(),
                 '/test/{id}',
                 new RouteHandlerPipeline(['Handler']),
                 ['id' => '\d{3}']
             )
-        ]));
+        ]);
         $request = new ServerRequest(
             'GET',
             '/test/123'
         );
         $result = $router->route($request);
         $this->assertEquals('123', $result->getParams()['id']);
+    }
+
+    /**
+     * @param Route[] $routes
+     * @return Router
+     */
+    private function createRouter(array $routes): Router
+    {
+        return new FastrouteRouter(new RouteCollection($routes), new FastRoutePath());
     }
 }

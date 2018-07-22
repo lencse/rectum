@@ -9,10 +9,8 @@ use Lencse\Rectum\Component\Web\Routing\Exception\BadMethodException;
 use Lencse\Rectum\Component\Web\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
-use Lencse\Rectum\Component\Web\Routing\RouteHandlingConfig;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
-use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use Psr\Http\Message\ServerRequestInterface;
 
 class FastrouteRouter implements Router
@@ -23,14 +21,14 @@ class FastrouteRouter implements Router
      */
     private $dispatcher;
 
-    public function __construct(RouteCollection $routes)
+    public function __construct(RouteCollection $routes, FastRoutePath $path)
     {
         /** @var Dispatcher dispatcher */
-        $this->dispatcher = simpleDispatcher(function (RouteCollector $collector) use ($routes): void {
+        $this->dispatcher = simpleDispatcher(function (RouteCollector $collector) use ($routes, $path): void {
             foreach ($routes as $route) {
                 $collector->addRoute(
                     (string) $route->getMethod(),
-                    (string) new FastRoutePath($route),
+                    $path->getPathWithParameterFormats($route),
                     $route->getHandlerPipeline()
                 );
             }

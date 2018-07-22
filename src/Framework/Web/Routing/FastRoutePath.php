@@ -7,20 +7,10 @@ use Lencse\Rectum\Component\Web\Routing\Route;
 class FastRoutePath
 {
 
-    /**
-     * @var Route
-     */
-    private $route;
-
-    public function __construct(Route $route)
+    public function getPathWithParameterFormats(Route $route): string
     {
-        $this->route = $route;
-    }
-
-    public function __toString(): string
-    {
-        $result = $this->route->getPath();
-        foreach ($this->route->getParameterFormats() as $param => $format) {
+        $result = $route->getPath();
+        foreach ($route->getParameterFormats() as $param => $format) {
             /** @var string $result */
             $result = preg_replace("/\{($param)\}/", "{\$1:$format}", $result);
         }
