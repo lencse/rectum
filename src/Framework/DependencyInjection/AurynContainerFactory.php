@@ -151,6 +151,8 @@ class AurynContainerFactory implements ContainerFactory
              */
             public function invoke(string $invokableClass, array $params = [])
             {
+                $this->get($invokableClass);
+
                 return $this->auryn->execute(
                     $invokableClass,
                     $this->parameterTransformer->transformParameters(

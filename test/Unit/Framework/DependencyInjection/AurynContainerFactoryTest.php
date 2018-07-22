@@ -10,6 +10,7 @@ use Lencse\Rectum\Framework\DependencyInjection\AurynParameterTransformer;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Test\Unit\Framework\DependencyInjection\Objects\ConstructorParameterWithDependency;
+use Test\Unit\Framework\DependencyInjection\Objects\Counter;
 use Test\Unit\Framework\DependencyInjection\Objects\DummyInterface;
 use Test\Unit\Framework\DependencyInjection\Objects\FactoryWithoutParameter;
 use Test\Unit\Framework\DependencyInjection\Objects\FactoryWithParameter;
@@ -75,6 +76,17 @@ class AurynContainerFactoryTest extends TestCase
         $invoker = $dic->get(Invoker::class);
         $result = $invoker->invoke(FactoryWithoutParameter::class);
         $this->assertTrue($result instanceof ConstructorParameter);
+    }
+
+    public function testInvokeIsOnTheSameObject()
+    {
+        $dic = $this->getContainer(new TestConfig([]));
+        /** @var Invoker $invoker */
+        $invoker = $dic->get(Invoker::class);
+        $result1 = $invoker->invoke(Counter::class);
+        $this->assertEquals(1, $result1);
+        $result2 = $invoker->invoke(Counter::class);
+        $this->assertEquals(2, $result2);
     }
 
     public function testInvokeWithParameters()
