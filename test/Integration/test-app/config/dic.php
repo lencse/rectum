@@ -9,21 +9,21 @@ return new class implements DependencyInjectionConfig
 
     public function bind(): array
     {
-        // TODO: Implement bind() method.
+        return [];
     }
 
     public function factory(): array
     {
-        // TODO: Implement factory() method.
+        return [];
     }
 
     public function setup(): array
     {
-        // TODO: Implement setup() method.
+        return [];
     }
 
     public function wire(): array
     {
-        // TODO: Implement wire() method.
+        return [];
     }
 };

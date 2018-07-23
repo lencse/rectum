@@ -6,6 +6,7 @@ use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectio
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
+use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfigurator;
 
 class RoutingDI implements DependencyInjectionConfig
 {
@@ -29,13 +30,15 @@ class RoutingDI implements DependencyInjectionConfig
 
     public function factory(): array
     {
-        return [];
+        return [
+            RouteCollection::class => RoutingConfigurator::class,
+        ];
     }
 
     public function setup(): array
     {
         return [
-            RouteCollection::class => ['routes' => $this->config->routes()],
+            RoutingConfigurator::class => ['config' => $this->config],
         ];
     }
 

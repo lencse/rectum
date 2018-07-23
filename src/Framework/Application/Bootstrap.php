@@ -32,6 +32,7 @@ class Bootstrap
             new RequestHandlerDI(),
             new ResponseDI(),
             new RoutingDI($config->routingConfig()),
+            $config->dependencyInjectionConfig(),
         ]));
     }
 
@@ -40,7 +41,6 @@ class Bootstrap
         /** @var WebApplication $app */
         $app = $this->dic->get(WebApplication::class);
 
-        var_dump($app);
         return $app;
     }
 }
