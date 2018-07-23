@@ -197,6 +197,19 @@ class AurynContainerFactoryTest extends TestCase
         $this->assertFalse($dic->has('InvalidClass'));
     }
 
+    public function testInstance()
+    {
+        $dic = $this->getContainer(new TestConfig([
+            'instance' => [
+                DummyInterface::class => new ConstructorParameter(1)
+            ]
+        ]));
+
+        /** @var ConstructorParameter $obj */
+        $obj = $dic->get(DummyInterface::class);
+        $this->assertEquals(1, $obj->value);
+    }
+
     private function getContainer(DependencyInjectionConfig $config): ContainerInterface
     {
         $factory = new AurynContainerFactory(

@@ -30,4 +30,9 @@ return new class implements DependencyInjectionConfig
     {
         return [];
     }
+
+    public function instance(): array
+    {
+        return [];
+    }
 };

@@ -53,6 +53,10 @@ class AurynContainerFactory implements ContainerFactory
         foreach ($config->factory() as $class => $factoryClass) {
             $auryn->delegate($class, $factoryClass);
         }
+        foreach ($config->instance() as $class => $instance) {
+            $auryn->alias($class, get_class($instance));
+            $auryn->share($instance);
+        }
 
         $wireConfig = $config->wire();
         $setupConfig = $config->setup();

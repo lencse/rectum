@@ -30,4 +30,9 @@ class RequestHandlerDI implements DependencyInjectionConfig
     {
         return [];
     }
+
+    public function instance(): array
+    {
+        return [];
+    }
 }

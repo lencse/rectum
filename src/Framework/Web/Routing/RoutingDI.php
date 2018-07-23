@@ -46,4 +46,9 @@ class RoutingDI implements DependencyInjectionConfig
     {
         return [];
     }
+
+    public function instance(): array
+    {
+        return [];
+    }
 }

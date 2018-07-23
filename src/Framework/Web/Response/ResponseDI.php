@@ -37,4 +37,9 @@ class ResponseDI implements DependencyInjectionConfig
     {
         return [];
     }
+
+    public function instance(): array
+    {
+        return [];
+    }
 }

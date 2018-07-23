@@ -38,4 +38,9 @@ class RequestDI implements DependencyInjectionConfig
     {
         return [];
     }
+
+    public function instance(): array
+    {
+        return [];
+    }
 }

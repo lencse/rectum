@@ -34,6 +34,11 @@ class CompositeDependencyInjectionConfigTest extends TestCase
                 {
                     return ['A' => ['B' => 'b']];
                 }
+
+                public function instance(): array
+                {
+                    return ['A' => 'a'];
+                }
             },
             new class implements DependencyInjectionConfig
             {
@@ -57,6 +62,12 @@ class CompositeDependencyInjectionConfigTest extends TestCase
                 {
                     return ['C' => ['D' => 'd']];
                 }
+
+
+                public function instance(): array
+                {
+                    return ['B' => 'b'];
+                }
             }
         ]);
 
@@ -64,5 +75,6 @@ class CompositeDependencyInjectionConfigTest extends TestCase
         $this->assertEquals(['A' => 'af', 'B' => 'bf', 'C' => 'cf'], $config->factory());
         $this->assertEquals(['A' => ['a' => 1], 'B' => ['b' => 2]], $config->setup());
         $this->assertEquals(['A' => ['B' => 'b'], 'C' => ['D' => 'd']], $config->wire());
+        $this->assertEquals(['A' => 'a', 'B' => 'b'], $config->instance());
     }
 }

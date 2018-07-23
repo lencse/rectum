@@ -50,6 +50,11 @@ return function (array $globals): Bootstrap {
         {
             return [];
         }
+
+        public function instance(): array
+        {
+            return [];
+        }
     };
 
     return new Bootstrap($config($dicExtra));

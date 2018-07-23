@@ -48,6 +48,13 @@ class CompositeDependencyInjectionConfig implements DependencyInjectionConfig
         });
     }
 
+    public function instance(): array
+    {
+        return $this->merge(function (DependencyInjectionConfig $config): array {
+            return $config->instance();
+        });
+    }
+
     private function merge(Closure $closure): array
     {
         return array_reduce(
