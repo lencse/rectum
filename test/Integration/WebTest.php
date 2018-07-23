@@ -11,7 +11,7 @@ class WebTest extends TestCase
 
     public function testWeb()
     {
-        $bootstrap = new Bootstrap();
+        $bootstrap = new Bootstrap(require 'config/configuration.php');
         $web = $bootstrap->createWebApplication();
         $this->assertTrue($web instanceof WebApplication);
     }

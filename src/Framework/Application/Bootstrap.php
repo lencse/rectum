@@ -2,6 +2,7 @@
 
 namespace Lencse\Rectum\Framework\Application;
 
+use Lencse\Rectum\Component\Configuration\ApplicationConfig;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\CompositeDependencyInjectionConfig;
 use Lencse\Rectum\Component\Web\WebApplication;
 use Lencse\Rectum\Framework\Classes\ClassesDI;
@@ -22,7 +23,7 @@ class Bootstrap
      */
     private $dic;
 
-    public function __construct()
+    public function __construct(ApplicationConfig $config)
     {
         $factory = new AurynContainerFactory(new AurynParameterTransformer(), new ReflectionMethodParameterAnalyzer());
         $this->dic = $factory->createContainer(new CompositeDependencyInjectionConfig([
@@ -30,7 +31,7 @@ class Bootstrap
             new RequestDI(),
             new RequestHandlerDI(),
             new ResponseDI(),
-            new RoutingDI(),
+            new RoutingDI($config->routingConfig()),
         ]));
     }
 
@@ -39,6 +40,7 @@ class Bootstrap
         /** @var WebApplication $app */
         $app = $this->dic->get(WebApplication::class);
 
+        var_dump($app);
         return $app;
     }
 }
