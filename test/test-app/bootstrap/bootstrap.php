@@ -8,10 +8,10 @@ use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
 use Lencse\Rectum\Framework\Application\Bootstrap;
 use Test\Integration\MockRenderer;
 
-return function (array $globals): Bootstrap {
+return function (array $globals, ResponseRenderer $responseRenderer): Bootstrap {
     $config = require 'configuration.php';
 
-    $dicExtra = new class ($globals) implements DependencyInjectionConfig
+    $dicExtra = new class ($globals, $responseRenderer) implements DependencyInjectionConfig
     {
 
         /**
@@ -19,16 +19,20 @@ return function (array $globals): Bootstrap {
          */
         private $globals;
 
-        public function __construct(array $globals)
+        /**
+         * @var ResponseRenderer
+         */
+        private $responseRenderer;
+
+        public function __construct(array $globals, ResponseRenderer $responseRenderer)
         {
             $this->globals = $globals;
+            $this->responseRenderer = $responseRenderer;
         }
 
         public function bind(): array
         {
-            return [
-                ResponseRenderer::class => MockRenderer::class
-            ];
+            return [];
         }
 
         public function factory(): array
@@ -53,7 +57,9 @@ return function (array $globals): Bootstrap {
 
         public function instance(): array
         {
-            return [];
+            return [
+                ResponseRenderer::class => $this->responseRenderer
+            ];
         }
     };
 

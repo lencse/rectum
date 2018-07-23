@@ -11,10 +11,15 @@ class MockRenderer implements ResponseRenderer
     /**
      * @var ResponseInterface
      */
-    public static $response;
+    private $response;
+
+    public function getResponse(): ResponseInterface
+    {
+        return $this->response;
+    }
 
     public function render(ResponseInterface $response): void
     {
-        self::$response = $response;
+        $this->response = $response;
     }
 }

@@ -11,6 +11,7 @@ class WebTest extends TestCase
     public function testWeb()
     {
         $createBoostrap = require __DIR__ . '/../test-app/bootstrap/bootstrap.php';
+        $renderer = new MockRenderer();
         /** @var Bootstrap $bootstrap */
         $bootstrap = $createBoostrap([
             'SERVER' => [
@@ -18,11 +19,11 @@ class WebTest extends TestCase
                 'REQUEST_URI' => '/',
             ],
             'GET' => [],
-        ]);
+        ], $renderer);
         $app = $bootstrap->createWebApplication();
         $app->run();
 
-        $response = MockRenderer::$response;
+        $response = $renderer->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('OK', $response->getBody());
