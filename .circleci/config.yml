@@ -1,0 +1,110 @@
+ _:
+     _: &CONFIG
+         docker:
+             - image: circleci/php:7.2-browsers
+         working_directory: ~/repo
+
+ version: 2
+ jobs:
+     build:
+         <<: *CONFIG
+         steps:
+             - checkout
+             - restore_cache:
+                 keys:
+                     - v1-dependencies-{{ checksum "composer.json" }}
+                     - v1-dependencies-
+             - run:
+                 name: Composer Install
+                 command: composer install -n --prefer-dist
+             - save_cache:
+                   paths:
+                       - ./vendor
+                   key: v1-dependencies-{{ checksum "composer.json" }}
+             - run:
+                 name: Test
+                 command: composer test-all
+#     benchmark:
+#         <<: *CONFIG
+#         steps:
+#             - checkout
+#             - restore_cache:
+#                 keys:
+#                     - v1-dependencies-{{ checksum "composer.json" }}
+#                     - v1-dependencies-
+#             - run:
+#                 name: Composer Install
+#                 command: composer install -n --prefer-dist
+#             - run:
+#                 name: Benchmark
+#                 command: composer benchmark
+#     deploy-to-staging:
+#         <<: *CONFIG
+#         steps:
+#             - checkout
+#             - add_ssh_keys:
+#                 fingerprints:
+#                      - "f2:40:52:df:7e:e6:b3:4d:18:55:4f:29:04:0b:59:6c"
+#             - run:
+#                 name: Heroku Init
+#                 command:
+#                     bash .circleci/setup-heroku.sh
+#             - run:
+#                 name: Deploy to Heroku Staging Server
+#                 command: |
+#                     heroku git:remote -a $HEROKU_APP_NAME_STAGING
+#                     git push --force git@heroku.com:$HEROKU_APP_NAME_STAGING.git HEAD:refs/heads/master
+#             - restore_cache:
+#                 keys:
+#                     - v1-dependencies-{{ checksum "composer.json" }}
+#                     - v1-dependencies-
+#             - run:
+#                 name: Composer Install
+#                 command: composer install -n --prefer-dist
+#             - run:
+#                 name: Smoke Test
+#                 command: vendor/bin/cigar --url=$APP_URL_STAGING
+#     deploy-to-prod:
+#         <<: *CONFIG
+#         steps:
+#             - checkout
+#             - add_ssh_keys:
+#                 fingerprints:
+#                      - "f2:40:52:df:7e:e6:b3:4d:18:55:4f:29:04:0b:59:6c"
+#             - run:
+#                 name: Heroku Init
+#                 command:
+#                     bash .circleci/setup-heroku.sh
+#             - run:
+#                 name: Deploy to Heroku Production Server
+#                 command: |
+#                     heroku git:remote -a $HEROKU_APP_NAME_PROD
+#                     git push --force git@heroku.com:$HEROKU_APP_NAME_PROD.git HEAD:refs/heads/master
+#             - restore_cache:
+#                 keys:
+#                     - v1-dependencies-{{ checksum "composer.json" }}
+#                     - v1-dependencies-
+#             - run:
+#                 name: Composer Install
+#                 command: composer install -n --prefer-dist
+#             - run:
+#                 name: Smoke Test
+#                 command: vendor/bin/cigar --url=$APP_URL_PROD
+# workflows:
+#     version: 2
+#     standard:
+#         jobs:
+#             - build
+#             - deploy-to-staging:
+#                 requires:
+#                     - build
+#             - approve:
+#                 type: approval
+#                 requires:
+#                     - deploy-to-staging
+#             - deploy-to-prod:
+#                 requires:
+#                     - approve
+#             - benchmark:
+#                 requires:
+#                     - build
