@@ -3,6 +3,7 @@
 namespace Test\Integration;
 
 use Lencse\Rectum\Framework\Application\Bootstrap;
+use Lencse\Rectum\Testing\Web\Response\ResponseObserver;
 use PHPUnit\Framework\TestCase;
 
 class WebTest extends TestCase
@@ -11,7 +12,7 @@ class WebTest extends TestCase
     public function testWeb()
     {
         $createBoostrap = require __DIR__ . '/../test-app/bootstrap/bootstrap.php';
-        $renderer = new MockRenderer();
+        $renderer = new ResponseObserver();
         /** @var Bootstrap $bootstrap */
         $bootstrap = $createBoostrap([
             'SERVER' => [

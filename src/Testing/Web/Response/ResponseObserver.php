@@ -1,11 +1,11 @@
 <?php
 
-namespace Test\Integration;
+namespace Lencse\Rectum\Testing\Web\Response;
 
 use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
 use Psr\Http\Message\ResponseInterface;
 
-class MockRenderer implements ResponseRenderer
+class ResponseObserver implements ResponseRenderer
 {
 
     /**
