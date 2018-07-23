@@ -18,7 +18,7 @@
     "autoload-dev": {
         "psr-4": {
             "Test\\": "test/",
-            "TestApp\\": "test/Integration/test-app/src/"
+            "TestApp\\": "test/test-app/src/"
         }
     },
     "require": {

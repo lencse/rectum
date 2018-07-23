@@ -10,7 +10,7 @@ class WebTest extends TestCase
 
     public function testWeb()
     {
-        $createBoostrap = require __DIR__ . '/test-app/bootstrap/bootstrap.php';
+        $createBoostrap = require __DIR__ . '/../test-app/bootstrap/bootstrap.php';
         /** @var Bootstrap $bootstrap */
         $bootstrap = $createBoostrap([
             'SERVER' => [
