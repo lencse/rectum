@@ -45,9 +45,6 @@ class AurynContainerFactory implements ContainerFactory
         return $dic;
     }
 
-    /**
-     * @psalm-suppress MixedArgument
-     */
     private function setup(Injector $auryn, DependencyInjectionConfig $config): void
     {
         foreach ($config->bind() as $abstract => $concrete) {
@@ -142,13 +139,6 @@ class AurynContainerFactory implements ContainerFactory
                 return true;
             }
 
-            /**
-             * @param string $invokableClass
-             * @param mixed[] $params
-             * @return mixed
-             *
-             * @psalm-suppress MixedReturnStatement
-             */
             public function invoke(string $invokableClass, array $params = [])
             {
                 $this->get($invokableClass);
@@ -164,10 +154,6 @@ class AurynContainerFactory implements ContainerFactory
                 );
             }
 
-            /**
-             * @psalm-suppress MixedArrayOffset
-             * @psalm-suppress MixedAssignment
-             */
             private function getExtendedParameters(string $invokableClass, array $params): array
             {
                 $result = $params;

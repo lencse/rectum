@@ -21,10 +21,6 @@ class RoutingConfigurator
         $this->config = $config;
     }
 
-    /**
-     * @psalm-suppress MixedAssignment
-     * @psalm-suppress MixedArrayAccess
-     */
     public function __invoke(): RouteCollection
     {
         $result = [];

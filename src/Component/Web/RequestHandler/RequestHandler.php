@@ -27,24 +27,15 @@ class RequestHandler implements RequestHandlerInterface
         $this->invoker = $invoker;
     }
 
-    /**
-     * @psalm-suppress MixedAssignment
-     * @psalm-suppress PossiblyUndefinedVariable
-     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $routingResult = $this->router->route($request);
-
         $params = $routingResult->getParams();
-
         foreach ($routingResult->getHandlerPipeline() as $handler) {
             $result = $this->invoker->invoke($handler, $params);
             $params = [$result];
         }
 
-        /** @var ResponseInterface $response */
-        $response = $result;
-
-        return $response;
+        return $result;
     }
 }

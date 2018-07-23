@@ -5,12 +5,6 @@ namespace Lencse\Rectum\Framework\DependencyInjection;
 class AurynParameterTransformer
 {
 
-    /**
-     * @param array $params
-     * @return array
-     *
-     * @psalm-suppress MixedAssignment
-     */
     public function transformParameters(array $params): array
     {
         $result = [];
