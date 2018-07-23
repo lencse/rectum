@@ -16,6 +16,8 @@ class ReflectionMethodParameterAnalyzer implements MethodParameterAnalyzer
      * @param string $class
      * @param string $method
      * @return MethodParameter[]
+     * @psalm-suppress MixedInferredReturnType
+     * @psalm-suppress PossiblyNullReference
      */
     public function getParameters(string $class, string $method): array
     {
