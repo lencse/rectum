@@ -3,13 +3,17 @@
 namespace Test\App;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
+use TestApp\Handler\OkMessage;
+use TestApp\Handler\TestMessage;
 
 return new class implements DependencyInjectionConfig
 {
 
     public function bind(): array
     {
-        return [];
+        return [
+            TestMessage::class => OkMessage::class
+        ];
     }
 
     public function factory(): array

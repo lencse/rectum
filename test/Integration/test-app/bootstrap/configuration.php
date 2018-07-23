@@ -1,6 +1,6 @@
 <?php
 
-namespace AppConfig;
+namespace App;
 
 use Lencse\Rectum\Component\Configuration\ApplicationConfig;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\CompositeDependencyInjectionConfig;
@@ -24,14 +24,14 @@ return function (DependencyInjectionConfig $dicExtra): ApplicationConfig {
         public function dependencyInjectionConfig(): DependencyInjectionConfig
         {
             return new CompositeDependencyInjectionConfig([
-                require 'dic.php',
+                require __DIR__ . '/../config/dic.php',
                 $this->dicExtra,
             ]);
         }
 
         public function routingConfig(): RoutingConfig
         {
-            return require 'routing.php';
+            return require __DIR__ . '/../config/routing.php';
         }
     };
 };
