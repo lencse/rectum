@@ -47,15 +47,4 @@ class CompositeApplicationConfig implements ApplicationConfig
             )
         );
     }
-
-//    private function merge(Closure $closure): Com
-//    {
-//        return array_reduce(
-//            $this->configs,
-//            function (array $carry, DependencyInjectionConfig $config) use ($closure): array {
-//                return array_merge($carry, $closure->call($this, $config));
-//            },
-//            []
-//        );
-//    }
 }

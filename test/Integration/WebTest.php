@@ -3,6 +3,7 @@
 namespace Test\Integration;
 
 use Lencse\Rectum\Framework\Application\Bootstrap;
+use Lencse\Rectum\Testing\Web\ApplicationRunner;
 use Lencse\Rectum\Testing\Web\Response\ResponseObserver;
 use PHPUnit\Framework\TestCase;
 
@@ -11,20 +12,14 @@ class WebTest extends TestCase
 
     public function testWeb()
     {
-        $createBoostrap = require __DIR__ . '/../test-app/bootstrap/bootstrap.php';
-        $renderer = new ResponseObserver();
-        /** @var Bootstrap $bootstrap */
-        $bootstrap = $createBoostrap([
+        $runner = new ApplicationRunner(__DIR__ . '/../test-app');
+        $response = $runner->runWithSuperGlobals([
             'SERVER' => [
                 'REQUEST_METHOD' => 'GET',
                 'REQUEST_URI' => '/',
             ],
             'GET' => [],
-        ], $renderer);
-        $app = $bootstrap->createWebApplication();
-        $app->run();
-
-        $response = $renderer->getResponse();
+        ]);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('OK', $response->getBody());

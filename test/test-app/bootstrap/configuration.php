@@ -8,6 +8,7 @@ use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
 
 return new class implements ApplicationConfig
 {
+
     public function dependencyInjectionConfig(): DependencyInjectionConfig
     {
         return require __DIR__ . '/../config/dic.php';
