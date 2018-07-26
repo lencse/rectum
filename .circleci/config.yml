@@ -37,7 +37,7 @@ jobs:
             - run:
                 name: Check Sonarcloud setup
                 command:
-                    source /home/circleci/.bashrc && echo $PATH && sonar-scanner --version
+                    sonar-scanner --version
 #     benchmark:
 #         <<: *CONFIG
 #         steps:
