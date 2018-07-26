@@ -27,9 +27,13 @@ jobs:
         steps:
             - checkout
             - run:
-                name: Set up SOnarcloud client
+                name: Set up Sonarcloud client
                 command:
                     bash .circleci/setup-sonarcloud.sh
+            - run:
+                name: Check Sonarcloud setup
+                command:
+                    sonar-scanner --version
 #     benchmark:
 #         <<: *CONFIG
 #         steps:
@@ -101,6 +105,6 @@ workflows:
     standard:
         jobs:
             - build
-            - sonarcloud:
-                requires:
-                    - build
+            - sonarcloud
+#                requires:
+#                    - build
