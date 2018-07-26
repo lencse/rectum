@@ -30,6 +30,7 @@ jobs:
                 name: Set up Sonarcloud client
                 command:
                     bash .circleci/setup-sonarcloud.sh
+            - run: source /home/circleci/.bashrc
             - run:
                 name: Check Sonarcloud setup
                 command:
