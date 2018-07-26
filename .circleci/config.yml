@@ -99,8 +99,8 @@ jobs:
 workflows:
     version: 2
     standard:
-    jobs:
-        - build
-        - sonarcloud:
-            requires:
-                - build
+        jobs:
+            - build
+            - sonarcloud:
+                requires:
+                    - build
