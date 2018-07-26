@@ -8,4 +8,4 @@ unzip $SONAR_CLI_ZIP
 
 SONAR_CLI_BIN=`pwd`/$SONAR_CLI_DIR/bin
 
-echo "export PATH=$SONAR_CLI_BIN:\$PATH" >> ~/.bashrc
+echo "export PATH=$SONAR_CLI_BIN:\$PATH" >> $BASH_ENV
