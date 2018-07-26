@@ -2,6 +2,8 @@
 
 namespace Lencse\Rectum\Framework\Web\Response;
 
+use Lencse\Rectum\Adapter\Web\Response\RealHttpHeader;
+use Lencse\Rectum\Adapter\Web\Response\RealOutput;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Component\Web\Response\HttpHeader;
 use Lencse\Rectum\Component\Web\Response\Output;

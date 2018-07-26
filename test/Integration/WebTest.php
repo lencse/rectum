@@ -3,7 +3,6 @@
 namespace Test\Integration;
 
 use Lencse\Rectum\Testing\Facade\AppTesting;
-use Lencse\Rectum\Testing\Web\ApplicationRunner;
 use PHPUnit\Framework\TestCase;
 
 class WebTest extends TestCase

@@ -3,7 +3,7 @@
 namespace Lencse\Rectum\Framework\Web\Request;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Web\Request\FromGlobalsRequestReader;
+use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestReader;
 use Lencse\Rectum\Component\Web\Request\RequestReader;
 
 class RequestDI implements DependencyInjectionConfig
