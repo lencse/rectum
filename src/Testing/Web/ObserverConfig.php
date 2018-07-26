@@ -2,93 +2,46 @@
 
 namespace Lencse\Rectum\Testing\Web;
 
-use Lencse\Rectum\Component\Configuration\ApplicationConfig;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Web\Request\FromGlobalsRequestReader;
 use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
-use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
 
-class ObserverConfig implements ApplicationConfig
+class ObserverConfig implements DependencyInjectionConfig
 {
-
-    /**
-     * @var array
-     */
-    private $globals;
 
     /**
      * @var ResponseRenderer
      */
     private $responseRenderer;
 
-    public function __construct(array $globals, ResponseRenderer $responseRenderer)
+    public function __construct(ResponseRenderer $responseRenderer)
     {
-        $this->globals = $globals;
         $this->responseRenderer = $responseRenderer;
     }
 
-    public function dependencyInjectionConfig(): DependencyInjectionConfig
+    public function bind(): array
     {
-        return new class ($this->globals, $this->responseRenderer) implements DependencyInjectionConfig
-        {
-            /**
-             * @var array
-             */
-            private $globals;
-
-            /**
-             * @var ResponseRenderer
-             */
-            private $responseRenderer;
-
-            public function __construct(array $globals, ResponseRenderer $responseRenderer)
-            {
-                $this->globals = $globals;
-                $this->responseRenderer = $responseRenderer;
-            }
-
-            public function bind(): array
-            {
-                return [];
-            }
-
-            public function factory(): array
-            {
-                return [];
-            }
-
-            public function setup(): array
-            {
-                return [
-                    FromGlobalsRequestReader::class => [
-                        'serverArr' => $this->globals['SERVER'],
-                        'getArr' => $this->globals['GET'],
-                    ]
-                ];
-            }
-
-            public function wire(): array
-            {
-                return [];
-            }
-
-            public function instance(): array
-            {
-                return [
-                    ResponseRenderer::class => $this->responseRenderer
-                ];
-            }
-        };
+        return [];
     }
 
-    public function routingConfig(): RoutingConfig
+    public function factory(): array
     {
-        return new class implements RoutingConfig
-        {
-            public function routes(): array
-            {
-                return [];
-            }
-        };
+        return [];
+    }
+
+    public function setup(): array
+    {
+        return [];
+    }
+
+    public function wire(): array
+    {
+        return [];
+    }
+
+    public function instance(): array
+    {
+        return [
+            ResponseRenderer::class => $this->responseRenderer
+        ];
     }
 }
