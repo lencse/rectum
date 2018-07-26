@@ -40,7 +40,7 @@
     },
     "scripts": {
         "test": "phpunit",
-        "test-coverage": "phpunit --coverage-html logs/coverage-report --coverage-clover logs/clover.xml",
+        "test-coverage": "phpunit --coverage-html logs/coverage-report --coverage-clover logs/clover.xml --log-junit logs/test-report.xml",
         "min-coverage": "ci-test-coverage --min-coverage 99 --clover-file logs/clover.xml",
         "md": "phpmd src/ text phpmd.xml && phpmd test/ text phpmd.xml",
         "cs": "phpcs --standard=PSR2 src test",

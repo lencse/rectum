@@ -4,26 +4,34 @@
              - image: circleci/php:7.2-browsers
          working_directory: ~/repo
 
- version: 2
- jobs:
-     build:
-         <<: *CONFIG
-         steps:
-             - checkout
-             - restore_cache:
-                 keys:
-                     - v1-dependencies-{{ checksum "composer.json" }}
-                     - v1-dependencies-
-             - run:
-                 name: Composer Install
-                 command: composer install -n --prefer-dist
-             - save_cache:
-                   paths:
-                       - ./vendor
-                   key: v1-dependencies-{{ checksum "composer.json" }}
-             - run:
+version: 2
+jobs:
+    build:
+        <<: *CONFIG
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "composer.json" }}
+                    - v1-dependencies-
+            - run:
+                name: Composer Install
+                command: composer install -n --prefer-dist
+            - save_cache:
+                 paths:
+                     - ./vendor
+                  key: v1-dependencies-{{ checksum "composer.json" }}
+            - run:
                  name: Test
-                 command: composer test-all
+                command: composer test-all
+    sonarcloud:
+        <<: *CONFIG
+        steps:
+            - checkout
+            - run:
+                name: Set up SOnarcloud client
+                command:
+                    bash .circleci/setup-sonarcloud.sh
 #     benchmark:
 #         <<: *CONFIG
 #         steps:
