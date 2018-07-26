@@ -98,21 +98,12 @@ jobs:
 #             - run:
 #                 name: Smoke Test
 #                 command: vendor/bin/cigar --url=$APP_URL_PROD
-# workflows:
-#     version: 2
-#     standard:
-#         jobs:
-#             - build
-#             - deploy-to-staging:
-#                 requires:
-#                     - build
-#             - approve:
-#                 type: approval
-#                 requires:
-#                     - deploy-to-staging
-#             - deploy-to-prod:
-#                 requires:
-#                     - approve
-#             - benchmark:
-#                 requires:
-#                     - build
+ workflows:
+     version: 2
+     standard:
+         jobs:
+             - build
+             - sonarcloud:
+                 requires:
+                     - build
+ 
