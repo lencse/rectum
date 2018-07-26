@@ -20,10 +20,10 @@ jobs:
             - save_cache:
                  paths:
                      - ./vendor
-                  key: v1-dependencies-{{ checksum "composer.json" }}
+                 key: v1-dependencies-{{ checksum "composer.json" }}
             - run:
                  name: Test
-                command: composer test-all
+                 command: composer test-all
     sonarcloud:
         <<: *CONFIG
         steps:
@@ -98,12 +98,11 @@ jobs:
 #             - run:
 #                 name: Smoke Test
 #                 command: vendor/bin/cigar --url=$APP_URL_PROD
- workflows:
-     version: 2
-     standard:
-         jobs:
-             - build
-             - sonarcloud:
-                 requires:
-                     - build
- 
+workflows:
+    version: 2
+    standard:
+    jobs:
+        - build
+        - sonarcloud:
+            requires:
+                - build
