@@ -1,13 +1,9 @@
-_:
-    _: &CONFIG
-    docker:
-        - image: circleci/php:7.2-browsers
-    working_directory: ~/repo
-
 version: 2
 jobs:
     build:
-        <<: *CONFIG
+        docker:
+            - image: circleci/php:7.2-browsers
+        working_directory: ~/repo
         steps:
             - checkout
             - restore_cache:
@@ -25,7 +21,9 @@ jobs:
                  name: Test
                  command: composer test-all
     sonarcloud:
-        <<: *CONFIG
+        docker:
+            - image: circleci/php:7.2-browsers
+        working_directory: ~/repo
         steps:
             - checkout
             - run:
