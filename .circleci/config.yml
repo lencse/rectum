@@ -30,10 +30,10 @@ jobs:
                 name: Set up Sonarcloud client
                 command:
                     bash .circleci/setup-sonarcloud.sh
-            - run: cat /home/circleci/.bashrc
-            - run: source /home/circleci/.bashrc
-            - run: ls -la /home/circleci/repo/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner
-            - run: source $BASH_ENV && echo $PATH
+            - run:
+                name: Add sonar dir to PATH
+                command:
+                    source $BASH_ENV
             - run:
                 name: Check Sonarcloud setup
                 command:
