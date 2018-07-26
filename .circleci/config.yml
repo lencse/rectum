@@ -32,6 +32,7 @@ jobs:
                     bash .circleci/setup-sonarcloud.sh
             - run: cat /home/circleci/.bashrc
             - run: source /home/circleci/.bashrc
+            - run: ls -la /home/circleci/repo/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner
             - run:
                 name: Check Sonarcloud setup
                 command:
