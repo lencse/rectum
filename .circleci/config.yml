@@ -136,6 +136,6 @@ workflows:
     standard:
         jobs:
             - build
-            - sonarcloud:
+            - code-analyze::
                 requires:
                     - build
