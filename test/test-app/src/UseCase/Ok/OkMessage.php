@@ -1,6 +1,6 @@
 <?php
 
-namespace TestApp\Handler;
+namespace TestApp\UseCase\Ok;
 
 class OkMessage implements TestMessage
 {

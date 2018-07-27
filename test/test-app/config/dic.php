@@ -3,8 +3,8 @@
 namespace Test\App;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use TestApp\Handler\OkMessage;
-use TestApp\Handler\TestMessage;
+use TestApp\UseCase\Ok\OkMessage;
+use TestApp\UseCase\Ok\TestMessage;
 
 return new class() implements DependencyInjectionConfig {
     public function bind(): array

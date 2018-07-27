@@ -1,6 +1,6 @@
 <?php
 
-namespace TestApp\Handler;
+namespace TestApp\UseCase\Ok;
 
 interface TestMessage
 {

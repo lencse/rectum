@@ -5,7 +5,9 @@ namespace Lencse\Rectum\Testing\Facade;
 use Lencse\Rectum\Component\Configuration\ApplicationConfig;
 use Lencse\Rectum\Component\Configuration\CompositeApplicationConfig;
 use Lencse\Rectum\Testing\Web\ConfigWithDI;
+use Lencse\Rectum\Testing\Web\RequestConfig;
 use Lencse\Rectum\Testing\Web\SuperGlobalsConfig;
+use Psr\Http\Message\ServerRequestInterface;
 
 class WebAppSetup
 {
@@ -25,6 +27,16 @@ class WebAppSetup
             new CompositeApplicationConfig([
                 $this->config,
                 new ConfigWithDI(new SuperGlobalsConfig($superGlobals))
+            ])
+        );
+    }
+
+    public function withRequest(ServerRequestInterface $request): WebAppRunner
+    {
+        return new WebAppRunner(
+            new CompositeApplicationConfig([
+                $this->config,
+                new ConfigWithDI(new RequestConfig($request))
             ])
         );
     }
