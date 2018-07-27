@@ -4,9 +4,8 @@ finder:
     exclude:
         - vendor
     name: "*.php"
-
-enabled:
-    - psr2
+    not-path:
+        - src/Adapter/DependencyInjection/AurynContainerFactory.php
 
 disabled:
     - align_double_arrow
