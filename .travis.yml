@@ -1,0 +1,23 @@
+language: php
+
+php:
+    - 7.2
+
+env:
+    - DEPS=lowest
+    - DEPS=latest
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+before_install:
+    - travis_retry composer self-update
+
+install:
+    - if [[ $DEPS == 'latest' ]]; then travis_retry composer update -n --prefer-dist ; fi
+    - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update -n --prefer-lowest --prefer-stable ; fi
+    - stty cols 120 && composer show
+
+script:
+    - composer test-all
