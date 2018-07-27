@@ -85,8 +85,7 @@ class AurynContainerFactory implements ContainerFactory
             $auryn,
             $this->parameterTransformer,
             $this->methodParameterAnalyzer
-        ) implements ContainerInterface, Invoker
-        {
+        ) implements ContainerInterface, Invoker {
 
             /**
              * @var Injector
