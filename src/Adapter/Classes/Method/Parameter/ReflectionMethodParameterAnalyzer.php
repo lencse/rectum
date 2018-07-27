@@ -23,16 +23,19 @@ class ReflectionMethodParameterAnalyzer implements MethodParameterAnalyzer
         /** @var ReflectionParameter[] $handlerParams */
         $handlerParams = $reflection->getMethod($method)->getParameters();
 
-        return array_map(function (ReflectionParameter $param) use ($class) : MethodParameter {
-            $type = empty($param->getType()) ?
-                new NonGivenParameterType() :
+        return array_map(function (ReflectionParameter $param) use ($class): MethodParameter {
+            if (empty($param->getType())) {
+                return new MethodParameter($param->getName(), new NonGivenParameterType());
+            }
+
+            return new MethodParameter(
+                $param->getName(),
                 new GivenParameterType(
                     'self' === $param->getType()->getName() ?
                         $class :
                         $param->getType()->getName()
-                );
-
-            return new MethodParameter($param->getName(), $type);
+                )
+            );
         }, $handlerParams);
     }
 }
