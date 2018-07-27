@@ -8,3 +8,5 @@ finder:
 disabled:
     - align_double_arrow
     - phpdoc_align
+    - trailing_comma_in_multiline_array
+
