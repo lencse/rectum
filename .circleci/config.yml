@@ -26,6 +26,10 @@ jobs:
         working_directory: ~/repo
         steps:
             - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "composer.json" }}
+                    - v1-dependencies-
             - run:
                 name: Set up Sonarcloud client
                 command:
@@ -38,6 +42,25 @@ jobs:
                 name: Check Sonarcloud setup
                 command:
                     sonar-scanner --version
+            - run:
+                name: Composer Install
+                command: composer install -n --prefer-dist
+            - run:
+                 name: Test coverage
+                 command: composer test-coverage
+            - run:
+                name: Run sonar console
+                command: |
+                    sonar-scanner \
+                        -Dsonar.projectKey=$SONARCLOUD_PROJECT \
+                        -Dsonar.organization=$SONARCLOUD_ORGANIZATION \
+                        -Dsonar.sources=src \
+                        -Dsonar.host.url=$SONARCLOUD_URL \
+                        -Dsonar.login=$SONARCLOUD_LOGIN
+                        -Dsonar.exclusions=logs/**,vendor/**
+                        -Dsonar.php.tests.reportPath=logs/test-report.xml
+                        -Dsonar.php.coverage.reportPaths=logs/clover.xml
+
 #     benchmark:
 #         <<: *CONFIG
 #         steps:
@@ -109,6 +132,6 @@ workflows:
     standard:
         jobs:
             - build
-            - sonarcloud
-#                requires:
-#                    - build
+            - sonarcloud:
+                requires:
+                    - build
