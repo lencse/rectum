@@ -56,9 +56,9 @@ jobs:
                         -Dsonar.organization=$SONARCLOUD_ORGANIZATION \
                         -Dsonar.sources=src \
                         -Dsonar.host.url=$SONARCLOUD_URL \
-                        -Dsonar.login=$SONARCLOUD_LOGIN
-                        -Dsonar.exclusions=logs/**,vendor/**
-                        -Dsonar.php.tests.reportPath=logs/test-report.xml
+                        -Dsonar.login=$SONARCLOUD_LOGIN \
+                        -Dsonar.exclusions=logs/**,vendor/** \
+                        -Dsonar.php.tests.reportPath=logs/test-report.xml \
                         -Dsonar.php.coverage.reportPaths=logs/clover.xml
 
 #     benchmark:
