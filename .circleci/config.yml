@@ -136,6 +136,6 @@ workflows:
     standard:
         jobs:
             - build
-            - code-analyze::
+            - code-analyze:
                 requires:
                     - build
