@@ -20,7 +20,7 @@ jobs:
             - run:
                  name: Test
                  command: composer test-all
-    sonarcloud:
+    code-analyze:
         docker:
             - image: circleci/php:7.2-browsers
         working_directory: ~/repo
@@ -47,7 +47,7 @@ jobs:
                 command: composer install -n --prefer-dist
             - run:
                  name: Test coverage
-                 command: phpunit --coverage-clover coverage.xml --log-junit test-report.xml
+                 command: vendor/bin/phpunit --coverage-clover coverage.xml --log-junit test-report.xml
             - run:
                 name: Run sonar console
                 command: |
