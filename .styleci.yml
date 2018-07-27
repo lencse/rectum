@@ -1,0 +1,11 @@
+preset: recommended
+risky: true
+finder:
+    exclude:
+        - vendor
+    name: *.php
+
+disabled:
+    - align_double_arrow
+    - align_comments
+    - align_phpdoc
