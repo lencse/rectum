@@ -38,9 +38,6 @@ class Bootstrap
 
     public function createWebApplication(): WebApplication
     {
-        /** @var WebApplication $app */
-        $app = $this->dic->get(WebApplication::class);
-
-        return $app;
+        return $this->dic->get(WebApplication::class);
     }
 }

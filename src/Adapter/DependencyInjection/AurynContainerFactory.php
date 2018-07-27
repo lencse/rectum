@@ -173,10 +173,7 @@ class AurynContainerFactory implements ContainerFactory
 
             private function makeInstance(string $class): object
             {
-                /** @var object $result */
-                $result = $this->auryn->make($class);
-
-                return $result;
+                return $this->auryn->make($class);
             }
         };
     }
