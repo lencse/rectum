@@ -8,7 +8,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class RequestHandlerDI implements DependencyInjectionConfig
 {
-
     public function bind(): array
     {
         return [

@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class RealOutputTest extends TestCase
 {
-
     public function testPrint()
     {
         $output = new RealOutput();

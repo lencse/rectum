@@ -7,7 +7,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class BasicHandler
 {
-
     /**
      * @var TestMessage
      */

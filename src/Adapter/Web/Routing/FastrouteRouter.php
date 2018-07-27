@@ -4,7 +4,6 @@ namespace Lencse\Rectum\Adapter\Web\Routing;
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use function FastRoute\simpleDispatcher;
 use Lencse\Rectum\Component\Web\Routing\Exception\BadMethodException;
 use Lencse\Rectum\Component\Web\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
@@ -12,10 +11,10 @@ use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
 use Psr\Http\Message\ServerRequestInterface;
+use function FastRoute\simpleDispatcher;
 
 class FastrouteRouter implements Router
 {
-
     /**
      * @var Dispatcher
      */

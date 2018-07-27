@@ -6,7 +6,6 @@ use Lencse\Rectum\Component\Web\Http\HttpMethod;
 
 class Route
 {
-
     /**
      * @var HttpMethod
      */

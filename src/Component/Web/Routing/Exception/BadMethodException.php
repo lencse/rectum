@@ -6,7 +6,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class BadMethodException extends RoutingException
 {
-
     protected function createMessage(ServerRequestInterface $request): string
     {
         return sprintf('Method not allowed: %s on "%s"', $request->getMethod(), $request->getUri()->getPath());

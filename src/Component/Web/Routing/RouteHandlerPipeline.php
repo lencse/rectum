@@ -7,7 +7,6 @@ use Lencse\Rectum\Component\Web\Routing\Exception\EmptyRouteHandlerPipelineExcep
 
 class RouteHandlerPipeline implements Iterator
 {
-
     /**
      * @var string[]
      */

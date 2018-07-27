@@ -9,7 +9,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class WebApplication implements Application
 {
-
     /**
      * @var RequestReader
      */
@@ -34,7 +33,6 @@ class WebApplication implements Application
         $this->requestHandler = $requestHandler;
         $this->responseRenderer = $responseRenderer;
     }
-
 
     public function run(): void
     {

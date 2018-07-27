@@ -2,23 +2,23 @@
 
 namespace Test\Unit\Adapter\DependencyInjection;
 
-use Lencse\Rectum\Component\Classes\Invoking\Invoker;
-use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Adapter\Classes\Method\Parameter\ReflectionMethodParameterAnalyzer;
 use Lencse\Rectum\Adapter\DependencyInjection\AurynContainerFactory;
 use Lencse\Rectum\Adapter\DependencyInjection\AurynParameterTransformer;
+use Lencse\Rectum\Component\Classes\Invoking\Invoker;
+use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Test\Unit\Adapter\DependencyInjection\Objects\ConstructorParameter;
 use Test\Unit\Adapter\DependencyInjection\Objects\ConstructorParameterWithDependency;
 use Test\Unit\Adapter\DependencyInjection\Objects\Counter;
 use Test\Unit\Adapter\DependencyInjection\Objects\DummyInterface;
 use Test\Unit\Adapter\DependencyInjection\Objects\FactoryWithoutParameter;
 use Test\Unit\Adapter\DependencyInjection\Objects\FactoryWithParameter;
-use Test\Unit\Adapter\DependencyInjection\Objects\ConstructorParameter;
 use Test\Unit\Adapter\DependencyInjection\Objects\NoConstructorParameter;
 use Test\Unit\Adapter\DependencyInjection\Objects\Service1;
-use Test\Unit\Adapter\DependencyInjection\Objects\WithDependency1;
 use Test\Unit\Adapter\DependencyInjection\Objects\Service2;
+use Test\Unit\Adapter\DependencyInjection\Objects\WithDependency1;
 use Test\Unit\Adapter\DependencyInjection\Objects\WithDependency2;
 use Test\Unit\Adapter\DependencyInjection\Objects\WithDependencyAndParam1;
 use Test\Unit\Adapter\DependencyInjection\Objects\WithDependencyAndParam2;
@@ -29,7 +29,6 @@ use Test\Unit\Adapter\DependencyInjection\Objects\WithDependencyAndParam2;
  */
 class AurynContainerFactoryTest extends TestCase
 {
-
     public function testMake()
     {
         $dic = $this->getContainer(new TestConfig([]));
@@ -40,7 +39,7 @@ class AurynContainerFactoryTest extends TestCase
     public function testMakeAbstract()
     {
         $dic = $this->getContainer(new TestConfig([
-            'bind' => [TestCase::class => AurynContainerFactoryTest::class]
+            'bind' => [TestCase::class => self::class]
         ]));
         $obj = $dic->get(parent::class);
         $this->assertTrue($obj instanceof self);
@@ -49,7 +48,7 @@ class AurynContainerFactoryTest extends TestCase
     public function testMakeAndShare()
     {
         $dic = $this->getContainer(new TestConfig([
-            'bind' => [TestCase::class => AurynContainerFactoryTest::class]
+            'bind' => [TestCase::class => self::class]
         ]));
         /** @var NoConstructorParameter $obj1 */
         $obj1 = $dic->get(NoConstructorParameter::class);
@@ -216,6 +215,7 @@ class AurynContainerFactoryTest extends TestCase
             new AurynParameterTransformer(),
             new ReflectionMethodParameterAnalyzer()
         );
+
         return $factory->createContainer($config);
     }
 }

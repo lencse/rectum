@@ -7,6 +7,5 @@ use Psr\Container\ContainerInterface;
 
 interface ContainerFactory
 {
-
     public function createContainer(DependencyInjectionConfig $config): ContainerInterface;
 }

@@ -4,19 +4,17 @@ namespace Test\Unit\Component\Web\RequestHandler;
 
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
+use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
 use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
-use Lencse\Rectum\Component\Classes\Invoking\Invoker;
 use Lencse\Rectum\Component\Web\Http\HttpMethod;
+use Lencse\Rectum\Component\Web\RequestHandler\RequestHandler;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
 use Lencse\Rectum\Component\Web\Routing\Router;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
 use Lencse\Rectum\Component\Web\Routing\RoutingResultParameterAppender;
-use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use Lencse\Rectum\Component\Web\Routing\WebRouter;
-use Lencse\Rectum\Component\Web\RequestHandler\RequestHandler;
-use Lencse\Rectum\Component\Web\Routing\WithTransformerRouteHandlingConfig;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -25,7 +23,6 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class RequestHandlerTest extends TestCase
 {
-
     public function testSimpleRouteHandling()
     {
         $handler = $this->getHandler();
@@ -46,8 +43,7 @@ class RequestHandlerTest extends TestCase
     {
         return new RequestHandler(
             new WebRouter(
-                new class implements Router
-                {
+                new class() implements Router {
                     public function route(ServerRequestInterface $request): RoutingResult
                     {
                         if ('/1' === $request->getUri()->getPath()) {
@@ -65,8 +61,7 @@ class RequestHandlerTest extends TestCase
                     }
                 },
                 new RoutingResultParameterAppender(
-                    new class implements MethodParameterAnalyzer
-                    {
+                    new class() implements MethodParameterAnalyzer {
                         public function getParameters(string $class, string $method): array
                         {
                             if ('Handler' === $class && '__invoke' === $method) {
@@ -100,13 +95,13 @@ class RequestHandlerTest extends TestCase
                     }
                 )
             ),
-            new class implements Invoker
-            {
+            new class() implements Invoker {
                 public function invoke(string $invokableClass, array $params = [])
                 {
                     if ('Handler' === $invokableClass) {
                         /** @var ServerRequestInterface $request */
                         $request = $params['request'];
+
                         return new Response(
                             200,
                             [],

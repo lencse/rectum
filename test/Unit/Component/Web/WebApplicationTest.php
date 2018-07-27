@@ -14,7 +14,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class WebApplicationTest extends TestCase implements ResponseRenderer
 {
-
     /**
      * @var ResponseInterface
      */
@@ -28,15 +27,13 @@ class WebApplicationTest extends TestCase implements ResponseRenderer
     public function testRun()
     {
         $app = new WebApplication(
-            new class implements RequestReader
-            {
+            new class() implements RequestReader {
                 public function create(): ServerRequestInterface
                 {
                     return new ServerRequest('GET', '/');
                 }
             },
-            new class implements RequestHandlerInterface
-            {
+            new class() implements RequestHandlerInterface {
                 public function handle(ServerRequestInterface $request): ResponseInterface
                 {
                     if ('/' === $request->getUri()->getPath()) {

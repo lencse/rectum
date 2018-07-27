@@ -4,7 +4,6 @@ namespace Lencse\Rectum\Component\DependencyInjection\Configuration;
 
 interface DependencyInjectionConfig
 {
-
     public function bind(): array;
 
     public function factory(): array;

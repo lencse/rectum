@@ -11,10 +11,10 @@ use ReflectionParameter;
 
 class ReflectionMethodParameterAnalyzer implements MethodParameterAnalyzer
 {
-
     /**
      * @param string $class
      * @param string $method
+     *
      * @return MethodParameter[]
      */
     public function getParameters(string $class, string $method): array
@@ -23,10 +23,14 @@ class ReflectionMethodParameterAnalyzer implements MethodParameterAnalyzer
         /** @var ReflectionParameter[] $handlerParams */
         $handlerParams = $reflection->getMethod($method)->getParameters();
 
-        return array_map(function (ReflectionParameter $param): MethodParameter {
+        return array_map(function (ReflectionParameter $param) use ($class) : MethodParameter {
             $type = empty($param->getType()) ?
                 new NonGivenParameterType() :
-                new GivenParameterType($param->getType()->getName());
+                new GivenParameterType(
+                    'self' === $param->getType()->getName() ?
+                        $class :
+                        $param->getType()->getName()
+                );
 
             return new MethodParameter($param->getName(), $type);
         }, $handlerParams);

@@ -6,7 +6,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class WebRouter implements Router
 {
-
     /**
      * @var Router
      */

@@ -6,7 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class ToHeaderAndOutputResponseRenderer implements ResponseRenderer
 {
-
     /**
      * @var HttpHeader
      */

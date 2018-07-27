@@ -2,15 +2,11 @@
 
 namespace Lencse\Rectum\Testing\Web;
 
-use Lencse\Rectum\Component\Configuration\ApplicationConfig;
-use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestReader;
-use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
-use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
+use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 
 class SuperGlobalsConfig implements DependencyInjectionConfig
 {
-
     /**
      * @var array
      */

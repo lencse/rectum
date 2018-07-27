@@ -6,7 +6,6 @@ use Closure;
 
 class CompositeDependencyInjectionConfig implements DependencyInjectionConfig
 {
-
     /**
      * @var DependencyInjectionConfig[]
      */

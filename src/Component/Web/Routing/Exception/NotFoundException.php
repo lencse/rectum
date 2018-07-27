@@ -6,7 +6,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class NotFoundException extends RoutingException
 {
-
     protected function createMessage(ServerRequestInterface $request): string
     {
         return sprintf('Not found: %s', $request->getUri()->getPath());

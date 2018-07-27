@@ -9,19 +9,15 @@ use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
 use Lencse\Rectum\Component\Web\Routing\RoutingResult;
 use Lencse\Rectum\Component\Web\Routing\RoutingResultParameterAppender;
-use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
 class RoutingResultParameterAppenderTest extends TestCase
 {
-
     public function testAppendRequestToParameters()
     {
         $appender = new RoutingResultParameterAppender(
-            new class implements MethodParameterAnalyzer
-            {
-
+            new class() implements MethodParameterAnalyzer {
                 public function getParameters(string $class, string $method): array
                 {
                     return 'Handler' === $class && '__invoke' === $method ?

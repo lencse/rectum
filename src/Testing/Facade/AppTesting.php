@@ -4,7 +4,6 @@ namespace Lencse\Rectum\Testing\Facade;
 
 class AppTesting
 {
-
     /**
      * @var string
      */

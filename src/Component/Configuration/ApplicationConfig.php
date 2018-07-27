@@ -7,7 +7,6 @@ use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
 
 interface ApplicationConfig
 {
-
     public function dependencyInjectionConfig(): DependencyInjectionConfig;
 
     public function routingConfig(): RoutingConfig;

@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class ToHeaderAndOutputResponseRendererTest extends TestCase implements HttpHeader, Output
 {
-
     /**
      * @var string[]
      */

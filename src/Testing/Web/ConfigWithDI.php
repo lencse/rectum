@@ -8,7 +8,6 @@ use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
 
 class ConfigWithDI implements ApplicationConfig
 {
-
     /**
      * @var DependencyInjectionConfig
      */
@@ -26,8 +25,7 @@ class ConfigWithDI implements ApplicationConfig
 
     public function routingConfig(): RoutingConfig
     {
-        return new class implements RoutingConfig
-        {
+        return new class() implements RoutingConfig {
             public function routes(): array
             {
                 return [];

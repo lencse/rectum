@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class FromGlobalsRequestReaderTest extends TestCase
 {
-
     public function testCreate()
     {
         $server = [

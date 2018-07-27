@@ -3,6 +3,8 @@
 namespace Test\Unit\Adapter\Web\Routing;
 
 use GuzzleHttp\Psr7\ServerRequest;
+use Lencse\Rectum\Adapter\Web\Routing\FastRoutePath;
+use Lencse\Rectum\Adapter\Web\Routing\FastrouteRouter;
 use Lencse\Rectum\Component\Web\Http\HttpMethod;
 use Lencse\Rectum\Component\Web\Routing\Exception\BadMethodException;
 use Lencse\Rectum\Component\Web\Routing\Exception\NotFoundException;
@@ -10,14 +12,10 @@ use Lencse\Rectum\Component\Web\Routing\Route;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
 use Lencse\Rectum\Component\Web\Routing\Router;
-use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
-use Lencse\Rectum\Adapter\Web\Routing\FastRoutePath;
-use Lencse\Rectum\Adapter\Web\Routing\FastrouteRouter;
 use PHPUnit\Framework\TestCase;
 
 class FastrouteRouterTest extends TestCase
 {
-
     public function testRoute()
     {
         $router = $this->createRouter([
@@ -57,6 +55,7 @@ class FastrouteRouterTest extends TestCase
         } catch (NotFoundException $e) {
             $this->assertEquals($request, $e->getRequest());
             $this->assertEquals('Not found: /test/1', $e->getMessage());
+
             return;
         }
 
@@ -72,11 +71,13 @@ class FastrouteRouterTest extends TestCase
             HttpMethod::get(),
             '/test/1'
         );
+
         try {
             $router->route($request);
         } catch (BadMethodException $e) {
             $this->assertEquals($request, $e->getRequest());
             $this->assertEquals('Method not allowed: GET on "/test/1"', $e->getMessage());
+
             return;
         }
 
@@ -121,6 +122,7 @@ class FastrouteRouterTest extends TestCase
 
     /**
      * @param Route[] $routes
+     *
      * @return Router
      */
     private function createRouter(array $routes): Router

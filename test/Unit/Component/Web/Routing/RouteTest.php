@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 class RouteTest extends TestCase
 {
-
     public function testRoute()
     {
         $route = new Route(HttpMethod::get(), '/path', new RouteHandlerPipeline(['Handler']));

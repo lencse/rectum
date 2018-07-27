@@ -7,7 +7,6 @@ use RuntimeException;
 
 abstract class RoutingException extends RuntimeException
 {
-
     /**
      * @var ServerRequestInterface
      */
@@ -27,10 +26,11 @@ abstract class RoutingException extends RuntimeException
     public static function create(ServerRequestInterface $request): self
     {
         $class = static::class;
+
         return new $class($request);
     }
 
     abstract protected function createMessage(ServerRequestInterface $request): string;
 
-    abstract  protected function getHttpCode(): int;
+    abstract protected function getHttpCode(): int;
 }

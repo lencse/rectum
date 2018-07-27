@@ -4,7 +4,6 @@ namespace Test\Unit\Adapter\DependencyInjection\Objects;
 
 class ConstructorParameterWithDependency
 {
-
     /**
      * @var int
      */

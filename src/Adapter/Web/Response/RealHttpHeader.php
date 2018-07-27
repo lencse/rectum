@@ -9,7 +9,6 @@ use Lencse\Rectum\Component\Web\Response\HttpHeader;
  */
 class RealHttpHeader implements HttpHeader
 {
-
     public function sendHeader(string $header): void
     {
         header($header);

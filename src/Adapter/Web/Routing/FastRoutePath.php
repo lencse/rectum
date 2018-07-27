@@ -6,7 +6,6 @@ use Lencse\Rectum\Component\Web\Routing\Route;
 
 class FastRoutePath
 {
-
     public function getPathWithParameterFormats(Route $route): string
     {
         $result = $route->getPath();

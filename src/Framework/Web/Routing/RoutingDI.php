@@ -11,7 +11,6 @@ use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfigurator;
 
 class RoutingDI implements DependencyInjectionConfig
 {
-
     /**
      * @var RoutingConfig
      */

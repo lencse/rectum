@@ -9,7 +9,6 @@ use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
 
 class CompositeApplicationConfig implements ApplicationConfig
 {
-
     /**
      * @var ApplicationConfig[]
      */

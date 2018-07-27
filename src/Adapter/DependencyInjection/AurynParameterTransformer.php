@@ -4,7 +4,6 @@ namespace Lencse\Rectum\Adapter\DependencyInjection;
 
 class AurynParameterTransformer
 {
-
     public function transformParameters(array $params): array
     {
         $result = [];

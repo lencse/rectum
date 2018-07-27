@@ -4,7 +4,6 @@ namespace Lencse\Rectum\Component\Web\Http;
 
 class HttpMethod
 {
-
     /**
      * @var string
      */

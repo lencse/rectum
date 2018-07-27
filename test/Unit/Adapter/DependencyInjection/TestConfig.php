@@ -6,7 +6,6 @@ use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectio
 
 class TestConfig implements DependencyInjectionConfig
 {
-
     /**
      * @var array[]
      */

@@ -11,12 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class RoutingConfiguratorTest extends TestCase
 {
-
     public function testRoutes()
     {
-        $configurator = new RoutingConfigurator(new class implements RoutingConfig
-        {
-
+        $configurator = new RoutingConfigurator(new class() implements RoutingConfig {
             public function routes(): array
             {
                 return [

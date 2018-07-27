@@ -8,13 +8,10 @@ use PHPUnit\Framework\TestCase;
 
 class CompositeDependencyInjectionConfigTest extends TestCase
 {
-
     public function testComposite()
     {
         $config = new CompositeDependencyInjectionConfig([
-            new class implements DependencyInjectionConfig
-            {
-
+            new class() implements DependencyInjectionConfig {
                 public function bind(): array
                 {
                     return ['A' => 'a', 'B' => 'b'];
@@ -40,9 +37,7 @@ class CompositeDependencyInjectionConfigTest extends TestCase
                     return ['A' => 'a'];
                 }
             },
-            new class implements DependencyInjectionConfig
-            {
-
+            new class() implements DependencyInjectionConfig {
                 public function bind(): array
                 {
                     return ['C' => 'c'];
@@ -62,7 +57,6 @@ class CompositeDependencyInjectionConfigTest extends TestCase
                 {
                     return ['C' => ['D' => 'd']];
                 }
-
 
                 public function instance(): array
                 {

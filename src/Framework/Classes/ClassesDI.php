@@ -8,7 +8,6 @@ use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectio
 
 class ClassesDI implements DependencyInjectionConfig
 {
-
     public function bind(): array
     {
         return [

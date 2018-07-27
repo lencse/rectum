@@ -12,7 +12,6 @@ use Lencse\Rectum\Component\Web\Response\ToHeaderAndOutputResponseRenderer;
 
 class ResponseDI implements DependencyInjectionConfig
 {
-
     public function bind(): array
     {
         return [

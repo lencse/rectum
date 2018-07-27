@@ -6,12 +6,10 @@ use Lencse\Rectum\Component\Web\Http\HttpMethod;
 use Lencse\Rectum\Component\Web\Routing\Route;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
-use Lencse\Rectum\Component\Web\Routing\SimpleRouteHandlingConfig;
 use PHPUnit\Framework\TestCase;
 
 class RouteCollectionTest extends TestCase
 {
-
     public function testRouteCollection()
     {
         $arr = [

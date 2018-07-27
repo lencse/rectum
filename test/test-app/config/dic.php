@@ -6,9 +6,7 @@ use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectio
 use TestApp\Handler\OkMessage;
 use TestApp\Handler\TestMessage;
 
-return new class implements DependencyInjectionConfig
-{
-
+return new class() implements DependencyInjectionConfig {
     public function bind(): array
     {
         return [

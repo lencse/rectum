@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class WebTest extends TestCase
 {
-
     public function testWeb()
     {
         $response = AppTesting::webApplication()

@@ -4,7 +4,6 @@ namespace Lencse\Rectum\Component\Classes\Method\Parameter;
 
 class GivenParameterType implements ParameterType
 {
-
     /**
      * @var string
      */

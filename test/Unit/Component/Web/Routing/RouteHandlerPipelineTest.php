@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 class RouteHandlerPipelineTest extends TestCase
 {
-
     public function testRouteHandlerPipeline()
     {
         $arr = [
@@ -20,6 +19,7 @@ class RouteHandlerPipelineTest extends TestCase
             $this->assertEquals($arr[$k], $v);
         }
     }
+
     public function testValidationn()
     {
         $this->expectException(EmptyRouteHandlerPipelineException::class);

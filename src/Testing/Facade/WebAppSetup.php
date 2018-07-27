@@ -9,7 +9,6 @@ use Lencse\Rectum\Testing\Web\SuperGlobalsConfig;
 
 class WebAppSetup
 {
-
     /**
      * @var ApplicationConfig
      */

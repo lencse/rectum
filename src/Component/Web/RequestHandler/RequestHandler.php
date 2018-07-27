@@ -10,7 +10,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class RequestHandler implements RequestHandlerInterface
 {
-
     /**
      * @var Router
      */

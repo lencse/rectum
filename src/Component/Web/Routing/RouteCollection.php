@@ -6,7 +6,6 @@ use Iterator;
 
 class RouteCollection implements Iterator
 {
-
     /**
      * @var Route[]
      */

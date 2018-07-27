@@ -7,7 +7,6 @@ use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
 
 class ObserverConfig implements DependencyInjectionConfig
 {
-
     /**
      * @var ResponseRenderer
      */

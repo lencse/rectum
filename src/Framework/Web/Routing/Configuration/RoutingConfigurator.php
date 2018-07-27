@@ -2,15 +2,14 @@
 
 namespace Lencse\Rectum\Framework\Web\Routing\Configuration;
 
-use function is_array;
 use Lencse\Rectum\Component\Web\Http\HttpMethod;
 use Lencse\Rectum\Component\Web\Routing\Route;
 use Lencse\Rectum\Component\Web\Routing\RouteCollection;
 use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
+use function is_array;
 
 class RoutingConfigurator
 {
-
     /**
      * @var RoutingConfig
      */

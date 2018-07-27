@@ -4,7 +4,6 @@ namespace Lencse\Rectum\Framework\Web\Routing\Configuration;
 
 class CompositeRoutingConfig implements RoutingConfig
 {
-
     /**
      * @var RoutingConfig[]
      */
