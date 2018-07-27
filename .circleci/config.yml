@@ -47,7 +47,7 @@ jobs:
                 command: composer install -n --prefer-dist
             - run:
                  name: Test coverage
-                 command: composer test-coverage
+                 command: phpunit --coverage-clover coverage.xml --log-junit test-report.xml
             - run:
                 name: Run sonar console
                 command: |
@@ -58,8 +58,12 @@ jobs:
                         -Dsonar.host.url=$SONARCLOUD_URL \
                         -Dsonar.login=$SONARCLOUD_LOGIN \
                         -Dsonar.exclusions=logs/**,vendor/** \
-                        -Dsonar.php.tests.reportPath=logs/test-report.xml \
-                        -Dsonar.php.coverage.reportPaths=logs/clover.xml
+                        -Dsonar.php.tests.reportPath=test-report.xml \
+                        -Dsonar.php.coverage.reportPaths=coverage.xml
+            - run:
+                 name: Run codecov
+                 command: bash <(curl -s https://codecov.io/bash)
+
 
 #     benchmark:
 #         <<: *CONFIG
