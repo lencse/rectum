@@ -7,5 +7,4 @@ finder:
 
 disabled:
     - align_double_arrow
-    - align_comments
     - align_phpdoc
