@@ -10,3 +10,4 @@ disabled:
     - phpdoc_align
     - trailing_comma_in_multiline_array
     - phpdoc_to_comment
+    - concat_without_spaces
