@@ -20,3 +20,5 @@ cat phpunit.xml.1 phpunit.xml.2 phpunit.xml.3 > phpunit.xml
 
 composer install
 composer test
+
+./smoke-test.sh

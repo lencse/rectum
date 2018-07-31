@@ -44,8 +44,7 @@ jobs:
                     - v1-dependencies-
             - run:
                 name: Set up Sonarcloud client
-                command:
-                    bash .circleci/setup-sonarcloud.sh
+                command: .circleci/setup-sonarcloud.sh
             - run:
                 name: Add sonar dir to PATH
                 command:
