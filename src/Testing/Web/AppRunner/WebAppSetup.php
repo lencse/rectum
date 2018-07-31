@@ -1,28 +1,18 @@
 <?php
 
-namespace Lencse\Rectum\Testing\Facade;
+namespace Lencse\Rectum\Testing\Web\AppRunner;
 
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Configuration\ApplicationConfig;
 use Lencse\Rectum\Component\Configuration\CompositeApplicationConfig;
-use Lencse\Rectum\Testing\Web\ConfigWithDI;
-use Lencse\Rectum\Testing\Web\RequestConfig;
-use Lencse\Rectum\Testing\Web\SuperGlobalsConfig;
+use Lencse\Rectum\Testing\Facade\AppSetup;
+use Lencse\Rectum\Testing\Web\Config\ConfigWithDI;
+use Lencse\Rectum\Testing\Web\Config\RequestConfig;
+use Lencse\Rectum\Testing\Web\Config\SuperGlobalsConfig;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class WebAppSetup
+class WebAppSetup extends AppSetup
 {
-    /**
-     * @var ApplicationConfig
-     */
-    private $config;
-
-    public function __construct(ApplicationConfig $config)
-    {
-        $this->config = $config;
-    }
-
     public function withSuperGlobals(array $superGlobals): WebAppRunner
     {
         return new WebAppRunner(

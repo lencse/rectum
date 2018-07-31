@@ -2,6 +2,8 @@
 
 namespace Lencse\Rectum\Testing\Facade;
 
+use Lencse\Rectum\Testing\Web\AppRunner\WebAppSetup;
+
 class AppTesting
 {
     /**
@@ -11,6 +13,6 @@ class AppTesting
 
     public static function webApplication(): WebAppSetup
     {
-        return new WebAppSetup(require self::$projectRoot . '/bootstrap/configuration.php');
+        return new WebAppSetup(self::$projectRoot . '/bootstrap/configuration.php');
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Lencse\Rectum\Testing\Facade;
+namespace Lencse\Rectum\Testing\Web\AppRunner;
 
 use Lencse\Rectum\Component\Configuration\ApplicationConfig;
 use Lencse\Rectum\Component\Configuration\CompositeApplicationConfig;
 use Lencse\Rectum\Framework\Application\Bootstrap;
-use Lencse\Rectum\Testing\Web\ConfigWithDI;
-use Lencse\Rectum\Testing\Web\ObserverConfig;
+use Lencse\Rectum\Testing\Web\Config\ConfigWithDI;
+use Lencse\Rectum\Testing\Web\Config\ObserverConfig;
 use Lencse\Rectum\Testing\Web\Response\ResponseObserver;
 use Psr\Http\Message\ResponseInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\Rectum\Testing\Web;
+namespace Lencse\Rectum\Testing\Web\Config;
 
 use Lencse\Rectum\Component\Configuration\ApplicationConfig;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
