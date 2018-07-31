@@ -18,8 +18,5 @@ echo "<php><env name=\"RECTUM_PROJECT_ROOT\" value=\"$SKELETON_DIR\" /></php>" >
 tail -n +2 phpunit.xml > phpunit.xml.3
 cat phpunit.xml.1 phpunit.xml.2 phpunit.xml.3 > phpunit.xml
 
-cat phpunit.xml
-
 composer install
-
 composer test
