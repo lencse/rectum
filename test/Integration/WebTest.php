@@ -38,4 +38,14 @@ class WebTest extends TestCase
         $this->assertEquals('Hello, Lencse!', $response->getBody());
         $this->assertEquals(['text/plain'], $response->getHeader('Content-Type'));
     }
+
+    public function testRun()
+    {
+        $response = AppTesting::webApplication()
+             ->runWithUri('/hello/Lencse');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('Hello, Lencse!', $response->getBody());
+        $this->assertEquals(['text/plain'], $response->getHeader('Content-Type'));
+    }
 }

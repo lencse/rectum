@@ -2,11 +2,13 @@
 
 namespace Lencse\Rectum\Testing\Facade;
 
+use GuzzleHttp\Psr7\ServerRequest;
 use Lencse\Rectum\Component\Configuration\ApplicationConfig;
 use Lencse\Rectum\Component\Configuration\CompositeApplicationConfig;
 use Lencse\Rectum\Testing\Web\ConfigWithDI;
 use Lencse\Rectum\Testing\Web\RequestConfig;
 use Lencse\Rectum\Testing\Web\SuperGlobalsConfig;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class WebAppSetup
@@ -39,5 +41,10 @@ class WebAppSetup
                 new ConfigWithDI(new RequestConfig($request))
             ])
         );
+    }
+
+    public function runWithUri(string $uri): ResponseInterface
+    {
+        return $this->withRequest(new ServerRequest('GET', $uri))->run();
     }
 }
