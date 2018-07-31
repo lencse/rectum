@@ -1,4 +1,7 @@
 <phpunit bootstrap="test/test-app/bootstrap/bootstrap.php">
+    <php>
+        <env name="TEST_ENV_VAR" value="test" />
+    </php>
     <testsuites>
         <testsuite name="Integration">
             <directory>test/Integration</directory>
