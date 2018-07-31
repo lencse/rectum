@@ -41,7 +41,7 @@ class RequestConfig implements DependencyInjectionConfig
     public function instance(): array
     {
         return [
-            RequestReader::class => new class ($this->request) implements RequestReader {
+            RequestReader::class => new class($this->request) implements RequestReader {
                 /**
                  * @var ServerRequestInterface
                  */
