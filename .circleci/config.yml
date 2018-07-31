@@ -1,5 +1,6 @@
 version: 2
 jobs:
+
     build:
         docker:
             - image: circleci/php:7.2-browsers
@@ -20,6 +21,17 @@ jobs:
             - run:
                  name: Test
                  command: composer test-all
+
+    test-with-skeleton-app:
+        docker:
+            - image: circleci/php:7.2-browsers
+        working_directory: ~/repo
+        steps:
+            - checkout
+            - run:
+                name: Build and test skeleton app
+                command: .circleci/build-and-test-skeleton.sh
+
     code-analyze:
         docker:
             - image: circleci/php:7.2-browsers
@@ -64,78 +76,14 @@ jobs:
                  name: Run codecov
                  command: bash <(curl -s https://codecov.io/bash)
 
-
-#     benchmark:
-#         <<: *CONFIG
-#         steps:
-#             - checkout
-#             - restore_cache:
-#                 keys:
-#                     - v1-dependencies-{{ checksum "composer.json" }}
-#                     - v1-dependencies-
-#             - run:
-#                 name: Composer Install
-#                 command: composer install -n --prefer-dist
-#             - run:
-#                 name: Benchmark
-#                 command: composer benchmark
-#     deploy-to-staging:
-#         <<: *CONFIG
-#         steps:
-#             - checkout
-#             - add_ssh_keys:
-#                 fingerprints:
-#                      - "f2:40:52:df:7e:e6:b3:4d:18:55:4f:29:04:0b:59:6c"
-#             - run:
-#                 name: Heroku Init
-#                 command:
-#                     bash .circleci/setup-heroku.sh
-#             - run:
-#                 name: Deploy to Heroku Staging Server
-#                 command: |
-#                     heroku git:remote -a $HEROKU_APP_NAME_STAGING
-#                     git push --force git@heroku.com:$HEROKU_APP_NAME_STAGING.git HEAD:refs/heads/master
-#             - restore_cache:
-#                 keys:
-#                     - v1-dependencies-{{ checksum "composer.json" }}
-#                     - v1-dependencies-
-#             - run:
-#                 name: Composer Install
-#                 command: composer install -n --prefer-dist
-#             - run:
-#                 name: Smoke Test
-#                 command: vendor/bin/cigar --url=$APP_URL_STAGING
-#     deploy-to-prod:
-#         <<: *CONFIG
-#         steps:
-#             - checkout
-#             - add_ssh_keys:
-#                 fingerprints:
-#                      - "f2:40:52:df:7e:e6:b3:4d:18:55:4f:29:04:0b:59:6c"
-#             - run:
-#                 name: Heroku Init
-#                 command:
-#                     bash .circleci/setup-heroku.sh
-#             - run:
-#                 name: Deploy to Heroku Production Server
-#                 command: |
-#                     heroku git:remote -a $HEROKU_APP_NAME_PROD
-#                     git push --force git@heroku.com:$HEROKU_APP_NAME_PROD.git HEAD:refs/heads/master
-#             - restore_cache:
-#                 keys:
-#                     - v1-dependencies-{{ checksum "composer.json" }}
-#                     - v1-dependencies-
-#             - run:
-#                 name: Composer Install
-#                 command: composer install -n --prefer-dist
-#             - run:
-#                 name: Smoke Test
-#                 command: vendor/bin/cigar --url=$APP_URL_PROD
 workflows:
     version: 2
     standard:
         jobs:
             - build
-            - code-analyze:
+            - test-with-skeleton-app:
                 requires:
                     - build
+            - code-analyze:
+                requires:
+                    - test-with-skeleton-app
