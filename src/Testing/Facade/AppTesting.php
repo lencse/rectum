@@ -18,7 +18,9 @@ class AppTesting
 
     private static function getProjectRoot(): string
     {
-        return self::$projectRoot ?? self::findProjectRoot();
+        return !empty(self::$projectRoot) ?
+            self::$projectRoot :
+            self::findProjectRoot();
     }
 
     /**
