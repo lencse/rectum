@@ -28,6 +28,10 @@ class AppTesting
      */
     private static function findProjectRoot(): string
     {
+        if (!empty(env('RECTUM_PROJECT_ROOT'))) {
+            return env('RECTUM_PROJECT_ROOT');
+        }
+
         $dir = __DIR__;
         while (!file_exists($dir . '/vendor/lencse/rectum')) {
             $dir = dirname($dir);
