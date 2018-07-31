@@ -2,16 +2,16 @@
 
 namespace Lencse\Rectum\Framework\Web\Request;
 
-use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestReader;
+use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestSource;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Web\Request\RequestReader;
+use Lencse\Rectum\Component\Web\Request\RequestSource;
 
 class RequestDI implements DependencyInjectionConfig
 {
     public function bind(): array
     {
         return [
-            RequestReader::class => FromGlobalsRequestReader::class,
+            RequestSource::class => FromGlobalsRequestSource::class,
         ];
     }
 
@@ -26,7 +26,7 @@ class RequestDI implements DependencyInjectionConfig
     public function setup(): array
     {
         return [
-            FromGlobalsRequestReader::class => [
+            FromGlobalsRequestSource::class => [
                 'serverArr' => $_SERVER,
                 'getArr' => $_GET,
             ]

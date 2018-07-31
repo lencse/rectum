@@ -2,10 +2,10 @@
 
 namespace Test\Unit\Adapter\Web\Request;
 
-use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestReader;
+use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestSource;
 use PHPUnit\Framework\TestCase;
 
-class FromGlobalsRequestReaderTest extends TestCase
+class FromGlobalsRequestSourceTest extends TestCase
 {
     public function testCreate()
     {
@@ -17,7 +17,7 @@ class FromGlobalsRequestReaderTest extends TestCase
             'value' => '1'
         ];
 
-        $reader = new FromGlobalsRequestReader($server, $get);
+        $reader = new FromGlobalsRequestSource($server, $get);
         $request = $reader->create();
         $this->assertEquals('/', $request->getUri()->getPath());
         $this->assertEquals('GET', $request->getMethod());

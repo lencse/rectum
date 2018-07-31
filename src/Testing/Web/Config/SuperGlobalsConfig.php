@@ -2,7 +2,7 @@
 
 namespace Lencse\Rectum\Testing\Web\Config;
 
-use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestReader;
+use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestSource;
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
 
 class SuperGlobalsConfig implements DependencyInjectionConfig
@@ -30,7 +30,7 @@ class SuperGlobalsConfig implements DependencyInjectionConfig
     public function setup(): array
     {
         return [
-            FromGlobalsRequestReader::class => [
+            FromGlobalsRequestSource::class => [
                 'serverArr' => $this->superGlobals['SERVER'],
                 'getArr' => $this->superGlobals['GET'],
             ]

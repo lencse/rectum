@@ -4,7 +4,7 @@ namespace Lencse\Rectum\Component\Web\Request;
 
 use Psr\Http\Message\ServerRequestInterface;
 
-interface RequestReader
+interface RequestSource
 {
     public function create(): ServerRequestInterface;
 }

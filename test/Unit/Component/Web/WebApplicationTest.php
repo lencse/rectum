@@ -4,7 +4,7 @@ namespace Test\Unit\Component\Web;
 
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Web\Request\RequestReader;
+use Lencse\Rectum\Component\Web\Request\RequestSource;
 use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
 use Lencse\Rectum\Component\Web\WebApplication;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +27,7 @@ class WebApplicationTest extends TestCase implements ResponseRenderer
     public function testRun()
     {
         $app = new WebApplication(
-            new class() implements RequestReader {
+            new class() implements RequestSource {
                 public function create(): ServerRequestInterface
                 {
                     return new ServerRequest('GET', '/');

@@ -3,7 +3,7 @@
 namespace Lencse\Rectum\Testing\Web\Config;
 
 use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Web\Request\RequestReader;
+use Lencse\Rectum\Component\Web\Request\RequestSource;
 use Psr\Http\Message\ServerRequestInterface;
 
 class RequestConfig implements DependencyInjectionConfig
@@ -41,7 +41,7 @@ class RequestConfig implements DependencyInjectionConfig
     public function instance(): array
     {
         return [
-            RequestReader::class => new class($this->request) implements RequestReader {
+            RequestSource::class => new class($this->request) implements RequestSource {
                 /**
                  * @var ServerRequestInterface
                  */

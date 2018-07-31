@@ -3,14 +3,14 @@
 namespace Lencse\Rectum\Component\Web;
 
 use Lencse\Rectum\Component\Application\Application;
-use Lencse\Rectum\Component\Web\Request\RequestReader;
+use Lencse\Rectum\Component\Web\Request\RequestSource;
 use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class WebApplication implements Application
 {
     /**
-     * @var RequestReader
+     * @var RequestSource
      */
     private $requestReader;
 
@@ -25,7 +25,7 @@ class WebApplication implements Application
     private $responseRenderer;
 
     public function __construct(
-        RequestReader $requestReader,
+        RequestSource $requestReader,
         RequestHandlerInterface $requestHandler,
         ResponseRenderer $responseRenderer
     ) {

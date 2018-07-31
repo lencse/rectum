@@ -3,10 +3,10 @@
 namespace Lencse\Rectum\Adapter\Web\Request;
 
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Web\Request\RequestReader;
+use Lencse\Rectum\Component\Web\Request\RequestSource;
 use Psr\Http\Message\ServerRequestInterface;
 
-class FromGlobalsRequestReader implements RequestReader
+class FromGlobalsRequestSource implements RequestSource
 {
     /**
      * @var array
