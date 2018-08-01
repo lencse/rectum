@@ -2,9 +2,6 @@
 
 namespace Lencse\Rectum\Web\Routing\Component;
 
-use Lencse\Rectum\Web\Routing\Component\Router;
-use Lencse\Rectum\Web\Routing\Component\RoutingResult;
-use Lencse\Rectum\Web\Routing\Component\RoutingResultParameterAppender;
 use Psr\Http\Message\ServerRequestInterface;
 
 class WebRouter implements Router

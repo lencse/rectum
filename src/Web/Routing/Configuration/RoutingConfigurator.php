@@ -7,7 +7,6 @@ use Lencse\Rectum\Web\Routing\Component\Route;
 use Lencse\Rectum\Web\Routing\Component\RouteCollection;
 use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
 use function is_array;
-use Lencse\Rectum\Web\Routing\Configuration\RoutingConfig;
 
 class RoutingConfigurator
 {

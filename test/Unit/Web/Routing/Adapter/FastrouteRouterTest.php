@@ -3,15 +3,15 @@
 namespace Test\Unit\Web\Routing\Adapter;
 
 use GuzzleHttp\Psr7\ServerRequest;
+use Lencse\Rectum\Web\Http\Component\HttpMethod;
 use Lencse\Rectum\Web\Routing\Adapter\FastRoutePath;
 use Lencse\Rectum\Web\Routing\Adapter\FastrouteRouter;
-use Lencse\Rectum\Web\Http\Component\HttpMethod;
-use Lencse\Rectum\Web\Routing\Exception\BadMethodException;
-use Lencse\Rectum\Web\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Web\Routing\Component\Route;
 use Lencse\Rectum\Web\Routing\Component\RouteCollection;
 use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
 use Lencse\Rectum\Web\Routing\Component\Router;
+use Lencse\Rectum\Web\Routing\Exception\BadMethodException;
+use Lencse\Rectum\Web\Routing\Exception\NotFoundException;
 use PHPUnit\Framework\TestCase;
 
 class FastrouteRouterTest extends TestCase

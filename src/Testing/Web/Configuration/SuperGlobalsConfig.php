@@ -2,8 +2,8 @@
 
 namespace Lencse\Rectum\Testing\Web\Configuration;
 
-use Lencse\Rectum\Web\Request\Adapter\FromGlobalsRequestSource;
 use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\Web\Request\Adapter\FromGlobalsRequestSource;
 
 class SuperGlobalsConfig implements DependencyInjectionConfig
 {

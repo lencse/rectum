@@ -2,17 +2,17 @@
 
 namespace Lencse\Rectum\Framework\Application;
 
+use Lencse\Rectum\Application\Configuration\ApplicationConfig;
 use Lencse\Rectum\Classes\Adapter\Method\Parameter\ReflectionMethodParameterAnalyzer;
 use Lencse\Rectum\DependencyInjection\Adapter\AurynContainerFactory;
 use Lencse\Rectum\DependencyInjection\Adapter\AurynParameterTransformer;
-use Lencse\Rectum\Application\Configuration\ApplicationConfig;
 use Lencse\Rectum\DependencyInjection\Configuration\CompositeDependencyInjectionConfig;
-use Lencse\Rectum\Web\Application\Component\WebApplication;
 use Lencse\Rectum\Framework\Classes\ClassesDI;
 use Lencse\Rectum\Framework\Web\Request\RequestDI;
 use Lencse\Rectum\Framework\Web\RequestHandler\RequestHandlerDI;
 use Lencse\Rectum\Framework\Web\Response\ResponseDI;
 use Lencse\Rectum\Framework\Web\Routing\RoutingDI;
+use Lencse\Rectum\Web\Application\Component\WebApplication;
 use Psr\Container\ContainerInterface;
 
 class ApplicationSetup

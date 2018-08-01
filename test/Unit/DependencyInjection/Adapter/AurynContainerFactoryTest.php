@@ -3,13 +3,12 @@
 namespace Test\Unit\DependencyInjection\Adapter;
 
 use Lencse\Rectum\Classes\Adapter\Method\Parameter\ReflectionMethodParameterAnalyzer;
+use Lencse\Rectum\Classes\Component\Invoking\Invoker;
 use Lencse\Rectum\DependencyInjection\Adapter\AurynContainerFactory;
 use Lencse\Rectum\DependencyInjection\Adapter\AurynParameterTransformer;
-use Lencse\Rectum\Classes\Component\Invoking\Invoker;
 use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Test\Unit\DependencyInjection\Adapter\TestConfig;
 use Test\Unit\DependencyInjection\Adapter\Objects\ConstructorParameter;
 use Test\Unit\DependencyInjection\Adapter\Objects\ConstructorParameterWithDependency;
 use Test\Unit\DependencyInjection\Adapter\Objects\Counter;

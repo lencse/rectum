@@ -2,8 +2,6 @@
 
 namespace Lencse\Rectum\Classes\Component\Method\Parameter;
 
-use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameter;
-
 interface MethodParameterAnalyzer
 {
     /**

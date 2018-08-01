@@ -2,7 +2,6 @@
 
 namespace Lencse\Rectum\Web\Routing\Exception;
 
-use Lencse\Rectum\Web\Routing\Exception\RoutingException;
 use Psr\Http\Message\ServerRequestInterface;
 
 class NotFoundException extends RoutingException

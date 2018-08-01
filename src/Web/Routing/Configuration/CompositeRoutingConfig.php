@@ -2,8 +2,6 @@
 
 namespace Lencse\Rectum\Web\Routing\Configuration;
 
-use Lencse\Rectum\Web\Routing\Configuration\RoutingConfig;
-
 class CompositeRoutingConfig implements RoutingConfig
 {
     /**

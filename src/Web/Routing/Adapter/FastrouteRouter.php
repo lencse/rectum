@@ -4,13 +4,12 @@ namespace Lencse\Rectum\Web\Routing\Adapter;
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use Lencse\Rectum\Web\Routing\Exception\BadMethodException;
-use Lencse\Rectum\Web\Routing\Exception\NotFoundException;
 use Lencse\Rectum\Web\Routing\Component\RouteCollection;
 use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
 use Lencse\Rectum\Web\Routing\Component\Router;
 use Lencse\Rectum\Web\Routing\Component\RoutingResult;
-use Lencse\Rectum\Web\Routing\Adapter\FastRoutePath;
+use Lencse\Rectum\Web\Routing\Exception\BadMethodException;
+use Lencse\Rectum\Web\Routing\Exception\NotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
 use function FastRoute\simpleDispatcher;
 

@@ -2,8 +2,8 @@
 
 namespace Lencse\Rectum\Framework\Web\Routing;
 
-use Lencse\Rectum\Web\Routing\Adapter\FastrouteRouter;
 use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\Web\Routing\Adapter\FastrouteRouter;
 use Lencse\Rectum\Web\Routing\Component\RouteCollection;
 use Lencse\Rectum\Web\Routing\Component\Router;
 use Lencse\Rectum\Web\Routing\Configuration\RoutingConfig;

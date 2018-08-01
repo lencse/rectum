@@ -2,7 +2,6 @@
 
 namespace Lencse\Rectum\Application\Configuration;
 
-use Lencse\Rectum\Application\Configuration\ApplicationConfig;
 use Lencse\Rectum\DependencyInjection\Configuration\CompositeDependencyInjectionConfig;
 use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\Web\Routing\Configuration\CompositeRoutingConfig;

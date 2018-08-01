@@ -4,7 +4,6 @@ namespace Lencse\Rectum\Web\Routing\Component;
 
 use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameter;
 use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
-use Lencse\Rectum\Web\Routing\Component\RoutingResult;
 use Psr\Http\Message\ServerRequestInterface;
 
 class RoutingResultParameterAppender

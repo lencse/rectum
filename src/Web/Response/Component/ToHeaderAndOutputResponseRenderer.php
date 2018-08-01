@@ -2,9 +2,6 @@
 
 namespace Lencse\Rectum\Web\Response\Component;
 
-use Lencse\Rectum\Web\Response\Component\HttpHeader;
-use Lencse\Rectum\Web\Response\Component\Output;
-use Lencse\Rectum\Web\Response\Component\ResponseRenderer;
 use Psr\Http\Message\ResponseInterface;
 
 class ToHeaderAndOutputResponseRenderer implements ResponseRenderer

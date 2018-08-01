@@ -3,7 +3,6 @@
 namespace Lencse\Rectum\DependencyInjection\Configuration;
 
 use Closure;
-use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 
 class CompositeDependencyInjectionConfig implements DependencyInjectionConfig
 {

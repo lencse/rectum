@@ -2,8 +2,6 @@
 
 namespace Lencse\Rectum\Web\Routing\Component;
 
-use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
-
 class RoutingResult
 {
     /**

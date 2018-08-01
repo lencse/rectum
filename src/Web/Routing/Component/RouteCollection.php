@@ -3,7 +3,6 @@
 namespace Lencse\Rectum\Web\Routing\Component;
 
 use Iterator;
-use Lencse\Rectum\Web\Routing\Component\Route;
 
 class RouteCollection implements Iterator
 {
