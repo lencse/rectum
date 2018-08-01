@@ -2,11 +2,11 @@
 
 namespace Lencse\Rectum\Testing\Web\AppRunner;
 
-use Lencse\Rectum\Component\Configuration\ApplicationConfig;
-use Lencse\Rectum\Component\Configuration\CompositeApplicationConfig;
-use Lencse\Rectum\Framework\Application\Bootstrap;
-use Lencse\Rectum\Testing\Web\Config\ConfigWithDI;
-use Lencse\Rectum\Testing\Web\Config\ObserverConfig;
+use Lencse\Rectum\Application\Configuration\ApplicationConfig;
+use Lencse\Rectum\Application\Configuration\CompositeApplicationConfig;
+use Lencse\Rectum\Framework\Application\ApplicationSetup;
+use Lencse\Rectum\Testing\Web\Configuration\ConfigWithDI;
+use Lencse\Rectum\Testing\Web\Configuration\ObserverConfig;
 use Lencse\Rectum\Testing\Web\Response\ResponseObserver;
 use Psr\Http\Message\ResponseInterface;
 
@@ -25,7 +25,7 @@ class WebAppRunner
     public function run(): ResponseInterface
     {
         $observer = new ResponseObserver();
-        $bootstrap = new Bootstrap(new CompositeApplicationConfig([
+        $bootstrap = new ApplicationSetup(new CompositeApplicationConfig([
             $this->config,
             new ConfigWithDI(new ObserverConfig($observer)),
         ]));

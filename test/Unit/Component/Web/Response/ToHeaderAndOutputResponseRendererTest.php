@@ -3,9 +3,9 @@
 namespace Test\Unit\Component\Web\Response;
 
 use GuzzleHttp\Psr7\Response;
-use Lencse\Rectum\Component\Web\Response\HttpHeader;
-use Lencse\Rectum\Component\Web\Response\Output;
-use Lencse\Rectum\Component\Web\Response\ToHeaderAndOutputResponseRenderer;
+use Lencse\Rectum\Web\Response\Component\HttpHeader;
+use Lencse\Rectum\Web\Response\Component\Output;
+use Lencse\Rectum\Web\Response\Component\ToHeaderAndOutputResponseRenderer;
 use PHPUnit\Framework\TestCase;
 
 class ToHeaderAndOutputResponseRendererTest extends TestCase implements HttpHeader, Output

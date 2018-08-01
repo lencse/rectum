@@ -2,9 +2,9 @@
 
 namespace Lencse\Rectum\Framework\Web\Request;
 
-use Lencse\Rectum\Adapter\Web\Request\FromGlobalsRequestSource;
-use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Web\Request\RequestSource;
+use Lencse\Rectum\Web\Request\Adapter\FromGlobalsRequestSource;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\Web\Request\Component\RequestSource;
 
 class RequestDI implements DependencyInjectionConfig
 {

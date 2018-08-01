@@ -2,7 +2,7 @@
 
 namespace Lencse\Rectum\Testing\Facade;
 
-use Lencse\Rectum\Component\Configuration\ApplicationConfig;
+use Lencse\Rectum\Application\Configuration\ApplicationConfig;
 
 abstract class AppSetup
 {

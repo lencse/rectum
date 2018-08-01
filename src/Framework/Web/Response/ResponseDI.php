@@ -2,13 +2,13 @@
 
 namespace Lencse\Rectum\Framework\Web\Response;
 
-use Lencse\Rectum\Adapter\Web\Response\RealHttpHeader;
-use Lencse\Rectum\Adapter\Web\Response\RealOutput;
-use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Web\Response\HttpHeader;
-use Lencse\Rectum\Component\Web\Response\Output;
-use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
-use Lencse\Rectum\Component\Web\Response\ToHeaderAndOutputResponseRenderer;
+use Lencse\Rectum\Web\Response\Adapter\RealHttpHeader;
+use Lencse\Rectum\Web\Response\Adapter\RealOutput;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\Web\Response\Component\HttpHeader;
+use Lencse\Rectum\Web\Response\Component\Output;
+use Lencse\Rectum\Web\Response\Component\ResponseRenderer;
+use Lencse\Rectum\Web\Response\Component\ToHeaderAndOutputResponseRenderer;
 
 class ResponseDI implements DependencyInjectionConfig
 {
@@ -26,9 +26,6 @@ class ResponseDI implements DependencyInjectionConfig
         return [];
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
     public function setup(): array
     {
         return [];

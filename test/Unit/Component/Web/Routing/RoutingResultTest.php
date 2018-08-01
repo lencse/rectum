@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Component\Web\Routing;
 
-use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
-use Lencse\Rectum\Component\Web\Routing\RoutingResult;
+use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
+use Lencse\Rectum\Web\Routing\Component\RoutingResult;
 use PHPUnit\Framework\TestCase;
 
 class RoutingResultTest extends TestCase

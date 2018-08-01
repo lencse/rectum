@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Lencse\Rectum\Component\Configuration\ApplicationConfig;
-use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
+use Lencse\Rectum\Application\Configuration\ApplicationConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\Web\Routing\Configuration\RoutingConfig;
 
 return new class() implements ApplicationConfig {
     public function dependencyInjectionConfig(): DependencyInjectionConfig

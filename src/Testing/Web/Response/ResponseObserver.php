@@ -2,7 +2,7 @@
 
 namespace Lencse\Rectum\Testing\Web\Response;
 
-use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
+use Lencse\Rectum\Web\Response\Component\ResponseRenderer;
 use Psr\Http\Message\ResponseInterface;
 
 class ResponseObserver implements ResponseRenderer

@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Component\Web\Http;
 
-use Lencse\Rectum\Component\Web\Http\HttpMethod;
+use Lencse\Rectum\Web\Http\Component\HttpMethod;
 use PHPUnit\Framework\TestCase;
 
 class HttpMethodTest extends TestCase

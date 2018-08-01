@@ -2,12 +2,12 @@
 
 namespace Lencse\Rectum\Framework\Web\Routing;
 
-use Lencse\Rectum\Adapter\Web\Routing\FastrouteRouter;
-use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\Component\Web\Routing\RouteCollection;
-use Lencse\Rectum\Component\Web\Routing\Router;
-use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
-use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfigurator;
+use Lencse\Rectum\Web\Routing\Adapter\FastrouteRouter;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\Web\Routing\Component\RouteCollection;
+use Lencse\Rectum\Web\Routing\Component\Router;
+use Lencse\Rectum\Web\Routing\Configuration\RoutingConfig;
+use Lencse\Rectum\Web\Routing\Configuration\RoutingConfigurator;
 
 class RoutingDI implements DependencyInjectionConfig
 {

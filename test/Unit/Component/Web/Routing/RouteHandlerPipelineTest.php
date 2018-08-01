@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Component\Web\Routing;
 
-use Lencse\Rectum\Component\Web\Routing\Exception\EmptyRouteHandlerPipelineException;
-use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
+use Lencse\Rectum\Web\Routing\Exception\EmptyRouteHandlerPipelineException;
+use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
 use PHPUnit\Framework\TestCase;
 
 class RouteHandlerPipelineTest extends TestCase

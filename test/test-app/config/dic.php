@@ -2,7 +2,7 @@
 
 namespace Test\App;
 
-use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 use TestApp\UseCase\Ok\OkMessage;
 use TestApp\UseCase\Ok\TestMessage;
 

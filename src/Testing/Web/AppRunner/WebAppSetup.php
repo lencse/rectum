@@ -3,11 +3,11 @@
 namespace Lencse\Rectum\Testing\Web\AppRunner;
 
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Configuration\CompositeApplicationConfig;
+use Lencse\Rectum\Application\Configuration\CompositeApplicationConfig;
 use Lencse\Rectum\Testing\Facade\AppSetup;
-use Lencse\Rectum\Testing\Web\Config\ConfigWithDI;
-use Lencse\Rectum\Testing\Web\Config\RequestConfig;
-use Lencse\Rectum\Testing\Web\Config\SuperGlobalsConfig;
+use Lencse\Rectum\Testing\Web\Configuration\ConfigWithDI;
+use Lencse\Rectum\Testing\Web\Configuration\RequestConfig;
+use Lencse\Rectum\Testing\Web\Configuration\SuperGlobalsConfig;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

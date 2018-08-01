@@ -4,9 +4,9 @@ namespace Test\Unit\Component\Web;
 
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Web\Request\RequestSource;
-use Lencse\Rectum\Component\Web\Response\ResponseRenderer;
-use Lencse\Rectum\Component\Web\WebApplication;
+use Lencse\Rectum\Web\Request\Component\RequestSource;
+use Lencse\Rectum\Web\Response\Component\ResponseRenderer;
+use Lencse\Rectum\Web\Application\Component\WebApplication;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

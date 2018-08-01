@@ -2,9 +2,9 @@
 
 namespace Lencse\Rectum\Framework\Classes;
 
-use Lencse\Rectum\Adapter\Classes\Method\Parameter\ReflectionMethodParameterAnalyzer;
-use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
-use Lencse\Rectum\Component\DependencyInjection\Configuration\DependencyInjectionConfig;
+use Lencse\Rectum\Classes\Adapter\Method\Parameter\ReflectionMethodParameterAnalyzer;
+use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
+use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 
 class ClassesDI implements DependencyInjectionConfig
 {

@@ -2,8 +2,8 @@
 
 namespace AppConfig;
 
-use Lencse\Rectum\Component\Web\Http\HttpMethod;
-use Lencse\Rectum\Framework\Web\Routing\Configuration\RoutingConfig;
+use Lencse\Rectum\Web\Http\Component\HttpMethod;
+use Lencse\Rectum\Web\Routing\Configuration\RoutingConfig;
 use TestApp\Handler\HelloHandler;
 use TestApp\Handler\OkHandler;
 

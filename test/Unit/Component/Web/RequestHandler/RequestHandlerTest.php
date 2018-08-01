@@ -4,17 +4,17 @@ namespace Test\Unit\Component\Web\RequestHandler;
 
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Component\Classes\Invoking\Invoker;
-use Lencse\Rectum\Component\Classes\Method\Parameter\GivenParameterType;
-use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameter;
-use Lencse\Rectum\Component\Classes\Method\Parameter\MethodParameterAnalyzer;
-use Lencse\Rectum\Component\Web\Http\HttpMethod;
-use Lencse\Rectum\Component\Web\RequestHandler\RequestHandler;
-use Lencse\Rectum\Component\Web\Routing\RouteHandlerPipeline;
-use Lencse\Rectum\Component\Web\Routing\Router;
-use Lencse\Rectum\Component\Web\Routing\RoutingResult;
-use Lencse\Rectum\Component\Web\Routing\RoutingResultParameterAppender;
-use Lencse\Rectum\Component\Web\Routing\WebRouter;
+use Lencse\Rectum\Classes\Component\Invoking\Invoker;
+use Lencse\Rectum\Classes\Component\Method\Parameter\GivenParameterType;
+use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameter;
+use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
+use Lencse\Rectum\Web\Http\Component\HttpMethod;
+use Lencse\Rectum\Web\RequestHandler\Component\RequestHandler;
+use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
+use Lencse\Rectum\Web\Routing\Component\Router;
+use Lencse\Rectum\Web\Routing\Component\RoutingResult;
+use Lencse\Rectum\Web\Routing\Component\RoutingResultParameterAppender;
+use Lencse\Rectum\Web\Routing\Component\WebRouter;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
