@@ -5,7 +5,7 @@ finder:
         - vendor
     name: "*.php"
     not-path:
-        - src/Adapter/DependencyInjection/AurynContainerFactory.php
+        - src/DependencyInjection/Adapter/AurynContainerFactory.php
 
 disabled:
     - align_double_arrow
