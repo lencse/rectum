@@ -4,14 +4,14 @@ namespace Lencse\Rectum\DependencyInjection\Configuration;
 
 use Iterator;
 
-class ConfigCollection implements Iterator
+class WireConfigCollection implements Iterator
 {
     /**
-     * @var Config[]
+     * @var WireConfig[]
      */
     private $configs = [];
 
-    public function add(Config $config): self
+    public function add(WireConfig $config): self
     {
         $result = new self();
         $result->configs = array_merge($this->configs, [$config]);
@@ -19,21 +19,13 @@ class ConfigCollection implements Iterator
         return $result;
     }
 
-    public function append(self $configs): self
-    {
-        $result = new self();
-        $result->configs = array_merge($this->configs, $configs->configs);
-
-        return $result;
-    }
-
-    public function current(): Config
+    public function current(): WireConfig
     {
         return current($this->configs);
     }
 
     /**
-     * @return false|Config
+     * @return false|WireConfig
      */
     public function next()
     {

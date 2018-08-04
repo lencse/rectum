@@ -5,6 +5,7 @@ namespace Lencse\Rectum\DependencyInjection\Adapter;
 use Auryn\InjectionException;
 use Auryn\Injector;
 use function get_class;
+use function is_callable;
 use Lencse\Rectum\Classes\Adapter\Method\Parameter\ReflectionMethodParameterAnalyzer;
 use Lencse\Rectum\Classes\Component\Invoking\Invoker2;
 use Lencse\Rectum\Classes\Component\Method\Parameter\ActualParameterCollection;
@@ -16,7 +17,10 @@ use Lencse\Rectum\DependencyInjection\Configuration\ContainerBuilder;
 use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\DependencyInjection\Component\Factory\ContainerFactory;
 use Lencse\Rectum\DependencyInjection\Configuration\FactoryConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\InstanceConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\SetupConfig;
 use Psr\Container\ContainerInterface;
+use RuntimeException;
 
 class AurynContainer implements ContainerInterface, ContainerBuilder, Invoker2
 {
@@ -47,6 +51,7 @@ class AurynContainer implements ContainerInterface, ContainerBuilder, Invoker2
         if (isset($this->instances[$class])) {
             return $this->makeInstance($class);
         }
+        // @TODO: throw exception
 
         $instance = $this->makeInstance($class);
         $this->auryn->share($instance);
@@ -57,13 +62,7 @@ class AurynContainer implements ContainerInterface, ContainerBuilder, Invoker2
 
     public function has($id): bool
     {
-        try {
-            $this->auryn->make((string) $id);
-        } catch (InjectionException $e) {
-            return false;
-        }
-
-        return true;
+        return class_exists($id) || interface_exists($id);
     }
 
     public function invoke(string $invokableClass, ActualParameterCollection $params)
@@ -78,11 +77,18 @@ class AurynContainer implements ContainerInterface, ContainerBuilder, Invoker2
             $invokableClass,
             $transformedParameters
         );
+        // @TODO: throw exception
     }
 
     public function invokeWithOneParameter(string $invokableClass, $param)
     {
-        return $this->get($invokableClass)($param);
+        $invokable = $this->get($invokableClass);
+        if (!is_callable($invokable)) {
+            throw new RuntimeException();
+            // @TODO: throw correct exception
+        }
+
+        return $invokable($param);
     }
 
     private function makeInstance(string $class): object
@@ -98,5 +104,24 @@ class AurynContainer implements ContainerInterface, ContainerBuilder, Invoker2
     public function factory(FactoryConfig $config): void
     {
         $this->auryn->delegate($config->getClass(), $config->getFactoryClass());
+    }
+
+    public function setup(SetupConfig $config): void
+    {
+        $params = [];
+        foreach ($config->getParams() as $wireConfig) {
+            $params[':' . $wireConfig->getName()] = $wireConfig->getValue();
+        }
+        foreach ($config->getWireConfigs() as $wireConfig) {
+            $params[$wireConfig->getParameterName()] = $wireConfig->getClassName();
+        }
+
+        $this->auryn->define($config->getClass(), $params);
+    }
+
+    public function instance(InstanceConfig $config): void
+    {
+        $this->auryn->alias($config->getClassName(), get_class($config->getInstance()));
+        $this->auryn->share($config->getInstance());
     }
 }

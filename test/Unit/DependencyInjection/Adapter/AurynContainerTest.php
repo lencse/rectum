@@ -47,9 +47,9 @@ class AurynContainerTest extends TestCase
     public function testMakeAbstract()
     {
         $dic = new Configurator();
-        $dic = new AurynContainer($dic->config()
-            ->add(new BindConfig(TestCase::class, self::class))
-        );
+        $config = $dic->config()
+            ->add(new BindConfig(TestCase::class, self::class));
+        $dic = new AurynContainer($config);
 
         $obj = $dic->get(parent::class);
         $this->assertTrue($obj instanceof self);
@@ -71,9 +71,9 @@ class AurynContainerTest extends TestCase
     public function testFactory()
     {
         $dic = new Configurator();
-        $container = new AurynContainer($dic->config()
-            ->add(new FactoryConfig(ConstructorParameter::class, FactoryWithoutParameter::class))
-        );
+        $config = $dic->config()
+            ->add(new FactoryConfig(ConstructorParameter::class, FactoryWithoutParameter::class));
+        $container = new AurynContainer($config);
 
         /** @var ConstructorParameter $result */
         $result = $container->get(ConstructorParameter::class);
@@ -132,122 +132,102 @@ class AurynContainerTest extends TestCase
         $this->assertEquals(2, $result->value);
     }
 
-//    public function testSetup()
-//    {
-//        $dic = new Configurator();
-//        $container = new AurynContainer($dic->config()
-//            ->add(
-//                $dic->setup()
-//                    ->param('value', 2)
-//            )
-//        );
-//
-////        $container = $this->getContainer(new TestConfig([
-////            'setup' => [ConstructorParameter::class => ['value' => 2]]
-////        ]));
-//        /** @var ConstructorParameter $result */
-//        $result = $container->get(ConstructorParameter::class);
-//        $this->assertEquals(2, $result->value);
-//    }
+    public function testSetup()
+    {
+        $dic = new Configurator();
+        $config = $dic->config()
+            ->add($dic->setup(ConstructorParameter::class)->param('value', 2));
+        $container = new AurynContainer($config);
 
-//    public function testSetupWithDependency()
-//    {
-//        $dic = $this->getContainer(new TestConfig([
-//            'bind' => [DummyInterface::class => NoConstructorParameter::class],
-//            'setup' => [ConstructorParameterWithDependency::class => ['value' => 2]]
-//        ]));
-//        /** @var ConstructorParameterWithDependency $result */
-//        $result = $dic->get(ConstructorParameterWithDependency::class);
-//        $this->assertEquals(2, $result->value);
-//    }
-//
-//    public function testWire()
-//    {
-//        $dic = $this->getContainer(new TestConfig([
-//            'wire' => [
-//                WithDependency1::class => ['dependency' => Service1::class],
-//                WithDependency2::class => ['dependency' => Service2::class],
-//            ]
-//        ]));
-//        /** @var WithDependency1 $obj1 */
-//        $obj1 = $dic->get(WithDependency1::class);
-//        /** @var WithDependency2 $obj2 */
-//        $obj2 = $dic->get(WithDependency2::class);
-//        $this->assertTrue($obj1->dependency instanceof Service1);
-//        $this->assertTrue($obj2->dependency instanceof Service2);
-//    }
-//
-//    public function testWireAndSetup()
-//    {
-//        $dic = $this->getContainer(new TestConfig([
-//            'setup' => [
-//                WithDependencyAndParam1::class => ['value' => 1],
-//                WithDependencyAndParam2::class => ['value' => 2],
-//            ],
-//            'wire' => [
-//                WithDependencyAndParam1::class => ['dependency' => Service1::class],
-//                WithDependencyAndParam2::class => ['dependency' => Service2::class],
-//            ]
-//        ]));
-//        /** @var WithDependencyAndParam1 $obj1 */
-//        $obj1 = $dic->get(WithDependencyAndParam1::class);
-//        /** @var WithDependencyAndParam2 $obj2 */
-//        $obj2 = $dic->get(WithDependencyAndParam2::class);
-//        $this->assertTrue($obj1->dependency instanceof Service1);
-//        $this->assertTrue($obj2->dependency instanceof Service2);
-//    }
-//
-//    public function testWireOverridesDefaultBinding()
-//    {
-//        $dic = $this->getContainer(new TestConfig([
-//            'bind' => [
-//                DummyInterface::class => Service2::class
-//            ],
-//            'wire' => [
-//                WithDependency1::class => ['dependency' => Service1::class],
-//            ]
-//        ]));
-//        /** @var WithDependency1 $obj1 */
-//        $obj1 = $dic->get(WithDependency1::class);
-//        /** @var WithDependency2 $obj2 */
-//        $obj2 = $dic->get(WithDependency2::class);
-//        $this->assertTrue($obj1->dependency instanceof Service1);
-//        $this->assertTrue($obj2->dependency instanceof Service2);
-//    }
-//
-//    public function testHas()
-//    {
-//        $dic = $this->getContainer(new TestConfig([
-//            'bind' => [
-//                DummyInterface::class => NoConstructorParameter::class
-//            ]
-//        ]));
-//
-//        $this->assertTrue($dic->has(DummyInterface::class));
-//        $this->assertTrue($dic->has(Service1::class));
-//        $this->assertFalse($dic->has('InvalidClass'));
-//    }
-//
-//    public function testInstance()
-//    {
-//        $dic = $this->getContainer(new TestConfig([
-//            'instance' => [
-//                DummyInterface::class => new ConstructorParameter(1)
-//            ]
-//        ]));
-//
-//        /** @var ConstructorParameter $obj */
-//        $obj = $dic->get(DummyInterface::class);
-//        $this->assertEquals(1, $obj->value);
-//    }
-//
-//    private function getContainer(DependencyInjectionConfig $config): ContainerInterface
-//    {
-//        $factory = new AurynContainerFactory(
-//            new AurynParameterTransformer(),
-//            new ReflectionMethodParameterAnalyzer()
-//        );
-//
-//        return $factory->createContainer($config);
-//    }
+        /** @var ConstructorParameter $result */
+        $result = $container->get(ConstructorParameter::class);
+        $this->assertEquals(2, $result->value);
+    }
+
+    public function testSetupWithDependency()
+    {
+        $dic = new Configurator();
+        $config = $dic->config()
+            ->add($dic->bind(DummyInterface::class, NoConstructorParameter::class))
+            ->add($dic->setup(ConstructorParameterWithDependency::class)->param('value', 2));
+        $container = new AurynContainer($config);
+
+        /** @var ConstructorParameterWithDependency $result */
+        $result = $container->get(ConstructorParameterWithDependency::class);
+        $this->assertEquals(2, $result->value);
+    }
+
+    public function testWire()
+    {
+        $dic = new Configurator();
+        $config = $dic->config()
+            ->add($dic->setup(WithDependency1::class)->wire('dependency', Service1::class))
+            ->add($dic->setup(WithDependency2::class)->wire('dependency', Service2::class));
+        $container = new AurynContainer($config);
+
+        /** @var WithDependency1 $obj1 */
+        $obj1 = $container->get(WithDependency1::class);
+        /** @var WithDependency2 $obj2 */
+        $obj2 = $container->get(WithDependency2::class);
+        $this->assertTrue($obj1->dependency instanceof Service1);
+        $this->assertTrue($obj2->dependency instanceof Service2);
+    }
+
+    public function testWireAndSetup()
+    {
+        $dic = new Configurator();
+        $config = $dic->config()
+            ->add($dic->setup(WithDependencyAndParam1::class)
+                ->param('value', 1)
+                ->wire('dependency', Service1::class))
+            ->add($dic->setup(WithDependencyAndParam2::class)
+                ->param('value', 2)
+                ->wire('dependency', Service2::class));
+        $container = new AurynContainer($config);
+
+        /** @var WithDependencyAndParam1 $obj1 */
+        $obj1 = $container->get(WithDependencyAndParam1::class);
+        /** @var WithDependencyAndParam2 $obj2 */
+        $obj2 = $container->get(WithDependencyAndParam2::class);
+        $this->assertTrue($obj1->dependency instanceof Service1);
+        $this->assertTrue($obj2->dependency instanceof Service2);
+    }
+
+    public function testWireOverridesDefaultBinding()
+    {
+        $dic = new Configurator();
+        $config = $dic->config()
+            ->add($dic->bind(DummyInterface::class, Service2::class))
+            ->add($dic->setup(WithDependency1::class)->wire('dependency', Service1::class));
+        $container = new AurynContainer($config);
+
+        /** @var WithDependency1 $obj1 */
+        $obj1 = $container->get(WithDependency1::class);
+        /** @var WithDependency2 $obj2 */
+        $obj2 = $container->get(WithDependency2::class);
+        $this->assertTrue($obj1->dependency instanceof Service1);
+        $this->assertTrue($obj2->dependency instanceof Service2);
+    }
+
+    public function testHas()
+    {
+        $dic = new Configurator();
+        $container = new AurynContainer($dic->config());
+
+        $this->assertTrue($container->has(DummyInterface::class));
+        $this->assertTrue($container->has(Service1::class));
+        $this->assertFalse($container->has('InvalidClass'));
+    }
+
+    public function testInstance()
+    {
+        $dic = new Configurator();
+        $config = $dic->config()
+            ->add($dic->instance(DummyInterface::class, new ConstructorParameter(1)));
+        $container = new AurynContainer($config);
+
+        /** @var ConstructorParameter $obj */
+        $obj = $container->get(DummyInterface::class);
+        $this->assertEquals(1, $obj->value);
+    }
 }
