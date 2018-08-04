@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use Lencse\Rectum\Classes\Component\Invoking\Invoker;
 use Lencse\Rectum\Classes\Component\Method\Parameter\GivenParameterType;
-use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameter;
+use Lencse\Rectum\Classes\Component\Method\Parameter\FormalParameter;
 use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Web\Http\Component\HttpMethod;
 use Lencse\Rectum\Web\RequestHandler\Component\RequestHandler;
@@ -66,8 +66,8 @@ class RequestHandlerTest extends TestCase
                         {
                             if ('Handler' === $class && '__invoke' === $method) {
                                 return [
-                                    new MethodParameter('value', new GivenParameterType('int')),
-                                    new MethodParameter(
+                                    new FormalParameter('value', new GivenParameterType('int')),
+                                    new FormalParameter(
                                         'request',
                                         new GivenParameterType(ServerRequestInterface::class)
                                     ),
@@ -75,8 +75,8 @@ class RequestHandlerTest extends TestCase
                             }
                             if ('DataHandler' === $class && '__invoke' === $method) {
                                 return [
-                                    new MethodParameter('value', new GivenParameterType('int')),
-                                    new MethodParameter(
+                                    new FormalParameter('value', new GivenParameterType('int')),
+                                    new FormalParameter(
                                         'request',
                                         new GivenParameterType(ServerRequestInterface::class)
                                     ),
@@ -84,8 +84,8 @@ class RequestHandlerTest extends TestCase
                             }
                             if ('Transformer' === $class && '__invoke' === $method) {
                                 return [
-                                    new MethodParameter('value', new GivenParameterType('int')),
-                                    new MethodParameter(
+                                    new FormalParameter('value', new GivenParameterType('int')),
+                                    new FormalParameter(
                                         'request',
                                         new GivenParameterType(ServerRequestInterface::class)
                                     ),

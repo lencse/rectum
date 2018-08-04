@@ -4,7 +4,7 @@ namespace Test\Unit\Component\Web\Routing;
 
 use GuzzleHttp\Psr7\ServerRequest;
 use Lencse\Rectum\Classes\Component\Method\Parameter\GivenParameterType;
-use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameter;
+use Lencse\Rectum\Classes\Component\Method\Parameter\FormalParameter;
 use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
 use Lencse\Rectum\Web\Routing\Component\RoutingResult;
@@ -22,8 +22,8 @@ class RoutingResultParameterAppenderTest extends TestCase
                 {
                     return 'Handler' === $class && '__invoke' === $method ?
                         [
-                            new MethodParameter('request', new GivenParameterType(ServerRequestInterface::class)),
-                            new MethodParameter('value', new GivenParameterType('int')),
+                            new FormalParameter('request', new GivenParameterType(ServerRequestInterface::class)),
+                            new FormalParameter('value', new GivenParameterType('int')),
                         ] : [];
                 }
             }

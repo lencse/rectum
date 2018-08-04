@@ -2,7 +2,7 @@
 
 namespace Lencse\Rectum\Web\Routing\Component;
 
-use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameter;
+use Lencse\Rectum\Classes\Component\Method\Parameter\FormalParameter;
 use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -26,11 +26,11 @@ class RoutingResultParameterAppender
                     $result->getHandlerPipeline()->first(),
                     '__invoke'
                 ),
-                function (MethodParameter $parameter): bool {
+                function (FormalParameter $parameter): bool {
                     return $parameter->getType()->match(ServerRequestInterface::class);
                 }
             ),
-            function (array $carry, MethodParameter $parameter) use ($request) : array {
+            function (array $carry, FormalParameter $parameter) use ($request) : array {
                 return array_merge($carry, [$parameter->getName() => $request]);
             },
             []

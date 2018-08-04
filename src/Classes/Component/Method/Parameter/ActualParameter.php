@@ -2,22 +2,19 @@
 
 namespace Lencse\Rectum\Classes\Component\Method\Parameter;
 
-class MethodParameter
+class ActualParameter
 {
     /**
      * @var string
      */
     private $name;
 
-    /**
-     * @var ParameterType
-     */
-    private $type;
+    private $value;
 
-    public function __construct(string $name, ParameterType $type)
+    public function __construct(string $name, $value)
     {
         $this->name = $name;
-        $this->type = $type;
+        $this->value = $value;
     }
 
     public function getName(): string
@@ -25,8 +22,8 @@ class MethodParameter
         return $this->name;
     }
 
-    public function getType(): ParameterType
+    public function getValue()
     {
-        return $this->type;
+        return $this->value;
     }
 }
