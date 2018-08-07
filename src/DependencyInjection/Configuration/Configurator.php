@@ -4,7 +4,6 @@ namespace Lencse\Rectum\DependencyInjection\Configuration;
 
 class Configurator
 {
-
     public static function config(): Setup
     {
         return new Setup();

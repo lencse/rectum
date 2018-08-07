@@ -4,7 +4,6 @@ namespace Lencse\Rectum\DependencyInjection\Configuration;
 
 class Setup
 {
-
     /**
      * @var ConfigCollection
      */

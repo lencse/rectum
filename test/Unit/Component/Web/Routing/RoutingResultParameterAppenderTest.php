@@ -3,8 +3,8 @@
 namespace Test\Unit\Component\Web\Routing;
 
 use GuzzleHttp\Psr7\ServerRequest;
-use Lencse\Rectum\Classes\Component\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Classes\Component\Method\Parameter\FormalParameter;
+use Lencse\Rectum\Classes\Component\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Web\Routing\Component\RouteHandlerPipeline;
 use Lencse\Rectum\Web\Routing\Component\RoutingResult;

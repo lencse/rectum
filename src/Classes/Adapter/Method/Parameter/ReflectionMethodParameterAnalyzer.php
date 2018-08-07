@@ -2,8 +2,8 @@
 
 namespace Lencse\Rectum\Classes\Adapter\Method\Parameter;
 
-use Lencse\Rectum\Classes\Component\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Classes\Component\Method\Parameter\FormalParameter;
+use Lencse\Rectum\Classes\Component\Method\Parameter\GivenParameterType;
 use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\Classes\Component\Method\Parameter\NonGivenParameterType;
 use ReflectionClass;

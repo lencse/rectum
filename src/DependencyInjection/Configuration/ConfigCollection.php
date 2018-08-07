@@ -11,7 +11,7 @@ class ConfigCollection implements Iterator
      */
     private $configs = [];
 
-    public function add(Config $config): ConfigCollection
+    public function add(Config $config): self
     {
         $result = new self();
         $result->configs = $this->configs;

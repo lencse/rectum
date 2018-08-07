@@ -2,26 +2,19 @@
 
 namespace Lencse\Rectum\DependencyInjection\Adapter;
 
-use Auryn\InjectionException;
 use Auryn\Injector;
-use function get_class;
-use function is_callable;
-use Lencse\Rectum\Classes\Adapter\Method\Parameter\ReflectionMethodParameterAnalyzer;
 use Lencse\Rectum\Classes\Component\Invoking\Invoker2;
 use Lencse\Rectum\Classes\Component\Method\Parameter\ActualParameterCollection;
-use Lencse\Rectum\DependencyInjection\Adapter\AurynParameterTransformer;
-use Lencse\Rectum\Classes\Component\Method\Parameter\MethodParameterAnalyzer;
 use Lencse\Rectum\DependencyInjection\Configuration\BindConfig;
-use Lencse\Rectum\DependencyInjection\Configuration\ConfigCollection;
 use Lencse\Rectum\DependencyInjection\Configuration\ContainerBuilder;
-use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
-use Lencse\Rectum\DependencyInjection\Component\Factory\ContainerFactory;
 use Lencse\Rectum\DependencyInjection\Configuration\FactoryConfig;
 use Lencse\Rectum\DependencyInjection\Configuration\InstanceConfig;
 use Lencse\Rectum\DependencyInjection\Configuration\Setup;
 use Lencse\Rectum\DependencyInjection\Configuration\SetupConfig;
 use Psr\Container\ContainerInterface;
 use RuntimeException;
+use function get_class;
+use function is_callable;
 
 class AurynContainer implements ContainerInterface, ContainerBuilder, Invoker2
 {
