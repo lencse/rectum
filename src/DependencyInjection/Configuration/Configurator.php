@@ -5,22 +5,22 @@ namespace Lencse\Rectum\DependencyInjection\Configuration;
 class Configurator
 {
 
-    public function config(): Setup
+    public static function config(): Setup
     {
         return new Setup();
     }
 
-    public function bind(string $abstract, string $concrete): BindConfig
+    public static function bind(string $abstract, string $concrete): BindConfig
     {
         return new BindConfig($abstract, $concrete);
     }
 
-    public function setup(string $class): SetupConfig
+    public static function setup(string $class): SetupConfig
     {
         return new SetupConfig($class);
     }
 
-    public function instance(string $className, $instance): InstanceConfig
+    public static function instance(string $className, $instance): InstanceConfig
     {
         return new InstanceConfig($className, $instance);
     }

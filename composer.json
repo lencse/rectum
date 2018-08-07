@@ -41,7 +41,7 @@
     "scripts": {
         "test": "phpunit",
         "test-coverage": "phpunit --coverage-html logs/phpunit/coverage-report --coverage-clover logs/phpunit/clover.xml --log-junit logs/phpunit/test-report.xml",
-        "min-coverage": "ci-test-coverage --min-coverage 98 --clover-file logs/phpunit/clover.xml",
+        "min-coverage": "ci-test-coverage --min-coverage 95 --clover-file logs/phpunit/clover.xml",
         "md": "phpmd src/ text phpmd.xml && phpmd test/ text phpmd.xml",
         "cs": "phpcs --standard=PSR2 src test",
         "loc": "phploc -vvv src",

@@ -35,6 +35,4 @@ class Setup
     {
         return $this->configs;
     }
-
-
 }

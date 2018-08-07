@@ -11,7 +11,7 @@ use Lencse\Rectum\DependencyInjection\Adapter\AurynContainerFactory;
 use Lencse\Rectum\DependencyInjection\Adapter\AurynParameterTransformer;
 use Lencse\Rectum\DependencyInjection\Configuration\BindConfig;
 use Lencse\Rectum\DependencyInjection\Configuration\ConfigCollection;
-use Lencse\Rectum\DependencyInjection\Configuration\Configurator;
+use Lencse\Rectum\DependencyInjection\Configuration\Configurator as DIC;
 use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\DependencyInjection\Configuration\FactoryConfig;
 use PHPUnit\Framework\TestCase;
@@ -38,27 +38,24 @@ class AurynContainerTest extends TestCase
 {
     public function testMake()
     {
-        $dic = new Configurator();
-        $container = new AurynContainer($dic->config());
+        $container = new AurynContainer(DIC::config());
         $obj = $container->get(self::class);
         $this->assertTrue($obj instanceof self);
     }
 
     public function testMakeAbstract()
     {
-        $dic = new Configurator();
-        $config = $dic->config()
+        $config = DIC::config()
             ->add(new BindConfig(TestCase::class, self::class));
-        $dic = new AurynContainer($config);
+        $container = new AurynContainer($config);
 
-        $obj = $dic->get(parent::class);
+        $obj = $container->get(parent::class);
         $this->assertTrue($obj instanceof self);
     }
 
     public function testMakeAndShare()
     {
-        $dic = new Configurator();
-        $container = new AurynContainer($dic->config());
+        $container = new AurynContainer(DIC::config());
 
         /** @var NoConstructorParameter $obj1 */
         $obj1 = $container->get(NoConstructorParameter::class);
@@ -70,8 +67,7 @@ class AurynContainerTest extends TestCase
 
     public function testFactory()
     {
-        $dic = new Configurator();
-        $config = $dic->config()
+        $config = DIC::config()
             ->add(new FactoryConfig(ConstructorParameter::class, FactoryWithoutParameter::class));
         $container = new AurynContainer($config);
 
@@ -82,8 +78,7 @@ class AurynContainerTest extends TestCase
 
     public function testInvoke()
     {
-        $dic = new Configurator();
-        $container = new AurynContainer($dic->config());
+        $container = new AurynContainer(DIC::config());
 
         /** @var Invoker2 $invoker */
         $invoker = $container->get(Invoker2::class);
@@ -93,8 +88,7 @@ class AurynContainerTest extends TestCase
 
     public function testInvokeIsOnTheSameObject()
     {
-        $dic = new Configurator();
-        $container = new AurynContainer($dic->config());
+        $container = new AurynContainer(DIC::config());
 
         /** @var Invoker2 $invoker */
         $invoker = $container->get(Invoker2::class);
@@ -106,8 +100,7 @@ class AurynContainerTest extends TestCase
 
     public function testInvokeWithParameters()
     {
-        $dic = new Configurator();
-        $container = new AurynContainer($dic->config());
+        $container = new AurynContainer(DIC::config());
 
         /** @var Invoker2 $invoker */
         $invoker = $container->get(Invoker2::class);
@@ -122,8 +115,7 @@ class AurynContainerTest extends TestCase
 
     public function testInvokeWithUnnamedParameter()
     {
-        $dic = new Configurator();
-        $container = new AurynContainer($dic->config());
+        $container = new AurynContainer(DIC::config());
 
         /** @var Invoker2 $invoker */
         $invoker = $container->get(Invoker2::class);
@@ -134,9 +126,8 @@ class AurynContainerTest extends TestCase
 
     public function testSetup()
     {
-        $dic = new Configurator();
-        $config = $dic->config()
-            ->add($dic->setup(ConstructorParameter::class)->param('value', 2));
+        $config = DIC::config()
+            ->add(DIC::setup(ConstructorParameter::class)->param('value', 2));
         $container = new AurynContainer($config);
 
         /** @var ConstructorParameter $result */
@@ -146,10 +137,9 @@ class AurynContainerTest extends TestCase
 
     public function testSetupWithDependency()
     {
-        $dic = new Configurator();
-        $config = $dic->config()
-            ->add($dic->bind(DummyInterface::class, NoConstructorParameter::class))
-            ->add($dic->setup(ConstructorParameterWithDependency::class)->param('value', 2));
+        $config = DIC::config()
+            ->add(DIC::bind(DummyInterface::class, NoConstructorParameter::class))
+            ->add(DIC::setup(ConstructorParameterWithDependency::class)->param('value', 2));
         $container = new AurynContainer($config);
 
         /** @var ConstructorParameterWithDependency $result */
@@ -159,10 +149,9 @@ class AurynContainerTest extends TestCase
 
     public function testWire()
     {
-        $dic = new Configurator();
-        $config = $dic->config()
-            ->add($dic->setup(WithDependency1::class)->wire('dependency', Service1::class))
-            ->add($dic->setup(WithDependency2::class)->wire('dependency', Service2::class));
+        $config = DIC::config()
+            ->add(DIC::setup(WithDependency1::class)->wire('dependency', Service1::class))
+            ->add(DIC::setup(WithDependency2::class)->wire('dependency', Service2::class));
         $container = new AurynContainer($config);
 
         /** @var WithDependency1 $obj1 */
@@ -175,12 +164,11 @@ class AurynContainerTest extends TestCase
 
     public function testWireAndSetup()
     {
-        $dic = new Configurator();
-        $config = $dic->config()
-            ->add($dic->setup(WithDependencyAndParam1::class)
+        $config = DIC::config()
+            ->add(DIC::setup(WithDependencyAndParam1::class)
                 ->param('value', 1)
                 ->wire('dependency', Service1::class))
-            ->add($dic->setup(WithDependencyAndParam2::class)
+            ->add(DIC::setup(WithDependencyAndParam2::class)
                 ->param('value', 2)
                 ->wire('dependency', Service2::class));
         $container = new AurynContainer($config);
@@ -195,10 +183,9 @@ class AurynContainerTest extends TestCase
 
     public function testWireOverridesDefaultBinding()
     {
-        $dic = new Configurator();
-        $config = $dic->config()
-            ->add($dic->bind(DummyInterface::class, Service2::class))
-            ->add($dic->setup(WithDependency1::class)->wire('dependency', Service1::class));
+        $config = DIC::config()
+            ->add(DIC::bind(DummyInterface::class, Service2::class))
+            ->add(DIC::setup(WithDependency1::class)->wire('dependency', Service1::class));
         $container = new AurynContainer($config);
 
         /** @var WithDependency1 $obj1 */
@@ -211,8 +198,7 @@ class AurynContainerTest extends TestCase
 
     public function testHas()
     {
-        $dic = new Configurator();
-        $container = new AurynContainer($dic->config());
+        $container = new AurynContainer(DIC::config());
 
         $this->assertTrue($container->has(DummyInterface::class));
         $this->assertTrue($container->has(Service1::class));
@@ -221,9 +207,8 @@ class AurynContainerTest extends TestCase
 
     public function testInstance()
     {
-        $dic = new Configurator();
-        $config = $dic->config()
-            ->add($dic->instance(DummyInterface::class, new ConstructorParameter(1)));
+        $config = DIC::config()
+            ->add(DIC::instance(DummyInterface::class, new ConstructorParameter(1)));
         $container = new AurynContainer($config);
 
         /** @var ConstructorParameter $obj */
