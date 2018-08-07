@@ -18,6 +18,7 @@ use Lencse\Rectum\DependencyInjection\Configuration\DependencyInjectionConfig;
 use Lencse\Rectum\DependencyInjection\Component\Factory\ContainerFactory;
 use Lencse\Rectum\DependencyInjection\Configuration\FactoryConfig;
 use Lencse\Rectum\DependencyInjection\Configuration\InstanceConfig;
+use Lencse\Rectum\DependencyInjection\Configuration\Setup;
 use Lencse\Rectum\DependencyInjection\Configuration\SetupConfig;
 use Psr\Container\ContainerInterface;
 use RuntimeException;
@@ -34,10 +35,10 @@ class AurynContainer implements ContainerInterface, ContainerBuilder, Invoker2
      */
     private $instances = [];
 
-    public function __construct(ConfigCollection $configs)
+    public function __construct(Setup $setup)
     {
         $this->auryn = new Injector();
-        foreach ($configs as $config) {
+        foreach ($setup->getConfigCollection() as $config) {
             $config->applyOnContainerBuilder($this);
         }
 

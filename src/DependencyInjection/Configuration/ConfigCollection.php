@@ -11,10 +11,11 @@ class ConfigCollection implements Iterator
      */
     private $configs = [];
 
-    public function add(Config $config): self
+    public function add(Config $config): ConfigCollection
     {
         $result = new self();
-        $result->configs = array_merge($this->configs, [$config]);
+        $result->configs = $this->configs;
+        $result->configs[] = $config;
 
         return $result;
     }

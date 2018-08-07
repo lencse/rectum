@@ -5,9 +5,9 @@ namespace Lencse\Rectum\DependencyInjection\Configuration;
 class Configurator
 {
 
-    public function config(): ConfigCollection
+    public function config(): Setup
     {
-        return new ConfigCollection();
+        return new Setup();
     }
 
     public function bind(string $abstract, string $concrete): BindConfig
